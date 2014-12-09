@@ -1,0 +1,33 @@
+aghfp/wbs/assisted/aghfp_indicators.o: aghfp/aghfp_indicators.c \
+  aghfp/aghfp.h C:/ADK3.5/tools/include/firmware/bdaddr_.h \
+  C:/ADK3.5/tools/include/standard/csrtypes.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/connection.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/connection_no_ble.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/library.h \
+  C:/ADK3.5/tools/include/firmware/message.h \
+  C:/ADK3.5/tools/include/firmware/sink_.h \
+  C:/ADK3.5/tools/include/firmware/message_.h \
+  C:/ADK3.5/tools/include/firmware/app/message/system_message.h \
+  C:/ADK3.5/tools/include/firmware/app/adc/adc_if.h \
+  C:/ADK3.5/tools/include/firmware/app/usb/usb_if.h \
+  C:/ADK3.5/tools/include/firmware/app/vm/vm_if.h \
+  C:/ADK3.5/tools/include/firmware/app/capsense/capsense_if.h \
+  C:/ADK3.5/tools/include/firmware/app/partition/partition_if.h \
+  C:/ADK3.5/tools/include/firmware/app/infrared/infrared_if.h \
+  C:/ADK3.5/tools/include/firmware/source_.h \
+  C:/ADK3.5/tools/include/firmware/app/status/status_if.h \
+  aghfp/aghfp_common.h aghfp/aghfp_private.h aghfp/aghfp_wbs.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/wbs.h \
+  C:/ADK3.5/tools/include/standard/stdlib.h aghfp/aghfp_indicators.h \
+  aghfp/aghfp_ok.h aghfp/aghfp_send_data.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/aghfp.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/bdaddr.h \
+  C:/ADK3.5/tools/include/firmware/app/bluestack/types.h \
+  C:/ADK3.5/tools/include/standard/limits.h \
+  C:/ADK3.5/tools/include/firmware/app/bluestack/bluetooth.h \
+  C:/ADK3.5/tools/include/standard/string.h \
+  C:/ADK3.5/tools/include/firmware/panic.h \
+  C:/ADK3.5/tools/include/standard/stdio.h \
+  C:/ADK3.5/tools/lib/gcc-lib/xap-local-xap-assisted/3.3.3/include/stdarg.h \
+  C:/ADK3.5/tools/include/firmware/sink.h \
+  C:/ADK3.5/tools/include/firmware/app/stream/stream_if.h

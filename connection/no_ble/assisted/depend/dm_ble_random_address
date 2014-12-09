@@ -1,0 +1,4 @@
+connection/no_ble/assisted/dm_ble_random_address.o:  \
+ connection/dm_ble_random_address.c \
+  C:/ADK3.5/tools/include/firmware/bdaddr_.h \
+  C:/ADK3.5/tools/include/standard/csrtypes.h

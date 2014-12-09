@@ -1,0 +1,7 @@
+
+VARIANTS := no_mass_storage
+
+CFLAGS_no_mass_storage := -DUSB_DEVICE_CLASS_REMOVE_MASS_STORAGE
+
+CFLAGS_debug := -DDEBUG_PRINT_ENABLED
+

@@ -1,0 +1,8 @@
+VARIANTS := scroll
+
+# Enable debug print
+CFLAGS_debug := -DDEBUG_DISPLAY
+# Enable Scrolling of text (uses more memory)
+CFLAGS_scroll := -DENABLE_SCROLL
+# Enable Scrolling and debug
+CFLAGS_scroll_debug := -DENABLE_SCROLL -DDEBUG_DISPLAY

@@ -1,0 +1,5 @@
+
+VARIANTS := 
+
+CFLAGS_debug := -DGATT_DEBUG_LIB
+

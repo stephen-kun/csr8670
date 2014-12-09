@@ -1,0 +1,8 @@
+
+VARIANTS :=  bc5mm
+
+# Include DEBUG
+
+CFLAGS_bc5mm := -DBC5MM
+CFLAGS_bc5mm_debug := -DBC5MM -DDEBUG_PRINT_ENABLED
+CFLAGS_debug := -DDEBUG_PRINT_ENABLED

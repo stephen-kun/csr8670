@@ -1,0 +1,17 @@
+-g
+-O
+-fno-builtin-memcpy
+-ansi
+-pedantic
+-Wall
+-Wmissing-prototypes
+-Wstrict-prototypes
+-Wsign-compare
+-Wredundant-decls
+-Werror
+-IC:\ADK3.5\tools/include/firmware
+-IC:\ADK3.5\tools/include/standard
+-IC:\ADK3.5\tools/include/profiles/BlueLab-6.5.2-Release
+-Wp,-MD,fm_rx_plugin/debug/assisted/depend/
+-Wp,-MQ,fm_rx_plugin/debug/assisted/dummy.force
+-DDEBUG_FM

@@ -1,0 +1,24 @@
+#
+# Compilation variants for Generic Application Interface Architecture library
+# [default]       RFCOMM transport
+#  debug          RFCOMM transport, verbose debugging
+#  spp            SPP transport only
+#  spp_debug      SPP transport only, verbose debugging
+#  mfi            MFi transport only
+#  mfi_debug      MFi transport only, verbose debugging
+#
+VARIANTS := spp # mfi debug spp_debug mfi_debug
+
+CFLAGS_debug := -DDEBUG_GAIA -DDEBUG_GAIA_COMMAND -DDEBUG_GAIA_TRANSPORT
+
+CFLAGS_spp := -DGAIA_TRANSPORT_NO_RFCOMM -DGAIA_TRANSPORT_SPP
+
+CFLAGS_mfi := -DGAIA_TRANSPORT_NO_RFCOMM -DGAIA_TRANSPORT_MFI
+
+CFLAGS_spp_debug := -DGAIA_TRANSPORT_NO_RFCOMM -DGAIA_TRANSPORT_SPP \
+                    -DDEBUG_GAIA -DDEBUG_GAIA_COMMAND \
+                    -DDEBUG_GAIA_TRANSPORT
+
+CFLAGS_mfi_debug := -DGAIA_TRANSPORT_NO_RFCOMM -DGAIA_TRANSPORT_MFI \
+                    -DDEBUG_GAIA -DDEBUG_GAIA_COMMAND \
+                    -DDEBUG_GAIA_TRANSPORT

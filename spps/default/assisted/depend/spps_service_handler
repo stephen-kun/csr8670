@@ -1,0 +1,22 @@
+spps/default/assisted/spps_service_handler.o:  \
+ spps/spps_service_handler.c spps/spps_private.h spps/spps.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/spp_common.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/library.h \
+  C:/ADK3.5/tools/include/firmware/panic.h \
+  C:/ADK3.5/tools/include/standard/csrtypes.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/connection.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/connection_no_ble.h \
+  C:/ADK3.5/tools/include/firmware/bdaddr_.h \
+  C:/ADK3.5/tools/include/firmware/message.h \
+  C:/ADK3.5/tools/include/firmware/sink_.h \
+  C:/ADK3.5/tools/include/firmware/message_.h \
+  C:/ADK3.5/tools/include/firmware/app/message/system_message.h \
+  C:/ADK3.5/tools/include/firmware/app/adc/adc_if.h \
+  C:/ADK3.5/tools/include/firmware/app/usb/usb_if.h \
+  C:/ADK3.5/tools/include/firmware/app/vm/vm_if.h \
+  C:/ADK3.5/tools/include/firmware/app/capsense/capsense_if.h \
+  C:/ADK3.5/tools/include/firmware/app/partition/partition_if.h \
+  C:/ADK3.5/tools/include/firmware/app/infrared/infrared_if.h \
+  C:/ADK3.5/tools/include/firmware/source_.h \
+  C:/ADK3.5/tools/include/firmware/app/status/status_if.h \
+  spp_common/spp_common_private.h

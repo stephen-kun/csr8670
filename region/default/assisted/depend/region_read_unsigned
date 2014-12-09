@@ -1,0 +1,3 @@
+region/default/assisted/region_read_unsigned.o:  \
+ region/region_read_unsigned.c region/region.h \
+  C:/ADK3.5/tools/include/standard/csrtypes.h

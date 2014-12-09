@@ -1,0 +1,2 @@
+connection/no_ble/assisted/dm_ble_scanning.o:  \
+ connection/dm_ble_scanning.c

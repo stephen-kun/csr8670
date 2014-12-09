@@ -1,0 +1,5 @@
+pbapc/default/assisted/pbapc_util.o: pbapc/pbapc_util.c \
+  C:/ADK3.5/tools/include/standard/memory.h \
+  C:/ADK3.5/tools/include/standard/stdlib.h \
+  C:/ADK3.5/tools/include/standard/csrtypes.h \
+  C:/ADK3.5/tools/include/standard/string.h pbapc/pbapc_util.h
