@@ -180,7 +180,7 @@ static void handleKalimbaMessage ( Task task , Message message )
     PRINT(("handleKalimbaMessage: msg id[%x] a[%x] b[%x] c[%x] d[%x]\n", m->id, m->a, m->b, m->c, m->d));
     
     switch ( m->id ) 
-    {
+    {	
         case MUSIC_READY_MSG:
         {
             PRINT(("VP: KalMsg MUSIC_READY_MSG\n"));

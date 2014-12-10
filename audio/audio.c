@@ -412,7 +412,7 @@ RETURNS
 */
 void AudioPlayAudioPrompt ( Task plugin , uint16 id , uint16 language , bool can_queue , Task codec_task, uint16 ap_volume , AudioPluginFeatures features, bool override, Task app_task )
 {   
-	MAKE_AUDIO_MESSAGE( AUDIO_PLUGIN_PLAY_AUDIO_PROMPT_MSG ) ; 
+	MAKE_AUDIO_MESSAGE( AUDIO_PLUGIN_PLAY_AUDIO_PROMPT_MSG) ; 
 	
 	message->id          = id ;
 	message->language    = language ;
@@ -420,6 +420,7 @@ void AudioPlayAudioPrompt ( Task plugin , uint16 id , uint16 language , bool can
 	message->codec_task  = codec_task ;
 	message->ap_volume   = ap_volume  ;
 	message->features    = features ;
+	message->app_task    = app_task;
 	
     if (AUDIO->plugin) 
 	{

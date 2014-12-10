@@ -626,6 +626,20 @@ void CsrAgAudioPluginInternalMessage( CsrAgAudioPluginTaskData *task ,uint16 id 
 
             switch ( m->id )
             {
+            
+#ifndef KOOVOX        
+				/* send the heart rate msg to app task */
+				case (HEART_RATE_MSG):
+				{
+					uint8* msg = PanicUnlessMalloc(sizeof(DSP_REGISTER_T));
+					memcpy(msg, m, sizeof(DSP_REGISTER_T));
+					PRINT(("message from dsp\n"));
+					MessageSend(CSR_AG_AUDIO->app_task, EVENT_DSP_MESSAGE, msg);
+				}
+				break;
+#endif
+				
+				
                 case KALIMBA_MSG_WARP_VALUES:
                     {
                         if (CSR_AG_AUDIO)

@@ -10,8 +10,11 @@ NOTES
 #include <audio.h>
 #include <codec.h>
 #include <stdlib.h>
-#include <print.h>
 #include <stream.h> /*for the ringtone_note*/
+#ifndef DEBUG_PRINT_ENABLED
+#define DEBUG_PRINT_ENABLEDx
+#endif
+#include <print.h>
 #include <string.h>
 #include <panic.h>
 
@@ -22,6 +25,7 @@ NOTES
 #include "csr_a2dp_decoder_common_if.h"
 #include "csr_a2dp_decoder_common_subwoofer.h"
 #include "csr_a2dp_decoder_common_sharing.h"
+
 
 
 	/*the task message handler*/

@@ -41,6 +41,11 @@ DESCRIPTION
 
 /* Kalimba Message IDs */
 
+#ifndef KOOVOX
+#define HEART_RATE_MSG				(0x1088)
+#define EVENT_DSP_MESSAGE			(0x40c3)
+#endif
+
 #define LOW_LATENCY_READY_MSG       (0x1000)
 #define LOW_LATENCY_SETMODE_MSG     (0x1001)
 #define LOW_LATENCY_VOLUME_MSG      (0x1002)
@@ -556,6 +561,8 @@ typedef struct
     AudioPluginFeatures features;
         /*! The audio route of connection required*/
     AUDIO_ROUTE_T   route ;
+		/*! The app task to use to communication the audio*/
+	Task			app_task ;
 
 }AUDIO_PLUGIN_PLAY_AUDIO_PROMPT_MSG_T ;
 

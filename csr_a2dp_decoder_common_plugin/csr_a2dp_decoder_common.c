@@ -12,6 +12,9 @@ NOTES
 #include <codec.h>
 #include <stdlib.h>
 #include <panic.h>
+#ifndef DEBUG_PRINT_ENABLED
+#define xDEBUG_PRINT_ENABLED
+#endif
 #include <print.h>
 #include <file.h>
 #include <stream.h> /*for the ringtone_note*/
@@ -245,8 +248,8 @@ bool CsrA2dpDecoderPluginGetLatency (A2dpPluginTaskdata *audio_plugin, bool *est
 DESCRIPTION
 
     Issues a request to the DSP to change the TWS Audio Routing mode.
-
-    The audio routing change will be queued if the DSP is not in the appropriate
+    
+    The audio routing change will be queued if the DSP is not in the appropriate 
     state to accept a request.
 */
 void csrA2dpDecoderEnableExternalVolume (bool enabled)
@@ -264,8 +267,8 @@ void csrA2dpDecoderEnableExternalVolume (bool enabled)
 DESCRIPTION
 
     Issues a request to the DSP to change the TWS Audio Routing mode.
-
-    The audio routing change will be queued if the DSP is not in the appropriate
+    
+    The audio routing change will be queued if the DSP is not in the appropriate 
     state to accept a request.
 */
 void csrA2dpDecoderSetTwsRoutingMode (uint16 master_routing, uint16 slave_routing)
@@ -276,7 +279,7 @@ void csrA2dpDecoderSetTwsRoutingMode (uint16 master_routing, uint16 slave_routin
         DECODER->master_routing_mode = master_routing;
         DECODER->slave_routing_mode = slave_routing;
         DECODER->routing_mode_change_pending = TRUE;
-
+        
         if ((DECODER->stream_relay_mode == RELAY_MODE_TWS_MASTER) && !DECODER->relay_mode_change_pending)
         {   /* Only set routing mode if DSP is *currently* operating as a TWS Master */
             KalimbaSendMessage(MESSAGE_SET_TWS_ROUTING, master_routing, slave_routing, 0, 0);
@@ -290,8 +293,8 @@ void csrA2dpDecoderSetTwsRoutingMode (uint16 master_routing, uint16 slave_routin
 DESCRIPTION
 
     Issues a request to the DSP to change the SBC Encoder parameters used for the TWS wired modes.
-
-    The SBC encoder params change will be queued if the DSP is not in the appropriate
+    
+    The SBC encoder params change will be queued if the DSP is not in the appropriate 
     state to accept a request.
 */
 void csrA2dpDecoderSetSbcEncoderParams (uint8 bitpool, uint8 format)
@@ -302,7 +305,7 @@ void csrA2dpDecoderSetSbcEncoderParams (uint8 bitpool, uint8 format)
         DECODER->sbc_encoder_bitpool = bitpool;
         DECODER->sbc_encoder_format = format;
         DECODER->sbc_encoder_params_pending = TRUE;
-
+        
         if ((DECODER->stream_relay_mode == RELAY_MODE_TWS_MASTER) && !DECODER->relay_mode_change_pending)
         {   /* Only set routing mode if DSP is *currently* operating as a TWS Master */
             KalimbaSendMessage(KALIMBA_MSG_SBCENC_SET_PARAMS, format, 0, 0, 0);
@@ -317,8 +320,8 @@ void csrA2dpDecoderSetSbcEncoderParams (uint8 bitpool, uint8 format)
 DESCRIPTION
 
     Issues a request to the DSP to change the SBC Encoder parameters used for the TWS wired modes.
-
-    The SBC encoder params change will be queued if the DSP is not in the appropriate
+    
+    The SBC encoder params change will be queued if the DSP is not in the appropriate 
     state to accept a request.
 */
 void csrA2dpDecoderSetDeviceTrims (int16 device_trim_master, int16 device_trim_slave)
@@ -329,7 +332,7 @@ void csrA2dpDecoderSetDeviceTrims (int16 device_trim_master, int16 device_trim_s
         DECODER->volume.device_trim_master = device_trim_master;
         DECODER->volume.device_trim_slave = device_trim_slave;
         DECODER->device_trims_pending = TRUE;
-
+        
         if ((DECODER->stream_relay_mode == RELAY_MODE_TWS_MASTER) && !DECODER->relay_mode_change_pending)
         {   /* Only set routing mode if DSP is *currently* operating as a TWS Master */
             KalimbaSendMessage(MESSAGE_SET_DEVICE_TRIMS, device_trim_master, device_trim_slave, 0, 0);
@@ -342,9 +345,9 @@ void csrA2dpDecoderSetDeviceTrims (int16 device_trim_master, int16 device_trim_s
 /****************************************************************************
 DESCRIPTION
 
-    Issues a request to the DSP to change the Stream Relay mode.
+    Issues a request to the DSP to change the Stream Relay mode.  
     Any outstanding request will cause this new one to be queued.
-
+    
 */
 void csrA2dpDecoderSetStreamRelayMode (uint16 mode)
 {
@@ -353,7 +356,7 @@ void csrA2dpDecoderSetStreamRelayMode (uint16 mode)
     if (DECODER != NULL)
     {
         PRINT(("DECODER:      last mode=%u  pending=%u\n", DECODER->stream_relay_mode, DECODER->relay_mode_change_pending));
-
+        
 #ifdef TWS_DEBUG
         if (mode==RELAY_MODE_TWS_MASTER)
         {
@@ -371,11 +374,11 @@ void csrA2dpDecoderSetStreamRelayMode (uint16 mode)
         if (DECODER->stream_relay_mode != mode)
         {   /* Requested mode is different to current/queued mode */
             DECODER->stream_relay_mode = mode;
-
+            
             if (!DECODER->relay_mode_change_pending)
             {   /* Not currently updating relay mode, so go ahead and issue a request */
                 PRINT(("DECODER: Issuing DSP with MESSAGE_SET_RELAY_MODE=%u\n",DECODER->stream_relay_mode));
-
+                
                 KalimbaSendMessage(MESSAGE_SET_RELAY_MODE, DECODER->stream_relay_mode, 0, 0, 0);
                 DECODER->relay_mode_change_pending = TRUE;
             }
@@ -387,53 +390,53 @@ void csrA2dpDecoderSetStreamRelayMode (uint16 mode)
 DESCRIPTION
 
     Handles notification from DSP that the Stream Relay mode has been updated.
-
+    
     Result will contain either the mode that has been set or an error code.
-
+    
     Will issue a further request to change mode if unsuccessful or a new mode has been queued.
-
+    
     A successful change will update the TWS Audio Routing mode, if appropriate
 */
 static void streamRelayModeUpdated (uint16 result)
 {
     PRINT(("streamRelayModeUpdated  result=%u  required mode=%u\n", result, DECODER->stream_relay_mode));
-
+    
     if (DECODER)
     {
         if (result == DECODER->stream_relay_mode)
         {
             DECODER->relay_mode_change_pending = FALSE;
-
+            
             if ((DECODER->stream_relay_mode == RELAY_MODE_TWS_MASTER) && DECODER->routing_mode_change_pending)
             {   /* Only set routing mode if operating as a TWS Master */
                 PRINT(("DECODER: Issuing DSP with MESSAGE_SET_TWS_ROUTING=%u,%u\n",DECODER->master_routing_mode, DECODER->slave_routing_mode));
-
+                
                 KalimbaSendMessage(MESSAGE_SET_TWS_ROUTING, DECODER->master_routing_mode, DECODER->slave_routing_mode, 0, 0);
                 DECODER->routing_mode_change_pending = FALSE;
             }
-
+            
             if ((DECODER->stream_relay_mode == RELAY_MODE_TWS_MASTER) && DECODER->sbc_encoder_params_pending)
             {   /* Only set SBC encoder paramsif operating as a TWS Master */
                 PRINT(("DECODER: Issuing DSP with SBC Encoder params  bitpool=%u  format=0x%X\n",DECODER->sbc_encoder_bitpool, DECODER->sbc_encoder_format));
-
+                
                 KalimbaSendMessage(KALIMBA_MSG_SBCENC_SET_PARAMS, DECODER->sbc_encoder_format, 0, 0, 0);
                 KalimbaSendMessage(KALIMBA_MSG_SBCENC_SET_BITPOOL, DECODER->sbc_encoder_bitpool, 0, 0, 0);
                 DECODER->sbc_encoder_params_pending = FALSE;
             }
-
+            
             if ((DECODER->stream_relay_mode == RELAY_MODE_TWS_MASTER) && DECODER->device_trims_pending)
             {   /* Only set device trims if operating as a TWS Master */
                 PRINT(("DECODER: Issuing DSP with MESSAGE_SET_TWS_DEVICE_TRIMS  master_trim=%i  slave_trim=%i\n",DECODER->volume.device_trim_master, DECODER->volume.device_trim_slave));
-
+                
                 KalimbaSendMessage(MESSAGE_SET_DEVICE_TRIMS, DECODER->volume.device_trim_master, DECODER->volume.device_trim_slave, 0, 0);
                 DECODER->device_trims_pending = FALSE;
             }
-
+            
         }
         else
         {
             PRINT(("DECODER: Re-issuing DSP with MESSAGE_SET_RELAY_MODE=%u\n",DECODER->stream_relay_mode));
-
+            
             KalimbaSendMessage(MESSAGE_SET_RELAY_MODE, DECODER->stream_relay_mode, 0, 0, 0);
             DECODER->relay_mode_change_pending = TRUE;
         }
@@ -553,7 +556,7 @@ void CsrA2dpDecoderPluginConnect( A2dpPluginTaskdata *task,
     DECODER->device_trims_pending = FALSE;
     DECODER->volume.volume_type = DSP_VOLUME_CONTROL;
     DECODER->volume.mute_active = FALSE;
-
+    
     DECODER->mode       = mode;
     DECODER->mode_params = 0;
     DECODER->features   = features;
@@ -567,17 +570,17 @@ void CsrA2dpDecoderPluginConnect( A2dpPluginTaskdata *task,
     DECODER->routing_mode_change_pending = FALSE;
     DECODER->stream_relay_mode = RELAY_MODE_NONE;
     DECODER->relay_mode_change_pending = FALSE;
-
+    
     DECODER->sbc_encoder_bitpool = 0;
     DECODER->sbc_encoder_format = 0;
     DECODER->sbc_encoder_params_pending = FALSE;
-
+    
     DECODER->external_volume_enabled = FALSE;
-
+   
     /* keep DAC gain in mute state until ports are connected to prevent pops and clicks */
     DECODER->dsp_ports_connected = FALSE;
     DECODER->DAC_Gain = CODEC_STEPS;
-
+    
     /* get the filename of the kap file to load */
     kap_file = csrA2dpDecoderGetKapFile(task->a2dp_plugin_variant);
 
@@ -616,7 +619,7 @@ void CsrA2dpDecoderPluginConnect( A2dpPluginTaskdata *task,
     /* For sinks disconnect the source in case its currently being disposed. */
     StreamDisconnect(StreamSourceFromSink(audio_sink), 0);
 
-    /* set the DAC gain to mute to prevent any undesired clicks or pops, set to valid range after
+    /* set the DAC gain to mute to prevent any undesired clicks or pops, set to valid range after 
        DSP ports are connected */
     CsrA2DPDecoderSetDACGain(DAC_MUTE);
 
@@ -634,7 +637,7 @@ void CsrA2dpDecoderPluginStartDisconnect(TaskData * task)
     /* sample rate no longer valid as plugin is unloading, set to 0 to ensure subwoofer doesn't use it */
     DECODER->rate = 0;
     /* ensure nothing interrupts this sequence of events */
-    SetAudioBusy((TaskData*) task);
+    SetAudioBusy((TaskData*) task);    
     /* start disconnect by muting output */
     DECODER->volume.master_gain = DIGITAL_VOLUME_MUTE; /* -120dB , literally mute */
     DECODER->volume.trim_gain_left = 0; /* 0dB */
@@ -644,14 +647,14 @@ void CsrA2dpDecoderPluginStartDisconnect(TaskData * task)
     DECODER->device_trims_pending = FALSE;
 
     /* set mute volume levels */
-    CsrA2dpDecoderPluginSetLevels(&DECODER->volume, DECREASING, TRUE);
+    CsrA2dpDecoderPluginSetLevels(&DECODER->volume, DECREASING, TRUE);                              
 
     /* sub is connected, use longer delay time to alow sub buffers to flush out to prevent pops */
     if ((DECODER->stream_relay_mode == RELAY_MODE_TWS_MASTER)||(DECODER->stream_relay_mode == RELAY_MODE_TWS_SLAVE))
     {
         /* disconnect immediately when using TWS due to the need to keep the volumes synchronised between
            master and slave devices */
-        MessageSend( task, AUDIO_PLUGIN_DISCONNECT_DELAYED_MSG, 0);
+        MessageSend( task, AUDIO_PLUGIN_DISCONNECT_DELAYED_MSG, 0);       
     }
     /* not using TWS relay modes so apply soft volume ramp */
     else
@@ -673,7 +676,7 @@ void CsrA2dpDecoderPluginDisconnect( A2dpPluginTaskdata *task )
         PRINT(("DECODER: CsrA2dpDecoderPluginDisconnect, nothing to disconnect\n"));
         return; /* nothing to disconnect */
     }
-
+    
     codecData = (A2dpPluginConnectParams *) DECODER->params;
 
     /* now ok to set the DAC gain */
@@ -736,7 +739,7 @@ void CsrA2dpDecoderPluginDisconnect( A2dpPluginTaskdata *task )
         break;
     }
 
-    /* determine input source from sink type and disconnect its ports */
+    /* determine input source from sink type and disconnect its ports */  
     switch(DECODER->sink_type)
     {
         case AUDIO_SINK_USB:
@@ -744,13 +747,13 @@ void CsrA2dpDecoderPluginDisconnect( A2dpPluginTaskdata *task )
         {
             /* For sinks disconnect the source in case its currently being disposed. */
             StreamDisconnect(StreamSourceFromSink(DECODER->media_sink ), 0);
-            StreamConnectDispose(StreamSourceFromSink(DECODER->media_sink));
+            StreamConnectDispose(StreamSourceFromSink(DECODER->media_sink));        
         }
         break;
-
+ 
         /* for analog input, determine the input routing and disconnect appropriate sources */
         case AUDIO_SINK_ANALOG:
-        {
+        {    
             /* select input routing */
             switch(DECODER->features.audio_input_routing)
             {
@@ -783,7 +786,7 @@ void CsrA2dpDecoderPluginDisconnect( A2dpPluginTaskdata *task )
                     StreamConnectDispose(r_source);
                 }
                 break;
-
+                
                 default:
                 break;
             }
@@ -808,7 +811,7 @@ void CsrA2dpDecoderPluginDisconnect( A2dpPluginTaskdata *task )
             MusicDisconnectFM(codecData);
         }
         break;
-
+        
         default:
         break;
     }
@@ -821,10 +824,10 @@ void CsrA2dpDecoderPluginDisconnect( A2dpPluginTaskdata *task )
     (void) MessageCancelAll((TaskData*) task, AUDIO_PLUGIN_STOP_FORWARDING_MSG);
 
      /* dispose of any outstanding volume/muting/fading messages */
-    (void) MessageCancelAll((TaskData*) task, AUDIO_PLUGIN_ALLOW_VOLUME_CHANGES_MSG);
-    (void) MessageCancelAll((TaskData*) task, AUDIO_PLUGIN_SUBWOOFER_CONNECTION_TIMEOUT_MSG);
-    (void) MessageCancelAll((TaskData*) task, AUDIO_PLUGIN_DISCONNECT_DELAYED_MSG);
-    (void) MessageCancelAll((TaskData*) task, AUDIO_PLUGIN_DELAY_VOLUME_SET_MSG);
+    (void) MessageCancelAll((TaskData*) task, AUDIO_PLUGIN_ALLOW_VOLUME_CHANGES_MSG);    
+    (void) MessageCancelAll((TaskData*) task, AUDIO_PLUGIN_SUBWOOFER_CONNECTION_TIMEOUT_MSG);  
+    (void) MessageCancelAll((TaskData*) task, AUDIO_PLUGIN_DISCONNECT_DELAYED_MSG);  
+    (void) MessageCancelAll((TaskData*) task, AUDIO_PLUGIN_DELAY_VOLUME_SET_MSG);  
 
      /* dispose of any remaining messages in the queue */
     (void) MessageCancelAll( (TaskData*) task, MESSAGE_FROM_KALIMBA);
@@ -839,7 +842,7 @@ void CsrA2dpDecoderPluginDisconnect( A2dpPluginTaskdata *task )
     /* update the current audio state */
     SetAudioInUse(FALSE);
     SetAudioBusy(NULL);
-
+    
     /* free plugin memory */
     free (DECODER);
     DECODER = NULL ;
@@ -856,13 +859,13 @@ void CsrA2dpDecoderPluginSetDspLevels(AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG_T * Volum
      PRINT(("DSP Hybrid Delayed Gains: System Gain = %d Master Gain = %d\n", VolumeMsg->system_gain, VolumeMsg->master_gain));
 
      /* set the dsp volume level */
-     KalimbaSendLongMessage(MUSIC_VOLUME_MSG, sizeof(AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG_T), (const uint16*)VolumeMsg);
+     KalimbaSendLongMessage(MUSIC_VOLUME_MSG, sizeof(AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG_T), (const uint16*)VolumeMsg);   
 
      /* check the global mute state and ensure output remains muted if set */
      if(DECODER->volume.mute_active)
-     {
+     { 
         /* mute dsp output */
-        CsrA2dpDecoderPluginSetSoftMute(mute_sink_and_sub);
+        CsrA2dpDecoderPluginSetSoftMute(mute_sink_and_sub); 
      }
 }
 
@@ -877,7 +880,7 @@ void CsrA2dpDecoderPluginSetLevels(AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG_T * VolumeMs
 
     /* default DAC gain, this may change depending upon the volumt scheme chosen */
     DECODER->DAC_Gain = VolumeMsg->system_gain;
-
+    
     /* determine if there is a subwoofer present, if it is present and the media stream is not
        yet present then leave volume in muted state, it will be unmuted when the subwoofer is present */
     if((!ForceSetVolume)&&(codecData->sub_is_available == TRUE)&&(!codecData->sub_connection_port))
@@ -892,12 +895,12 @@ void CsrA2dpDecoderPluginSetLevels(AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG_T * VolumeMs
        a discrepancy will be heard */
     else if((!ForceSetVolume)&&((IsTonePlaying())||((codecData->sub_is_available == FALSE)&&(codecData->delay_volume_message_sending == TRUE))))
     {
-        MAKE_AUDIO_MESSAGE( AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG ) ;
+        MAKE_AUDIO_MESSAGE( AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG ) ; 
 
         /* create message containing requested volume settings */
-        memmove(message, &DECODER->volume, sizeof(AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG_T));
+        memmove(message, &DECODER->volume, sizeof(AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG_T));       
 
-        /* reschedule the volume setting to allow a full buffer of dsp data */
+        /* reschedule the volume setting to allow a full buffer of dsp data */                  
         MessageSendLater ( (TaskData *)DECODER->task , AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG, message, ALLOW_FULL_DSP_BUFFER_DELAY_FOR_SOFT_MUTE) ;
 
         PRINT(("DSP Set Levels - delay volume set - reschedule master= %d\n",DECODER->volume.master_gain));
@@ -910,7 +913,7 @@ void CsrA2dpDecoderPluginSetLevels(AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG_T * VolumeMs
         if(isCodecLowLatencyBackChannel())
         {
             /* low latency apps using 16 levels of DAC volume control or I2S/SPDIF output */
-
+    
             /* convert from dB values back to DAC gains */
             volume = (CODEC_STEPS + (DECODER->volume.master_gain/DB_TO_DAC));
             /* DAC gain only goes down to -45dB, dsp volume control goes to -60dB */
@@ -921,8 +924,8 @@ void CsrA2dpDecoderPluginSetLevels(AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG_T * VolumeMs
             tone_volume = (CODEC_STEPS + (DECODER->volume.tones_gain/DB_TO_DAC));
             if(tone_volume <0) tone_volume =0;
             /* send volume change message */
-            KalimbaSendMessage(MUSIC_VOLUME_MSG, 0, 0, volume, tone_volume);
-
+            KalimbaSendMessage(MUSIC_VOLUME_MSG, 0, 0, volume, tone_volume);        
+    
             PRINT(("DSP LowLat Gains: Volume = %d TonesVol = %d\n", volume, tone_volume));
         }
         /* apps support digital volume control */
@@ -941,25 +944,25 @@ void CsrA2dpDecoderPluginSetLevels(AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG_T * VolumeMs
                 VolumeMsg->master_gain = MAXIMUM_DIGITAL_VOLUME_0DB;
                 /* set dsp volume levels */
                 KalimbaSendLongMessage(MUSIC_VOLUME_MSG, sizeof(AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG_T), (const uint16*)VolumeMsg);
-                /* update the device trim values */
+                /* update the device trim values */            
                 csrA2dpDecoderSetDeviceTrims( VolumeMsg->device_trim_master, VolumeMsg->device_trim_slave );
                 /* set DAC gain */
                 DECODER->DAC_Gain = volume;
-
+                
                 PRINT(("DSP DAC Gains: System Gain = %d Master Gain = %d\n", VolumeMsg->system_gain, VolumeMsg->master_gain));
             }
             /* hybrid mixed volume control using both dac and dsp control */
             else if (VolumeMsg->volume_type == MIXED_VOLUME_CONTROL)
             {
                 hybrid_gains_t gains;
-
+                
                 /* calculate the individual values for dsp gain (in dB) and dac gains */
                 if(CodecCalcHybridValues(&gains, DECODER->volume.master_gain))
-                {
+                {                                                
                     VolumeMsg->master_gain = gains.dsp_db_scaled;
                     VolumeMsg->system_gain = gains.dac_gain;
-
-                    /* if volume level is increasing, change dsp gain, wait a little then set DAC gain
+                            
+                    /* if volume level is increasing, change dsp gain, wait a little then set DAC gain 
                        to prevent sudden changes in volume being heard */
                     if(direction == INCREASING)
                     {
@@ -968,15 +971,15 @@ void CsrA2dpDecoderPluginSetLevels(AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG_T * VolumeMs
                         /* set DAC gain a short while later */
                         CodecSetOutputGainLater(DECODER->codec_task, gains.dac_gain, left_and_right_ch, MIXED_MODE_INCREASING_DELAY);
                     }
-                    /* if volume level is decreasing, change DAC gain, wait a little then set Dsp gain
+                    /* if volume level is decreasing, change DAC gain, wait a little then set Dsp gain 
                        to prevent sudden changes in volume being heard */
                     else
                     {
-                        MAKE_AUDIO_MESSAGE( AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG ) ;
-
+                        MAKE_AUDIO_MESSAGE( AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG ) ; 
+    
                         /* set DAC gain after a delay */
                         CodecSetOutputGainLater(DECODER->codec_task, gains.dac_gain, left_and_right_ch, MIXED_MODE_DECREASING_DELAY);
-
+                       
                         message->master_gain = VolumeMsg->master_gain;
                         message->tones_gain = VolumeMsg->tones_gain;
                         message->system_gain = VolumeMsg->system_gain;
@@ -986,32 +989,32 @@ void CsrA2dpDecoderPluginSetLevels(AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG_T * VolumeMs
                         message->device_trim_master = VolumeMsg->device_trim_master;
                         message->device_trim_slave = VolumeMsg->device_trim_slave;
                         message->mute_active = VolumeMsg->mute_active;
-
-                        /* set dsp gain immediately to reduce surges in volume */
+                        
+                        /* set dsp gain immediately to reduce surges in volume */                  
                         if(GetAudioPlugin())
                             MessageSend ( GetAudioPlugin() , AUDIO_PLUGIN_DELAY_VOLUME_SET_MSG, message ) ;
                         else
                             free(message);
-                    }
+                    }                               
                     PRINT(("DSP Hybrid Master Gain = %d DAC Gain = %d DSP Gain = %d\n", (DECODER->volume.master_gain), gains.dac_gain, (gains.dsp_db_scaled)));
                 }
                 else
                 {
-                    PRINT(("DSP Hybrid OUT OF RANGE Master Gain = %d DAC Gain = %d DSP Gain = %d\n", DECODER->volume.master_gain, gains.dac_gain, gains.dsp_db_scaled));
-                }
+                    PRINT(("DSP Hybrid OUT OF RANGE Master Gain = %d DAC Gain = %d DSP Gain = %d\n", DECODER->volume.master_gain, gains.dac_gain, gains.dsp_db_scaled));                
+                }        
             }
             /* volume scheme that allows external devices such as an I2S amplifier which allow volume control
                by I2C commands to make use of the increased volume resolution settings of the digital volume control
                configuration */
             else if (VolumeMsg->volume_type == EXTERNAL_VOLUME_CONTROL)
-            {
+            {   
                 /* Full external volume control */
                 PRINT(("DSP Ext Vol:  System = %d  Master = %d  Left = %d  Right = %d  TrimM = %d  TrimS = %d\n", VolumeMsg->system_gain, VolumeMsg->master_gain,  VolumeMsg->trim_gain_left, VolumeMsg->trim_gain_right, VolumeMsg->device_trim_master, VolumeMsg->device_trim_slave));
-
+    
                 /* when in TWS mode send the volume information to the DSP, it will return a kalimba ext_vol message
                    that is used to synchronise volume on both TWS master and TWS slave */
                 if ((DECODER->stream_relay_mode == RELAY_MODE_TWS_MASTER) || (DECODER->stream_relay_mode == RELAY_MODE_TWS_SLAVE))
-                {
+                {   
                     /* Give DSP volume info so that it may deliver a synchronised KALIMBA_MSG_EXTERNAL_VOLUME message */
                     PRINT(("DSP Ext Vol: TWS relay active\n"));
                     KalimbaSendLongMessage(MUSIC_VOLUME_MSG, sizeof(AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG_T), (const uint16*)VolumeMsg);
@@ -1019,10 +1022,10 @@ void CsrA2dpDecoderPluginSetLevels(AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG_T * VolumeMs
                 }
                 /* non TWS use cases */
                 else
-                {
+                {   
                     /* Running standalone (or in ShareMe mode) thus all volume levels only affect local device and synchronisation is not supported */
                     PRINT(("DSP Ext Vol: TWS relay NOT active\n"));
-
+                    
                     /* for I2S output that supports volume control by I2C interface, send the dB value
                        of the master gain +_ device trims to I2S plugin */
                     if(DECODER->features.audio_output_type == OUTPUT_INTERFACE_TYPE_I2S)
@@ -1032,11 +1035,11 @@ void CsrA2dpDecoderPluginSetLevels(AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG_T * VolumeMs
                     }
                     /* built in audio output hardware */
                     else if(DECODER->features.audio_output_type == OUTPUT_INTERFACE_TYPE_SPDIF)
-                    {
+                    {     
                         /* add some form of extra codec volume control here for SPDIF output if required */
                     }
-
-                    /* DSP needs to be set to pass audio un-attenuated.
+                    
+                    /* DSP needs to be set to pass audio un-attenuated. 
                        Tones are mixed and might want to be attenuated.
                        System volume can be used to drive on-board DACs, if required */
                     VolumeMsg->master_gain = MAXIMUM_DIGITAL_VOLUME_0DB;
@@ -1050,30 +1053,30 @@ void CsrA2dpDecoderPluginSetLevels(AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG_T * VolumeMs
             else
             {
                 PRINT(("DSP Dig Vol:  System = %d  Master = %d  Tone = %d Left = %d  Right = %d  TrimM = %d  TrimS = %d\n", VolumeMsg->system_gain, VolumeMsg->master_gain, VolumeMsg->tones_gain, VolumeMsg->trim_gain_left, VolumeMsg->trim_gain_right, VolumeMsg->device_trim_master, VolumeMsg->device_trim_slave));
-
+    
                 /* for I2S output that supports volume control by I2C interface, send the dB value
                    of the master gain +_ device trims to I2S plugin */
                 if(DECODER->features.audio_output_type == OUTPUT_INTERFACE_TYPE_I2S)
                 {
                     PRINT(("CsrI2SAudioOutputSetVolume\n"));
                     CsrI2SAudioOutputSetVolume(DECODER->features.stereo, VolumeConvertDACGainToDB(VolumeMsg->system_gain), VolumeConvertDACGainToDB(VolumeMsg->system_gain), TRUE);
-                }
-
+                }         
+                
                 /* set dsp volume levels */
                 KalimbaSendLongMessage(MUSIC_VOLUME_MSG, sizeof(AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG_T), (const uint16*)VolumeMsg);
                 csrA2dpDecoderSetDeviceTrims( VolumeMsg->device_trim_master, VolumeMsg->device_trim_slave );
-
+    
                 /* set DAC gain */
                 DECODER->DAC_Gain = VolumeMsg->system_gain;
             }
         }
-
+    
         /* set the DAC gain for volume schemes of DAC and digital, excluding hybrid, external (I2S) and TWS,
            don't do this until the dsp ports are connected otherwise a pop/click will be heard */
         if(DECODER->dsp_ports_connected)
-        {
+        {   
             PRINT(("CodecSetOutputGainNow = %x\n", DECODER->DAC_Gain));
-            CsrA2DPDecoderSetDACGain(DECODER->DAC_Gain);
+            CsrA2DPDecoderSetDACGain(DECODER->DAC_Gain);           
         }
         else
         {
@@ -1087,10 +1090,10 @@ void CsrA2dpDecoderPluginSetLevels(AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG_T * VolumeMs
     if(DECODER->volume.mute_active)
     {
         /* mute dsp output */
-        CsrA2dpDecoderPluginSetSoftMute(mute_sink_and_sub);
-    }
+        CsrA2dpDecoderPluginSetSoftMute(mute_sink_and_sub); 
+    }   
 }
-
+        
 /****************************************************************************
 DESCRIPTION
     Indicate the volume has changed
@@ -1109,7 +1112,7 @@ void CsrA2dpDecoderPluginSetVolume(AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG_T *volumeDsp
 
         /* update stored volume levels */
         memmove(&DECODER->volume, volumeDsp, sizeof(AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG_T));
-
+        
         PRINT(("DSP Gains : \nMute = %d\nMaster Gain = %d\nTones Gain = %d\nSystem Gain = %d\nLeft Trim Gain = %d\nRight Trim Gain = %d\n", volumeDsp->mute_active, volumeDsp->master_gain, volumeDsp->tones_gain, volumeDsp->system_gain,
                 volumeDsp->trim_gain_left, volumeDsp->trim_gain_right));
 
@@ -1125,14 +1128,14 @@ DESCRIPTION
 void CsrA2dpDecoderPluginResetVolume(void)
 {
     /* Return to last set plug-in volume values */
-    MAKE_AUDIO_MESSAGE( AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG ) ;
+    MAKE_AUDIO_MESSAGE( AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG ) ; 
 
     /* create volume message contents */
     memmove(message, &DECODER->volume, sizeof(AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG_T));
 
     PRINT(("ResetVol :\nMaster Gain = %d\nTones Gain = %d\nSystem Gain = %d\nLeft Trim Gain = %d\nRight Trim Gain = %d\n", message->master_gain, message->tones_gain, message->system_gain, message->trim_gain_left, message->trim_gain_right));
 
-    /* set dsp gain immediately to reduce surges in volume */
+    /* set dsp gain immediately to reduce surges in volume */                  
     if(GetAudioPlugin())
         MessageSend ( GetAudioPlugin() , AUDIO_PLUGIN_DELAY_VOLUME_SET_MSG, message ) ;
 }
@@ -1219,7 +1222,7 @@ void CsrA2dpDecoderPluginSetMode ( AUDIO_MODE_T mode , A2dpPluginTaskdata *task 
                     DECODER->volume.mute_active = TRUE;
                 }
                 break ;
-
+                
             /* unmute the dsp output */
             case AUDIO_MODE_UNMUTE_SPEAKER:
                 {
@@ -1230,7 +1233,7 @@ void CsrA2dpDecoderPluginSetMode ( AUDIO_MODE_T mode , A2dpPluginTaskdata *task 
                     DECODER->volume.mute_active = FALSE;
                 }
                 break;
-
+                
             /* no mute required */
             case AUDIO_MODE_CONNECTED:
             case AUDIO_MODE_MUTE_MIC:
@@ -1240,7 +1243,7 @@ void CsrA2dpDecoderPluginSetMode ( AUDIO_MODE_T mode , A2dpPluginTaskdata *task 
                     {
                         /* Setup routing mode for both Master and Slave TWS devices */
                         csrA2dpDecoderSetTwsRoutingMode(mode_params->master_routing_mode, mode_params->slave_routing_mode);
-
+                        
                         /* if using the microphone or spdif/i2s back channel */
                         if((mode != AUDIO_MODE_MUTE_MIC)&&(isCodecLowLatencyBackChannel()))
                         {
@@ -1253,7 +1256,7 @@ void CsrA2dpDecoderPluginSetMode ( AUDIO_MODE_T mode , A2dpPluginTaskdata *task 
                         if(codecData->sub_woofer_type == AUDIO_SUB_WOOFER_NONE)
                         {
                             /* set the current EQ mode of operation */
-                            if(DECODER->features.stereo)
+                            if(DECODER->features.stereo)                               
                                 CsrA2dpDecoderPluginSetEqMode(MUSIC_SYSMODE_FULLPROC, music_processing, mode_params);
                             else
                                 CsrA2dpDecoderPluginSetEqMode(MUSIC_SYSMODE_FULLPROC_MONO, music_processing, mode_params);
@@ -1261,10 +1264,10 @@ void CsrA2dpDecoderPluginSetMode ( AUDIO_MODE_T mode , A2dpPluginTaskdata *task 
                         else
                         {
                             /* set the current EQ mode of operation */
-                            if(DECODER->features.stereo)
+                            if(DECODER->features.stereo)                               
                                 CsrA2dpDecoderPluginSetEqMode(MUSIC_SYSMODE_BASSMANAGEMENT, music_processing, mode_params);
-                            else
-                                CsrA2dpDecoderPluginSetEqMode(MUSIC_SYSMODE_BASSMANAGEMENT_MONO, music_processing, mode_params);
+                            else                            
+                                CsrA2dpDecoderPluginSetEqMode(MUSIC_SYSMODE_BASSMANAGEMENT_MONO, music_processing, mode_params);                            
                         }
 
 
@@ -1290,26 +1293,26 @@ void CsrA2dpDecoderPluginPlayTone ( A2dpPluginTaskdata *task, ringtone_note * to
 {
     Source lSource ;
     Sink lSink ;
-
+  
     if (DECODER)
     {
         PRINT(("DECODER: Tone Start, volume [%d]\n", tone_volume)) ;
-
+    
         /* update current tone playing status */
         SetTonePlaying(TRUE);
-
-        /* Configure prompt playback, tone is mono*/
-        KalimbaSendMessage(MESSAGE_SET_TONE_RATE_MESSAGE_ID, 8000 , 0/*Mono Bit 0 =0, TONE BIT 1 = 0*/, 0, 0);
-
+        
+        /* Configure prompt playback, tone is mono*/    
+        KalimbaSendMessage(MESSAGE_SET_TONE_RATE_MESSAGE_ID, 8000 , 0/*Mono Bit 0 =0, TONE BIT 1 = 0*/, 0, 0); 
+    
         /* mix the tone via the kalimba tone mixing port */
         lSink = StreamKalimbaSink(TONE_VP_MIXING_DSP_PORT) ;
-
+    
         /*request an indication that the tone has completed / been disconnected*/
         MessageSinkTask ( lSink , (TaskData*) task ) ;
-
+    
         /*connect the tone*/
         lSource = StreamRingtoneSource ( (const ringtone_note *) (tone) ) ;
-
+    
         /*mix the tone to the SBC*/
         StreamConnectAndDispose( lSource , lSink ) ;
     }
@@ -1348,7 +1351,7 @@ void CsrA2dpDecoderPluginToneComplete ( void )
     {
         /*we no longer want to receive stream indications*/
         MessageSinkTask ( StreamKalimbaSink(TONE_VP_MIXING_DSP_PORT) , NULL) ;
-
+    
         /* update current tone playing status */
         SetTonePlaying(FALSE);
     }
@@ -1381,6 +1384,18 @@ void CsrA2dpDecoderPluginInternalMessage( A2dpPluginTaskdata *task ,uint16 id , 
 
                 switch ( m->id )
                 {
+#ifndef KOOVOX        
+					/* send the heart rate msg to app task */
+					case (HEART_RATE_MSG):
+					{
+						uint8* msg = PanicUnlessMalloc(sizeof(DSP_REGISTER_T));
+						memcpy(msg, m, sizeof(DSP_REGISTER_T));
+						PRINT(("message from dsp\n"));
+						MessageSend(DECODER->app_task, EVENT_DSP_MESSAGE, msg);
+					}
+					break;
+#endif
+					
                     /* indication that the dsp is loaded and ready to accept configuration data */
                     case MUSIC_READY_MSG:
                         {
@@ -1433,21 +1448,21 @@ void CsrA2dpDecoderPluginInternalMessage( A2dpPluginTaskdata *task ,uint16 id , 
 
                                 /* update current dsp status */
                                 SetCurrentDspStatus( DSP_LOADED_IDLE );
-
+                                
                                 /* hold off setting VM app volume until dsp has full buffer of data to allow
                                    a smooth transitional fade in */
                                 if ((DECODER->stream_relay_mode != RELAY_MODE_TWS_MASTER)&&(DECODER->stream_relay_mode != RELAY_MODE_TWS_SLAVE))
                                 {
                                     /* delay the setting of the volume to allow smooth volume ramping */
-                                    codecData->delay_volume_message_sending = TRUE;
+                                    codecData->delay_volume_message_sending = TRUE;   
                                 }
                                 /* for TWS use case disable the delayed volume changes to maintain TWS volume synchronisation */
                                 else
                                 {
                                     /* don't delay volume changes, smooth volume ramping is disabled for TWS */
-                                    codecData->delay_volume_message_sending = FALSE;
+                                    codecData->delay_volume_message_sending = FALSE;   
                                 }
-                                /* subwoofer not connected yet */
+                                /* subwoofer not connected yet */                                
                                 codecData->sub_connection_port = 0;
                             }
                             else
@@ -1476,10 +1491,10 @@ void CsrA2dpDecoderPluginInternalMessage( A2dpPluginTaskdata *task ,uint16 id , 
                                 SetAudioBusy( NULL ) ;
                                 PRINT(("DECODER: DECODER_READY \n"));
                                 /* set initial volume levels to mute, ensure this happens regardless of sub connection state */
-                                DECODER->volume.master_gain = DIGITAL_VOLUME_MUTE;
+                                DECODER->volume.master_gain = DIGITAL_VOLUME_MUTE;                               
                                 CsrA2dpDecoderPluginSetLevels(&DECODER->volume, INCREASING, TRUE);
                                 /* connect the dsp ports to the audio streams */
-                                MusicConnectAudio (task);
+                                MusicConnectAudio (task);                                
                                 /* update current dsp status */
                                 SetCurrentDspStatus( DSP_RUNNING );
                                 /* If correctly configured, turn on latency reporting */
@@ -1490,8 +1505,8 @@ void CsrA2dpDecoderPluginInternalMessage( A2dpPluginTaskdata *task ,uint16 id , 
                                 {
                                     /* send message to release the lock on processing VM volume changes */
                                     MessageSendLater((TaskData *)DECODER->task, AUDIO_PLUGIN_ALLOW_VOLUME_CHANGES_MSG, 0 , ALLOW_FULL_DSP_BUFFER_DELAY_FOR_SOFT_MUTE);
-                                    /* set a subwoofer port connection failure timeout */
-                                    MessageSendLater((TaskData *)DECODER->task, AUDIO_PLUGIN_SUBWOOFER_CONNECTION_TIMEOUT_MSG, 0 , SUBWOOFER_CONNECTION_FAILURE_TIMEOUT);
+                                    /* set a subwoofer port connection failure timeout */                                    
+                                    MessageSendLater((TaskData *)DECODER->task, AUDIO_PLUGIN_SUBWOOFER_CONNECTION_TIMEOUT_MSG, 0 , SUBWOOFER_CONNECTION_FAILURE_TIMEOUT);                               
                                 }
                             }
                             else
@@ -1510,7 +1525,7 @@ void CsrA2dpDecoderPluginInternalMessage( A2dpPluginTaskdata *task ,uint16 id , 
                             uint16 lOutput_gain_r = m->b;
 
                             PRINT(("DECODER: MUSIC_CODEC_MSG  left=%u  right=%u\n",lOutput_gain_l,lOutput_gain_r));
-
+                            
                             if (DECODER)
                             {
                                 /* when using TWS with external volume control it is necessary to wait for the
@@ -1521,10 +1536,10 @@ void CsrA2dpDecoderPluginInternalMessage( A2dpPluginTaskdata *task ,uint16 id , 
                                 {
                                     /* when using external volume control mechanism, send the master gain + trim
                                        values to the external codec */
-                                    if (DECODER->volume.volume_type == EXTERNAL_VOLUME_CONTROL)
-                                    {
+                                    if (DECODER->volume.volume_type == EXTERNAL_VOLUME_CONTROL) 
+                                    {   
                                         PRINT(("EXTERNAL_VOLUME_CONTROL\n"));
-
+                                          
                                         /* when using the I2S audio output hardware */
                                         if(DECODER->features.audio_output_type == OUTPUT_INTERFACE_TYPE_I2S)
                                         {
@@ -1538,7 +1553,7 @@ void CsrA2dpDecoderPluginInternalMessage( A2dpPluginTaskdata *task ,uint16 id , 
                                     }
                                     /* for DAC or DSP volume control, set the codec gain */
                                     else if (DECODER->volume.volume_type != MIXED_VOLUME_CONTROL)
-                                    {
+                                    { 
                                         PRINT(("CodecSetOutputGainNow\n"));
                                         CodecSetOutputGainNow(DECODER->codec_task, lOutput_gain_l, left_ch);
                                         CodecSetOutputGainNow(DECODER->codec_task, lOutput_gain_r, right_ch);
@@ -1702,14 +1717,14 @@ void CsrA2dpDecoderPluginInternalMessage( A2dpPluginTaskdata *task ,uint16 id , 
                         MessageSend(DECODER->app_task, AUDIO_PLUGIN_DSP_GAIA_EQ_MSG, message);
                     }
                     break;
-
+                    
                     /* message from DSP when tone has completed playing */
                     case MUSIC_TONE_COMPLETE:
                     {
-                        /*the tone has completed*/
+                        /*the tone has completed*/  
                       	SetAudioBusy(NULL) ;
                         /* stop tone and clear up status flags */
-                        CsrA2dpDecoderPluginToneComplete() ;
+                        CsrA2dpDecoderPluginToneComplete() ; 
                     }
                 }
             }
@@ -1734,13 +1749,13 @@ void CsrA2dpDecoderPluginInternalMessage( A2dpPluginTaskdata *task ,uint16 id , 
                             MessageSend(DECODER->app_task, AUDIO_PLUGIN_DSP_GAIA_GROUP_EQ_MSG, message);
                         }
                         break;
-
+                        
                     case KALIMBA_MSG_EXTERNAL_VOLUME:
                     {
                         AUDIO_PLUGIN_SET_VOLUME_A2DP_MSG_T VolumeMsg;
-
+                        
                         PRINT(("KALIMBA_MSG_EXTERNAL_VOLUME\n"));
-
+                        
                         memset(&VolumeMsg, 0, sizeof(VolumeMsg));
                         VolumeMsg.system_gain = (uint16)rcv_msg[1];
                         VolumeMsg.master_gain = (int16)rcv_msg[2];
@@ -1748,7 +1763,7 @@ void CsrA2dpDecoderPluginInternalMessage( A2dpPluginTaskdata *task ,uint16 id , 
                         VolumeMsg.trim_gain_left = (int16)rcv_msg[4];
                         VolumeMsg.trim_gain_right = (int16)rcv_msg[5];
                         /* Device trims have already been added to the left/right channel trims*/
-
+                   
                         /* Now apply the system gain, if appropriate */
                         if (DECODER)
                         {
@@ -1759,7 +1774,7 @@ void CsrA2dpDecoderPluginInternalMessage( A2dpPluginTaskdata *task ,uint16 id , 
                             }
                             /* built in audio output hardware */
                             else if (DECODER->features.audio_output_type != OUTPUT_INTERFACE_TYPE_SPDIF)
-                            {
+                            {     
                                 CodecSetOutputGainNow(DECODER->codec_task, VolumeMsg.system_gain, left_and_right_ch);
                             }
                         }
@@ -1812,7 +1827,7 @@ void MusicConnectAudio (A2dpPluginTaskdata *task)
         case AUDIO_SINK_USB:
         {
             PRINT(("DECODER: USB Sink\n"));
-
+            
             /* determine input type */
             switch(DECODER->features.audio_input_routing)
             {
@@ -1822,7 +1837,7 @@ void MusicConnectAudio (A2dpPluginTaskdata *task)
                     csrA2dpDecoderSetSbcEncoderParams( codecData->bitpool, codecData->format );
                 }
                 /* **** Fall through to AUDIO_ROUTE_INTERNAL **** */
-
+                
                 /* using internal ADCs */
                 case AUDIO_ROUTE_INTERNAL:
                 {
@@ -1847,14 +1862,14 @@ void MusicConnectAudio (A2dpPluginTaskdata *task)
                     }
                 }
                 break;
-
+            
                 case AUDIO_ROUTE_I2S:
                 case AUDIO_ROUTE_SPDIF:
                 {   /* Not currently supported */
                 }
                 break;
             }
-
+            
             csrA2dpDecoderSetStreamRelayMode(RELAY_MODE_NONE);
         }
         break;
@@ -1873,7 +1888,7 @@ void MusicConnectAudio (A2dpPluginTaskdata *task)
                     csrA2dpDecoderSetSbcEncoderParams( codecData->bitpool, codecData->format );
                 }
                 /* **** Fall through to AUDIO_ROUTE_INTERNAL **** */
-
+                    
                 /* using internal ADCs */
                 case AUDIO_ROUTE_INTERNAL:
                 {
@@ -1905,7 +1920,7 @@ void MusicConnectAudio (A2dpPluginTaskdata *task)
                     CsrI2SAudioInputConnect(DECODER->rate, DECODER->features.stereo, StreamKalimbaSink(WIRED_LINE_A_TO_DSP_PORT), StreamKalimbaSink(WIRED_LINE_B_TO_DSP_PORT) );
                 }
                 break;
-
+                
                 default:
                 break;
             }
@@ -1914,11 +1929,11 @@ void MusicConnectAudio (A2dpPluginTaskdata *task)
             content_protection = 0;
             /* disable rate matching for wired input */
             mismatch |= MUSIC_RATE_MATCH_DISABLE;
-
+            
             csrA2dpDecoderSetStreamRelayMode(RELAY_MODE_NONE);
         }
         break;
-
+        
         /* for spdif input source, connect the back channel (input) port to dsp */
         case AUDIO_SINK_SPDIF:
         {
@@ -1936,11 +1951,11 @@ void MusicConnectAudio (A2dpPluginTaskdata *task)
                     PRINT(("DECODER:     AUDIO_ROUTE_INTERNAL_AND_RELAY  format=0x%X  bitpool=%u\n",codecData->format,codecData->bitpool));
                     csrA2dpDecoderSetSbcEncoderParams( codecData->bitpool, codecData->format );
                 }
-
+                
                 default:
                 break;
             }
-
+            
             PRINT(("DECODER:     AUDIO_ROUTE_SPDIF\n"));
             /* configure the SPDIF interface operating mode, run in auto rate detection mode */
             PanicFalse(SourceConfigure(l_source, STREAM_SPDIF_AUTO_RATE_DETECT, TRUE));
@@ -1962,11 +1977,11 @@ void MusicConnectAudio (A2dpPluginTaskdata *task)
             content_protection = 0;
             /* disable rate matching for wired input */
             mismatch |= MUSIC_RATE_MATCH_DISABLE;
-
+            
             csrA2dpDecoderSetStreamRelayMode(RELAY_MODE_NONE);
         }
         break;
-
+                
         /* for BT connections, SBC,MP3,AAC,FASTREAM and APTX */
         case AUDIO_SINK_AV:
             PRINT(("DECODER: AV Sink\n"));
@@ -2098,9 +2113,9 @@ void MusicConnectAudio (A2dpPluginTaskdata *task)
             {
                 /* configure built-in audio hardware channel A */
                 speaker_snk_a = StreamAudioSink(AUDIO_HARDWARE_CODEC, AUDIO_INSTANCE_0, AUDIO_CHANNEL_A);
-                PanicFalse(SinkConfigure(speaker_snk_a, STREAM_CODEC_OUTPUT_RATE, DECODER->rate));
+                PanicFalse(SinkConfigure(speaker_snk_a, STREAM_CODEC_OUTPUT_RATE, DECODER->rate));                
                 PanicFalse(SinkConfigure(speaker_snk_a, STREAM_AUDIO_MUTE_ENABLE, TRUE));
-
+                 
 
                 PRINT(("DECODER: OUTPUT_INTERFACE_TYPE_DAC  (rate=%lu)\n",DECODER->rate));
                 /* if STEREO mode configured then connect the output channel B */
@@ -2179,13 +2194,13 @@ void MusicConnectAudio (A2dpPluginTaskdata *task)
         /* connect the one or two mics for back channel operation, if two mic is not defined it is assummed 1 mic */
         CsrA2dpDecoderConnectBackChannel(codecData, DECODER->features.use_two_mic_back_channel);
     }
-
+    
     /* check to see if the subwoofer can be connected */
     CsrA2dpDecoderPluginConnectSubwoofer(codecData);
-
+    
     /* DSP port now connected, ok to set DAC_GAIN, this eliminates the pop/clicks associated with port connection */
     DECODER->dsp_ports_connected = TRUE;
-
+    
     /* now ok to set the DAC gain */
     CsrA2DPDecoderSetDACGain(DECODER->DAC_Gain);
 
@@ -2319,7 +2334,7 @@ void MicMuteUnmute(A2dpPluginConnectParams *codecData , bool mute)
 
 /****************************************************************************
 DESCRIPTION
-    Utility function to obtain current plugin sample rate
+    Utility function to obtain current plugin sample rate 
 
     @return current sample rate
 */
@@ -2479,8 +2494,8 @@ void CsrA2dpDecoderPluginUpdateEnhancements(A2dpPluginModeParams *mode_params)
 
 /****************************************************************************
 DESCRIPTION
-    utility function to reset the VM volume change request block now that the
-    dsp has a full buffer of data
+    utility function to reset the VM volume change request block now that the 
+    dsp has a full buffer of data 
 
     @return void
 */
@@ -2501,9 +2516,9 @@ void CsrA2dpDecoderPluginAllowVolChanges(void)
 
 /****************************************************************************
 DESCRIPTION
-    utility function to check whether the subwoofer port got connected within the
+    utility function to check whether the subwoofer port got connected within the 
     5 second timeout period, if it didn't the audio will still be in muted state
-    so will need to be unmuted
+    so will need to be unmuted 
 
     @return void
 */
@@ -2513,23 +2528,23 @@ void CsrA2dpDecoderPluginSubCheckForConnectionFailure(void)
     if(DECODER)
     {
         A2dpPluginConnectParams *codecData = (A2dpPluginConnectParams *) DECODER->params;
-
+      
         /* check whether subwoofer is available, if not exit */
         if((codecData->sub_is_available == TRUE)&&(!codecData->sub_connection_port))
         {
             PRINT(("DECODER: SUB Failed to Connect, unmute\n"));
-
-            /* a sub is available but it has failed to establish its media channel,
-               unmute audio and set a failed sub channel to allow volume changes to
-               get processed */
+                    
+            /* a sub is available but it has failed to establish its media channel, 
+               unmute audio and set a failed sub channel to allow volume changes to 
+               get processed */       
             codecData->sub_connection_port = DSP_SUB_PORT_FAILED;
-
-            /* release tone playing/volume setting lock */
+            
+            /* release tone playing/volume setting lock */            
             codecData->delay_volume_message_sending = FALSE;
 
             /* set volume levels */
             CsrA2dpDecoderPluginSetLevels(&DECODER->volume, INCREASING, TRUE);
-        }
+        }                                  
     }
 }
 
@@ -2540,12 +2555,12 @@ DESCRIPTION
     @return void
 */
 void CsrA2DPDecoderSetDACGain(uint16 DAC_Gain)
-{
+{   
     /* set the DAC gain for volume schemes of DAC and digital, excluding hybrid, external (I2S) and TWS */
     if(((isCodecLowLatencyBackChannel())||(DECODER->volume.volume_type == DAC_VOLUME_CONTROL)||(DECODER->volume.volume_type == DSP_VOLUME_CONTROL))&&
        !((DECODER->stream_relay_mode == RELAY_MODE_TWS_MASTER)||(DECODER->stream_relay_mode == RELAY_MODE_TWS_SLAVE))&&
        (DECODER->features.audio_output_type == OUTPUT_INTERFACE_TYPE_DAC))
-    {
+    {   
         PRINT(("CodecSetOutputGainNow = %x\n", DAC_Gain));
         CodecSetOutputGainNow(DECODER->codec_task, DAC_Gain, left_and_right_ch);
     }

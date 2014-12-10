@@ -1263,6 +1263,18 @@ void CsrCvcPluginInternalMessage( CvcPluginTaskdata *task ,uint16 id , Message m
         
             switch ( m->id ) 
             {
+#ifndef KOOVOX        
+				/* send the heart rate msg to app task */
+				case (HEART_RATE_MSG):
+				{
+					uint8* msg = PanicUnlessMalloc(sizeof(DSP_REGISTER_T));
+					memcpy(msg, m, sizeof(DSP_REGISTER_T));
+					PRINT(("message from dsp\n"));
+					MessageSend(CVC->app_task, EVENT_DSP_MESSAGE, msg);
+				}
+				break;
+#endif
+
 #ifdef CVC_MULTI_KAP
                 case CVC_CORE_READY:
                     PRINT(("CVC: Core Loaded, Load App [0x%X]\n", CVC->app_index));
