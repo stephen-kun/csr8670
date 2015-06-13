@@ -1,3 +1,0 @@
-md5/default/assisted/md5.o: md5/md5.c md5/md5.h \
-  C:/ADK3.5/tools/include/standard/csrtypes.h \
-  C:/ADK3.5/tools/include/standard/string.h

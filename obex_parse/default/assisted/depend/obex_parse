@@ -1,4 +1,0 @@
-obex_parse/default/assisted/obex_parse.o: obex_parse/obex_parse.c \
-  obex_parse/obex_parse_internal.h obex_parse/obex_parse.h \
-  C:/ADK3.5/tools/include/standard/stdlib.h \
-  C:/ADK3.5/tools/include/standard/csrtypes.h

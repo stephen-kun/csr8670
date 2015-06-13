@@ -1,4 +1,0 @@
-
-VARIANTS := 
-
-CFLAGS_debug := -DSPP_DEBUG_LIB  # -DDEBUG_PRINT_ENABLED  flags for building debug version of lib

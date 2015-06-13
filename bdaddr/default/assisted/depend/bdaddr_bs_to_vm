@@ -1,8 +1,0 @@
-bdaddr/default/assisted/bdaddr_bs_to_vm.o: bdaddr/bdaddr_bs_to_vm.c \
-  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/bdaddr.h \
-  C:/ADK3.5/tools/include/firmware/bdaddr_.h \
-  C:/ADK3.5/tools/include/standard/csrtypes.h \
-  C:/ADK3.5/tools/include/firmware/app/bluestack/types.h \
-  C:/ADK3.5/tools/include/standard/limits.h \
-  C:/ADK3.5/tools/include/firmware/app/bluestack/bluetooth.h \
-  C:/ADK3.5/tools/include/standard/string.h

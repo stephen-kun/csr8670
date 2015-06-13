@@ -1,2 +1,0 @@
-VARIANTS := debug 
-CFLAGS_debug := -DDEBUG_FM

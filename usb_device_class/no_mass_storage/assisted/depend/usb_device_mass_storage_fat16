@@ -1,3 +1,0 @@
- \
- usb_device_class/no_mass_storage/assisted/usb_device_mass_storage_fat16.o:  \
- usb_device_class/usb_device_mass_storage_fat16.c

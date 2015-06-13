@@ -1,5 +1,0 @@
-sdp_parse/default/assisted/sdp_parse_profile_version.o:  \
- sdp_parse/sdp_parse_profile_version.c sdp_parse/sdp_parse.h \
-  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/service.h \
-  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/region.h \
-  C:/ADK3.5/tools/include/standard/csrtypes.h

@@ -1,4 +1,0 @@
-connection/no_ble/assisted/dm_ble_set_connection_parameters.o:  \
- connection/dm_ble_set_connection_parameters.c \
-  C:/ADK3.5/tools/include/firmware/bdaddr_.h \
-  C:/ADK3.5/tools/include/standard/csrtypes.h
