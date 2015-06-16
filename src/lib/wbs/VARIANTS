@@ -1,0 +1,5 @@
+
+VARIANTS := print
+
+# Wide Band Speech Supported, include print output
+CFLAGS_print := -DDEBUG_PRINT_ENABLED

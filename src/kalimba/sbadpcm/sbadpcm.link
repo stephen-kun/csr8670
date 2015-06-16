@@ -1,0 +1,12 @@
+/* Linkscript for the library */
+
+segment SBADPCM_DECODER_PM                                      40          PM_REGION, flash.code;
+segment SBADPCM_ENCODER_PM                                      40          PM_REGION, flash.code;
+segment SBADPCM_DECODER_FRAME_DECODE_PM                         40          PM_REGION, flash.code;
+segment SBADPCM_ENCODER_FRAME_ENCODE_PM                         40          PM_REGION, flash.code;
+segment SBADPCM_OBJECT_INITIALIZE_PM                            40          PM_REGION, flash.code;
+segment SBADPCM_PM                                              40          PM_REGION, flash.code;
+segment SBADPCM_PREDICTOR_PM                                    40          PM_REGION, flash.code;
+segment ADPCM_QMF_PM                                            40          PM_REGION, flash.code;
+segment SBADPCM_QUANTIZE_PM                                     40          PM_REGION, flash.code;
+segment SBADPCM_DECODER_SCO_DECODE_PM                           40          PM_REGION, flash.code;

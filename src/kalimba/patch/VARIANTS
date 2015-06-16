@@ -1,0 +1,12 @@
+VARIANTS := patch_libs
+
+VARIANTS_oxygen := base_regs
+VARIANTS_purdey := base_regs base_regs_patch_libs
+VARIANTS_gemini := base_regs base_regs_patch_libs
+VARIANTS_gordon := base_regs base_regs_patch_libs
+
+CFLAGS_patch_libs := -DPATCH_LIBS
+
+CFLAGS_base_regs := -DBASE_REGISTER_MODE
+
+CFLAGS_base_regs_patch_libs := -DBASE_REGISTER_MODE -DPATCH_LIBS

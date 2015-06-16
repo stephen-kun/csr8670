@@ -1,0 +1,9 @@
+
+VARIANTS := lowram
+
+VARIANTS_oxygen := base_regs
+
+# add lowram
+CFLAGS_lowram := -DFFT_LOW_RAM
+
+CFLAGS_base_regs := -DBASE_REGISTER_MODE

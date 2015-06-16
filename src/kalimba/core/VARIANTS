@@ -1,0 +1,27 @@
+
+VARIANTS := debug c_support big_stack debug_wall_clock_fail_ok old_bt_address old_bt_address_debug
+
+VARIANTS_oxygen := base_regs
+VARIANTS_purdey := base_regs
+VARIANTS_gemini := base_regs
+VARIANTS_gordon := base_regs base_regs_debug base_regs_debug_wall_clock_fail_ok
+
+CFLAGS_base_regs := -DBASE_REGISTER_MODE
+
+CFLAGS_debug := -DDEBUG_ON
+
+CFLAGS_debug_wall_clock_fail_ok := -DDEBUG_ON -DWALL_CLOCK_FAIL_OK
+
+CFLAGS_c_support := -DBUILD_WITH_C_SUPPORT
+CFLAGS_big_stack := -DBUILD_WITH_BIG_STACK
+
+CFLAGS_base_regs_debug := -DBASE_REGISTER_MODE -DDEBUG_ON
+
+CFLAGS_base_regs_debug_wall_clock_fail_ok := -DBASE_REGISTER_MODE -DDEBUG_ON -DWALL_CLOCK_FAIL_OK
+
+CFLAGS_old_bt_address := -DOLD_BT_ADDRESS
+CFLAGS_old_bt_address_debug := -DDEBUG_ON -DOLD_BT_ADDRESS
+
+
+
+

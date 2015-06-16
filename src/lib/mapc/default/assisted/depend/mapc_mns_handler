@@ -1,0 +1,26 @@
+mapc/default/assisted/mapc_mns_handler.o: mapc/mapc_mns_handler.c \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/obex.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/library.h \
+  C:/ADK3.5/tools/include/firmware/message.h \
+  C:/ADK3.5/tools/include/standard/csrtypes.h \
+  C:/ADK3.5/tools/include/firmware/sink_.h \
+  C:/ADK3.5/tools/include/firmware/message_.h \
+  C:/ADK3.5/tools/include/firmware/app/message/system_message.h \
+  C:/ADK3.5/tools/include/firmware/app/adc/adc_if.h \
+  C:/ADK3.5/tools/include/firmware/app/usb/usb_if.h \
+  C:/ADK3.5/tools/include/firmware/app/vm/vm_if.h \
+  C:/ADK3.5/tools/include/firmware/app/capsense/capsense_if.h \
+  C:/ADK3.5/tools/include/firmware/app/partition/partition_if.h \
+  C:/ADK3.5/tools/include/firmware/app/infrared/infrared_if.h \
+  C:/ADK3.5/tools/include/firmware/source_.h \
+  C:/ADK3.5/tools/include/firmware/app/status/status_if.h \
+  C:/ADK3.5/tools/include/firmware/bdaddr_.h \
+  C:/ADK3.5/tools/include/standard/memory.h \
+  C:/ADK3.5/tools/include/standard/stdlib.h \
+  C:/ADK3.5/tools/include/standard/string.h \
+  C:/ADK3.5/tools/include/firmware/source.h \
+  C:/ADK3.5/tools/include/firmware/app/stream/stream_if.h \
+  C:/ADK3.5/tools/include/firmware/app/bluestack/types.h \
+  C:/ADK3.5/tools/include/standard/limits.h mapc/mapc_private.h \
+  mapc/mapc_extern.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/mapc.h

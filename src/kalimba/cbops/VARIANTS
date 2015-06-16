@@ -1,0 +1,13 @@
+
+VARIANTS := debug
+
+VARIANTS_oxygen := base_regs
+VARIANTS_purdey := base_regs
+VARIANTS_gemini := base_regs
+VARIANTS_gordon := base_regs base_regs_debug
+
+CFLAGS_base_regs := -DBASE_REGISTER_MODE
+
+CFLAGS_debug := -DDEBUG_ON
+
+CFLAGS_base_regs_debug := -DDEBUG_ON -DBASE_REGISTER_MODE

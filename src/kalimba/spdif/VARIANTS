@@ -1,0 +1,16 @@
+VARIANTS := debug sink sink_debug source_app source_app_debug
+
+# add debug
+CFLAGS_debug := -DDEBUG_ON
+
+# build for sink use case
+CFLAGS_sink := -DSPDIF_OUTPUT_INTERFACE_CONTROL -DSPDIF_REPORT_EVENTS -DSPDIF_LATENCY_MEASUREMENT
+
+# build for sink use case plus debug
+CFLAGS_sink_debug := -DSPDIF_OUTPUT_INTERFACE_CONTROL -DSPDIF_REPORT_EVENTS -DSPDIF_LATENCY_MEASUREMENT -DDEBUG_ON
+
+# build for source_app use case
+CFLAGS_source_app :=  -DSPDIF_REPORT_EVENTS -DSPDIF_PCM_SUPPORT_ONLY
+
+# build for source_app use case plus debug
+CFLAGS_source_app_debug := -DSPDIF_REPORT_EVENTS -DSPDIF_PCM_SUPPORT_ONLY -DDEBUG_ON

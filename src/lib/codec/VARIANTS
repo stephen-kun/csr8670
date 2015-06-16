@@ -1,0 +1,4 @@
+
+VARIANTS := 
+
+CFLAGS_nowolfson := -DCODEC_EXCLUDE_WOLFSON # Exclude wolfson codec when not needed

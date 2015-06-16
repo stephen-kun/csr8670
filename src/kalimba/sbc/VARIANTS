@@ -1,0 +1,19 @@
+
+
+VARIANTS := external debug wbs decoupled
+
+CFLAGS_debug := -DDEBUG_ON -DDEBUG_SBCDEC -DPROFILE_SBCDEC
+
+VARIANTS_oxygen := external_base_regs
+VARIANTS_purdey := external_base_regs
+VARIANTS_gemini := external_base_regs
+VARIANTS_gordon := external_base_regs
+
+CFLAGS_external_base_regs := -DBASE_REGISTER_MODE -DSBC_USE_EXTERNAL_MEMORY -DWBS_DECOUPLED
+
+# add flash variant
+CFLAGS_external := -DSBC_USE_EXTERNAL_MEMORY -DWBS_DECOUPLED
+CFLAGS_wbs := -DSBC_WBS_ONLY
+CFLAGS_decoupled := -DWBS_DECOUPLED
+
+	

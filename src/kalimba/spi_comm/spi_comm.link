@@ -1,0 +1,8 @@
+/* Linkscript for the SPI_COMM library */
+
+segment SPI_COMM_INITIALIZE_PM                          1000        PM_REGION, flash.code;
+segment SPI_COMM_REGISTER_HANDLER_PM                    1000        PM_REGION, flash.code;
+segment SPI_COMM_POLLED_SERVICE_ROUTINE_PM              1000        PM_REGION, flash.code;
+
+/* DM1_SPI_FIXED_BLOCK *must* have a priority of 0 so that UFE can read version information! */
+segment DM1_SPI_FIXED_BLOCK                              0          DM1_REGION;

@@ -1,0 +1,4 @@
+region/default/assisted/region_matches_uuid32.o:  \
+ region/region_matches_uuid32.c region/region.h \
+  C:/ADK3.5/tools/include/standard/csrtypes.h \
+  C:/ADK3.5/tools/include/standard/string.h

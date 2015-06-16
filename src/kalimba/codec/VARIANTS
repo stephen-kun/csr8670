@@ -1,0 +1,30 @@
+
+VARIANTS := l2cap debug l2cap_debug l2cap_debug_patch_libs
+
+VARIANTS_oxygen := base_regs l2cap_base_regs
+VARIANTS_purdey := base_regs l2cap_base_regs l2cap_base_regs_patch_libs
+VARIANTS_gemini := base_regs l2cap_base_regs l2cap_base_regs_patch_libs
+VARIANTS_gordon := base_regs l2cap_base_regs base_regs_debug l2cap_base_regs_debug_patch_libs
+
+CFLAGS_base_regs := -DBASE_REGISTER_MODE
+
+CFLAGS_base_regs_debug := -DBASE_REGISTER_MODE -DDEBUG_ON
+
+# L2CAP header added by DSP
+CFLAGS_l2cap := -DL2CAP_FRAME
+
+CFLAGS_l2cap_debug := -DL2CAP_FRAME -DDEBUG_ON
+
+CFLAGS_l2cap_debug_patch_libs := -DL2CAP_FRAME -DDEBUG_ON -DPATCH_LIBS
+
+CFLAGS_l2cap_base_regs := -DL2CAP_FRAME -DBASE_REGISTER_MODE
+
+CFLAGS_l2cap_base_regs_patch_libs := -DL2CAP_FRAME -DBASE_REGISTER_MODE -DPATCH_LIBS
+
+CFLAGS_l2cap_base_regs_debug := -DL2CAP_FRAME -DBASE_REGISTER_MODE -DDEBUG_ON
+
+CFLAGS_l2cap_base_regs_debug_patch_libs := -DL2CAP_FRAME -DBASE_REGISTER_MODE -DDEBUG_ON -DPATCH_LIBS
+
+CFLAGS_debug := -DDEBUG_ON
+
+

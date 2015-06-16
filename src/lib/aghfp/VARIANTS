@@ -1,0 +1,15 @@
+
+VARIANTS := wbs
+
+CFLAGS_debug := -DAGHFP_DEBUG_LIB  # flags for building debug version of AGHFP lib
+
+CFLAGS_wbs := -DWBS  # flags for building WBS version of AGHFP lib
+
+CFLAGS_wbs_debug := -DWBS -DAGHFP_DEBUG_LIB  # flags for building debug WBS version of AGHFP lib
+
+CFLAGS_wbs_debug_at_bcc_reject := -DWBS -DDEBUG_TEST_AT_BCC_REJECTION  # Compiles in debug code to reject the AT+BCC.
+                                                                      # This allows the AT+BCC rejection handling on the HF side to be tested.
+
+CFLAGS_wbs_debug_at_bcs_reject := -DWBS -DDEBUG_TEST_AT_BCS_REJECTION  # Compiles in debug code to reject the AT+BCS on an HF initiated connection.
+                                                                      # This allows the AT+BCS rejection handling on the HF side to be tested.
+

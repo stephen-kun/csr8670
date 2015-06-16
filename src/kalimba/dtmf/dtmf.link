@@ -1,0 +1,8 @@
+segment DTMF_INITIALIZE_PM                                 40          PM_REGION;
+segment DTMF_MESSAGE_HANDLER_PM                            40          PM_REGION;
+segment DTMF_MAKE_TONES_PM                                 40          PM_REGION;
+
+
+
+
+

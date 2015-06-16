@@ -1,0 +1,8 @@
+
+VARIANTS := debug
+
+VARIANTS_oxygen := base_regs
+
+CFLAGS_base_regs := -DBASE_REGISTER_MODE
+
+CFLAGS_debug := -DDEBUG_ON

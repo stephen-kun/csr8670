@@ -1,0 +1,22 @@
+VARIANTS := debug extra_space_debug patch_libs extra_space_debug_patch_libs
+
+VARIANTS_oxygen := base_regs
+VARIANTS_purdey := base_regs base_regs_patch_libs
+VARIANTS_gemini := base_regs base_regs_patch_libs
+VARIANTS_gordon := base_regs base_regs_patch_libs base_regs_extra_space_debug base_regs_extra_space_debug_patch_libs
+
+CFLAGS_base_regs := -DBASE_REGISTER_MODE
+
+CFLAGS_debug := -DDEBUG_ON
+
+CFLAGS_patch_libs := -DPATCH_LIBS
+
+CFLAGS_extra_space_debug := -DINCLUDE_DEBUG_SPACE -DDEBUG_ON
+
+CFLAGS_extra_space_debug_patch_libs := -DINCLUDE_DEBUG_SPACE -DDEBUG_ON -DPATCH_LIBS
+
+CFLAGS_base_regs_extra_space_debug := -DINCLUDE_DEBUG_SPACE -DDEBUG_ON -DBASE_REGISTER_MODE
+
+CFLAGS_base_regs_extra_space_debug_patch_libs := -DINCLUDE_DEBUG_SPACE -DDEBUG_ON -DBASE_REGISTER_MODE -DPATCH_LIBS
+
+CFLAGS_base_regs_patch_libs := -DBASE_REGISTER_MODE -DPATCH_LIBS
