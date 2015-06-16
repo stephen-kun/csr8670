@@ -1,0 +1,12 @@
+// Version      : XAP2 Assembler - V1.18-1  (27 September 2005)
+// Title        : "Code Table"
+// Date         : Wed Aug 13 12:31:13 2014
+// Command Line : xap2asm -large -list -supinc -quiet xap2crt0.xap
+// ../../src/extra/memcpy.xap ../../src/extra/memset.xap remote_putchar.xap
+// ../../src/extra/force.xap loader_unsigned.lib -o loader_unsigned
+// ROM START ADDRESS 000000
+// WORDSIZE 16
+// BASE HEX : HEX
+
+// PAGEZERO_CODE - Start Address H'0; Size H'80
+
