@@ -1,0 +1,6 @@
+/* Linkscript for the PULSE_LED library */
+
+segment PULSE_LED_PM			                     40          PM_REGION, flash.code;
+segment PULSE_LED_INITIIALISE_PM                40          PM_REGION, flash.code;
+segment PULSE_LED_MESSAGE_HANDLER_PM            40          PM_REGION, flash.code;
+segment PULSE_LED_SERVICE_ROUTINE_PM            40          PM_REGION, flash.code;

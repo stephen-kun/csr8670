@@ -1,0 +1,22 @@
+/* Linkscript for the AUDIO_PROC library */
+
+segment AUDIO_PROC_CMP100_ANALYSIS_PM                   40          PM_REGION;
+segment AUDIO_PROC_CMP100_INITIALIZE_PM                 1000        PM_REGION, flash.code;
+segment AUDIO_PROC_CMP100_APPLYGAIN_PM                  40          PM_REGION;
+segment AUDIO_PROC_DELAY_INITIALIZE_PM                  1000        PM_REGION, flash.code;
+segment AUDIO_PROC_DELAY_PROCESS_PM                     40          PM_REGION;
+segment AUDIO_PROC_PEAK_MONITOR_PM                      40          PM_REGION;
+segment AUDIO_PROC_PEQ_INITIALIZE_PM                    1000        PM_REGION, flash.code;
+segment AUDIO_PROC_PEQ_PROCESS_PM                       40          PM_REGION;
+segment AUDIO_PROC_STREAM_GAIN_PROCESS_PM               40          PM_REGION;
+segment AUDIO_PROC_STREAM_MIXER_PROCESS_PM              40          PM_REGION;
+segment AUDIO_PROC_STEREO_3D_ENHANCEMENT_PM             40          PM_REGION;
+segment AUDIO_PROC_MUTE_CONTROL_PROCESS_PM              40          PM_REGION;
+segment AUDIO_PROC_STEREO_COPY_PROCESS_PM               40          PM_REGION;
+segment AUDIO_PROC_BASS_MANAGEMENT_PM                   40          PM_REGION;
+segment LATENCY_MEASURE_CALC_PCM_LATENCY_PM             40          PM_REGION;
+segment LATENCY_MEASURE_CALC_ENCODED_LATENCY_PM         40          PM_REGION;
+segment LATENCY_MEASURE_RESET_ENCODED_LATENCY_PM        40          PM_REGION;
+segment LATENCY_MEASURE_CALC_INV_FS_PM                  40          PM_REGION;
+segment AUDIO_PROC_VOLUME_AND_LIMIT_RESET_PM            40          PM_REGION;
+segment AUDIO_PROC_VOLUME_AND_LIMIT_APPLY_VOLUME_PM     40          PM_REGION;

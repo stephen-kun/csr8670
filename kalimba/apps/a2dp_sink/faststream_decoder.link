@@ -1,0 +1,9 @@
+/* Linkscript for the a2dp_sink application (faststream_decoder variant) */
+
+/* same application segment assignments as sbc app */
+#include "sbc_decoder.link"
+
+/* Additional library segment overrides: precede statement with "override" qualifier 
+   to override a segment defined by a library */
+segment CONFIG_DAC_RESAMPLER_PM           40          flash.code;
+segment CONFIG_ADC_RESAMPLER_PM           40          flash.code;

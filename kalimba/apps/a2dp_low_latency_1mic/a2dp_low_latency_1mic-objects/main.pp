@@ -1,0 +1,1964 @@
+.linefile 1 "main.asm"
+.linefile 1 "<command-line>"
+.linefile 1 "main.asm"
+.linefile 18 "main.asm"
+.linefile 1 "C:/ADK3.5/kalimba/lib_sets/sdk/include/core_library.h" 1
+.linefile 9 "C:/ADK3.5/kalimba/lib_sets/sdk/include/core_library.h"
+.linefile 1 "C:/ADK3.5/kalimba/lib_sets/sdk/include/stack.h" 1
+.linefile 10 "C:/ADK3.5/kalimba/lib_sets/sdk/include/core_library.h" 2
+.linefile 1 "C:/ADK3.5/kalimba/lib_sets/sdk/include/timer.h" 1
+.linefile 14 "C:/ADK3.5/kalimba/lib_sets/sdk/include/timer.h"
+   .CONST $timer.MAX_TIMER_HANDLERS 50;
+
+   .CONST $timer.LAST_ENTRY -1;
+
+   .CONST $timer.NEXT_ADDR_FIELD 0;
+   .CONST $timer.TIME_FIELD 1;
+   .CONST $timer.HANDLER_ADDR_FIELD 2;
+   .CONST $timer.ID_FIELD 3;
+   .CONST $timer.STRUC_SIZE 4;
+
+   .CONST $timer.n_us_delay.SHORT_DELAY 10;
+   .CONST $timer.n_us_delay.MEDIUM_DELAY 150;
+.linefile 11 "C:/ADK3.5/kalimba/lib_sets/sdk/include/core_library.h" 2
+.linefile 1 "C:/ADK3.5/kalimba/lib_sets/sdk/include/message.h" 1
+.linefile 12 "C:/ADK3.5/kalimba/lib_sets/sdk/include/message.h"
+.linefile 1 "C:/ADK3.5/kalimba/architecture/architecture.h" 1
+.linefile 20 "C:/ADK3.5/kalimba/architecture/architecture.h"
+.linefile 1 "C:/ADK3.5/kalimba/architecture/gordon.h" 1
+.linefile 9 "C:/ADK3.5/kalimba/architecture/gordon.h"
+   .CONST $FLASHWIN1_START 0xFFB000;
+   .CONST $FLASHWIN1_SIZE 0x001000;
+   .CONST $FLASHWIN2_START 0xFFC000;
+   .CONST $FLASHWIN2_SIZE 0x001000;
+   .CONST $FLASHWIN3_START 0xFFD000;
+   .CONST $FLASHWIN3_SIZE 0x001000;
+   .CONST $MCUWIN1_START 0xFFE000;
+   .CONST $MCUWIN1_SIZE 0x001000;
+   .CONST $MCUWIN2_START 0xFFF000;
+   .CONST $MCUWIN2_SIZE 0x000E00;
+
+   .CONST $PMWIN_HI_START 0x020000;
+   .CONST $PMWIN_LO_START 0x030000;
+   .CONST $PMWIN_24_START 0x040000;
+   .CONST $PMWIN_SIZE 0x003000;
+
+   .CONST $FLASHWIN1_LARGE_START 0xD00000;
+   .CONST $FLASHWIN1_LARGE_SIZE 0x100000;
+   .CONST $FLASHWIN2_LARGE_START 0xE00000;
+   .CONST $FLASHWIN2_LARGE_SIZE 0x100000;
+   .CONST $FLASHWIN3_LARGE_START 0xF00000;
+   .CONST $FLASHWIN3_LARGE_SIZE 0x0D0000;
+
+
+
+
+
+   .CONST $INT_LOAD_INFO_CLR_REQ_MASK 16384;
+
+   .CONST $INT_SOURCE_TIMER1_POSN 0;
+   .CONST $INT_SOURCE_TIMER2_POSN 1;
+   .CONST $INT_SOURCE_MCU_POSN 2;
+   .CONST $INT_SOURCE_PIO_POSN 3;
+   .CONST $INT_SOURCE_MMU_UNMAPPED_POSN 4;
+   .CONST $INT_SOURCE_SW0_POSN 5;
+   .CONST $INT_SOURCE_SW1_POSN 6;
+   .CONST $INT_SOURCE_SW2_POSN 7;
+   .CONST $INT_SOURCE_SW3_POSN 8;
+
+   .CONST $INT_SOURCE_TIMER1_MASK 1;
+   .CONST $INT_SOURCE_TIMER2_MASK 2;
+   .CONST $INT_SOURCE_MCU_MASK 4;
+   .CONST $INT_SOURCE_PIO_MASK 8;
+   .CONST $INT_SOURCE_MMU_UNMAPPED_MASK 16;
+   .CONST $INT_SOURCE_SW0_MASK 32;
+   .CONST $INT_SOURCE_SW1_MASK 64;
+   .CONST $INT_SOURCE_SW2_MASK 128;
+   .CONST $INT_SOURCE_SW3_MASK 256;
+
+   .CONST $INT_SOURCE_TIMER1_EVENT 0;
+   .CONST $INT_SOURCE_TIMER2_EVENT 1;
+   .CONST $INT_SOURCE_MCU_EVENT 2;
+   .CONST $INT_SOURCE_PIO_EVENT 3;
+   .CONST $INT_SOURCE_MMU_UNMAPPED_EVENT 4;
+   .CONST $INT_SOURCE_SW0_EVENT 5;
+   .CONST $INT_SOURCE_SW1_EVENT 6;
+   .CONST $INT_SOURCE_SW2_EVENT 7;
+   .CONST $INT_SOURCE_SW3_EVENT 8;
+
+
+
+
+
+   .CONST $CLK_DIV_1 0;
+   .CONST $CLK_DIV_2 1;
+   .CONST $CLK_DIV_4 3;
+   .CONST $CLK_DIV_8 7;
+   .CONST $CLK_DIV_16 15;
+   .CONST $CLK_DIV_32 31;
+   .CONST $CLK_DIV_64 63;
+   .CONST $CLK_DIV_128 127;
+   .CONST $CLK_DIV_256 255;
+   .CONST $CLK_DIV_512 511;
+   .CONST $CLK_DIV_1024 1023;
+   .CONST $CLK_DIV_2048 2047;
+   .CONST $CLK_DIV_4096 4095;
+   .CONST $CLK_DIV_8192 8191;
+   .CONST $CLK_DIV_16384 16383;
+
+
+   .CONST $CLK_DIV_MAX $CLK_DIV_64;
+
+
+
+   .CONST $N_FLAG 1;
+   .CONST $Z_FLAG 2;
+   .CONST $C_FLAG 4;
+   .CONST $V_FLAG 8;
+   .CONST $UD_FLAG 16;
+   .CONST $SV_FLAG 32;
+   .CONST $BR_FLAG 64;
+   .CONST $UM_FLAG 128;
+
+   .CONST $NOT_N_FLAG (65535-$N_FLAG);
+   .CONST $NOT_Z_FLAG (65535-$Z_FLAG);
+   .CONST $NOT_C_FLAG (65535-$C_FLAG);
+   .CONST $NOT_V_FLAG (65535-$V_FLAG);
+   .CONST $NOT_UD_FLAG (65535-$UD_FLAG);
+   .CONST $NOT_SV_FLAG (65535-$SV_FLAG);
+   .CONST $NOT_BR_FLAG (65535-$BR_FLAG);
+   .CONST $NOT_UM_FLAG (65535-$UM_FLAG);
+.linefile 21 "C:/ADK3.5/kalimba/architecture/architecture.h" 2
+.linefile 1 "C:/ADK3.5/kalimba/architecture/gordon_io_defs.h" 1
+
+
+
+
+   .CONST $FLASH_CACHE_SIZE_1K_ENUM 0x000000;
+   .CONST $FLASH_CACHE_SIZE_512_ENUM 0x000001;
+   .CONST $ADDSUB_SATURATE_ON_OVERFLOW_POSN 0x000000;
+   .CONST $ADDSUB_SATURATE_ON_OVERFLOW_MASK 0x000001;
+   .CONST $ARITHMETIC_16BIT_MODE_POSN 0x000001;
+   .CONST $ARITHMETIC_16BIT_MODE_MASK 0x000002;
+   .CONST $DISABLE_UNBIASED_ROUNDING_POSN 0x000002;
+   .CONST $DISABLE_UNBIASED_ROUNDING_MASK 0x000004;
+   .CONST $DISABLE_FRAC_MULT_ROUNDING_POSN 0x000003;
+   .CONST $DISABLE_FRAC_MULT_ROUNDING_MASK 0x000008;
+   .CONST $DISABLE_RMAC_STORE_ROUNDING_POSN 0x000004;
+   .CONST $DISABLE_RMAC_STORE_ROUNDING_MASK 0x000010;
+   .CONST $FLASHWIN_CONFIG_NOSIGNX_POSN 0x000000;
+   .CONST $FLASHWIN_CONFIG_NOSIGNX_MASK 0x000001;
+   .CONST $FLASHWIN_CONFIG_24BIT_POSN 0x000001;
+   .CONST $FLASHWIN_CONFIG_24BIT_MASK 0x000002;
+   .CONST $INT_EVENT_TIMER1_POSN 0x000000;
+   .CONST $INT_EVENT_TIMER1_MASK 0x000001;
+   .CONST $INT_EVENT_TIMER2_POSN 0x000001;
+   .CONST $INT_EVENT_TIMER2_MASK 0x000002;
+   .CONST $INT_EVENT_XAP_POSN 0x000002;
+   .CONST $INT_EVENT_XAP_MASK 0x000004;
+   .CONST $INT_EVENT_PIO_POSN 0x000003;
+   .CONST $INT_EVENT_PIO_MASK 0x000008;
+   .CONST $INT_EVENT_MMU_UNMAPPED_POSN 0x000004;
+   .CONST $INT_EVENT_MMU_UNMAPPED_MASK 0x000010;
+   .CONST $INT_EVENT_SW0_POSN 0x000005;
+   .CONST $INT_EVENT_SW0_MASK 0x000020;
+   .CONST $INT_EVENT_SW1_POSN 0x000006;
+   .CONST $INT_EVENT_SW1_MASK 0x000040;
+   .CONST $INT_EVENT_SW2_POSN 0x000007;
+   .CONST $INT_EVENT_SW2_MASK 0x000080;
+   .CONST $INT_EVENT_SW3_POSN 0x000008;
+   .CONST $INT_EVENT_SW3_MASK 0x000100;
+   .CONST $INT_EVENT_GPS_POSN 0x000009;
+   .CONST $INT_EVENT_GPS_MASK 0x000200;
+   .CONST $BITMODE_POSN 0x000000;
+   .CONST $BITMODE_MASK 0x000003;
+   .CONST $BITMODE_8BIT_ENUM 0x000000;
+   .CONST $BITMODE_16BIT_ENUM 0x000001;
+   .CONST $BITMODE_24BIT_ENUM 0x000002;
+   .CONST $BYTESWAP_POSN 0x000002;
+   .CONST $BYTESWAP_MASK 0x000004;
+   .CONST $SATURATE_POSN 0x000003;
+   .CONST $SATURATE_MASK 0x000008;
+   .CONST $NOSIGNEXT_POSN 0x000003;
+   .CONST $NOSIGNEXT_MASK 0x000008;
+.linefile 22 "C:/ADK3.5/kalimba/architecture/architecture.h" 2
+.linefile 1 "C:/ADK3.5/kalimba/architecture/gordon_io_map.h" 1
+
+
+
+
+   .CONST $INT_SW_ERROR_EVENT_TRIGGER 0xFFFE00;
+   .CONST $INT_GBL_ENABLE 0xFFFE11;
+   .CONST $INT_ENABLE 0xFFFE12;
+   .CONST $INT_CLK_SWITCH_EN 0xFFFE13;
+   .CONST $INT_SOURCES_EN 0xFFFE14;
+   .CONST $INT_PRIORITIES 0xFFFE15;
+   .CONST $INT_LOAD_INFO 0xFFFE16;
+   .CONST $INT_ACK 0xFFFE17;
+   .CONST $INT_SOURCE 0xFFFE18;
+   .CONST $INT_SAVE_INFO 0xFFFE19;
+   .CONST $INT_ADDR 0xFFFE1A;
+   .CONST $DSP2MCU_EVENT_DATA 0xFFFE1B;
+   .CONST $PC_STATUS 0xFFFE1C;
+   .CONST $MCU2DSP_EVENT_DATA 0xFFFE1D;
+   .CONST $DOLOOP_CACHE_EN 0xFFFE1E;
+   .CONST $TIMER1_EN 0xFFFE1F;
+   .CONST $TIMER2_EN 0xFFFE20;
+   .CONST $TIMER1_TRIGGER 0xFFFE21;
+   .CONST $TIMER2_TRIGGER 0xFFFE22;
+   .CONST $WRITE_PORT0_DATA 0xFFFE23;
+   .CONST $WRITE_PORT1_DATA 0xFFFE24;
+   .CONST $WRITE_PORT2_DATA 0xFFFE25;
+   .CONST $WRITE_PORT3_DATA 0xFFFE26;
+   .CONST $WRITE_PORT4_DATA 0xFFFE27;
+   .CONST $WRITE_PORT5_DATA 0xFFFE28;
+   .CONST $WRITE_PORT6_DATA 0xFFFE29;
+   .CONST $WRITE_PORT7_DATA 0xFFFE2A;
+   .CONST $READ_PORT0_DATA 0xFFFE2B;
+   .CONST $READ_PORT1_DATA 0xFFFE2C;
+   .CONST $READ_PORT2_DATA 0xFFFE2D;
+   .CONST $READ_PORT3_DATA 0xFFFE2E;
+   .CONST $READ_PORT4_DATA 0xFFFE2F;
+   .CONST $READ_PORT5_DATA 0xFFFE30;
+   .CONST $READ_PORT6_DATA 0xFFFE31;
+   .CONST $READ_PORT7_DATA 0xFFFE32;
+   .CONST $PORT_BUFFER_SET 0xFFFE33;
+   .CONST $WRITE_PORT8_DATA 0xFFFE34;
+   .CONST $WRITE_PORT9_DATA 0xFFFE35;
+   .CONST $WRITE_PORT10_DATA 0xFFFE36;
+   .CONST $READ_PORT8_DATA 0xFFFE38;
+   .CONST $READ_PORT9_DATA 0xFFFE39;
+   .CONST $READ_PORT10_DATA 0xFFFE3A;
+   .CONST $MM_DOLOOP_START 0xFFFE40;
+   .CONST $MM_DOLOOP_END 0xFFFE41;
+   .CONST $MM_QUOTIENT 0xFFFE42;
+   .CONST $MM_REM 0xFFFE43;
+   .CONST $MM_RINTLINK 0xFFFE44;
+   .CONST $CLOCK_DIVIDE_RATE 0xFFFE4D;
+   .CONST $INT_CLOCK_DIVIDE_RATE 0xFFFE4E;
+   .CONST $PIO_IN 0xFFFE4F;
+   .CONST $PIO2_IN 0xFFFE50;
+   .CONST $PIO_OUT 0xFFFE51;
+   .CONST $PIO2_OUT 0xFFFE52;
+   .CONST $PIO_DIR 0xFFFE53;
+   .CONST $PIO2_DIR 0xFFFE54;
+   .CONST $PIO_EVENT_EN_MASK 0xFFFE55;
+   .CONST $PIO2_EVENT_EN_MASK 0xFFFE56;
+   .CONST $INT_SW0_EVENT 0xFFFE57;
+   .CONST $INT_SW1_EVENT 0xFFFE58;
+   .CONST $INT_SW2_EVENT 0xFFFE59;
+   .CONST $INT_SW3_EVENT 0xFFFE5A;
+   .CONST $FLASH_WINDOW1_START_ADDR 0xFFFE5B;
+   .CONST $FLASH_WINDOW2_START_ADDR 0xFFFE5C;
+   .CONST $FLASH_WINDOW3_START_ADDR 0xFFFE5D;
+   .CONST $NOSIGNX_MCUWIN1 0xFFFE5F;
+   .CONST $NOSIGNX_MCUWIN2 0xFFFE60;
+   .CONST $FLASHWIN1_CONFIG 0xFFFE61;
+   .CONST $FLASHWIN2_CONFIG 0xFFFE62;
+   .CONST $FLASHWIN3_CONFIG 0xFFFE63;
+   .CONST $NOSIGNX_PMWIN 0xFFFE64;
+   .CONST $PM_WIN_ENABLE 0xFFFE65;
+   .CONST $STACK_START_ADDR 0xFFFE66;
+   .CONST $STACK_END_ADDR 0xFFFE67;
+   .CONST $STACK_POINTER 0xFFFE68;
+   .CONST $STACK_OVERFLOW_PC 0xFFFE69;
+   .CONST $FRAME_POINTER 0xFFFE6A;
+   .CONST $NUM_RUN_CLKS_MS 0xFFFE6B;
+   .CONST $NUM_RUN_CLKS_LS 0xFFFE6C;
+   .CONST $NUM_INSTRS_MS 0xFFFE6D;
+   .CONST $NUM_INSTRS_LS 0xFFFE6E;
+   .CONST $NUM_STALLS_MS 0xFFFE6F;
+   .CONST $NUM_STALLS_LS 0xFFFE70;
+   .CONST $TIMER_TIME 0xFFFE71;
+   .CONST $TIMER_TIME_MS 0xFFFE72;
+   .CONST $WRITE_PORT0_CONFIG 0xFFFE73;
+   .CONST $WRITE_PORT1_CONFIG 0xFFFE74;
+   .CONST $WRITE_PORT2_CONFIG 0xFFFE75;
+   .CONST $WRITE_PORT3_CONFIG 0xFFFE76;
+   .CONST $WRITE_PORT4_CONFIG 0xFFFE77;
+   .CONST $WRITE_PORT5_CONFIG 0xFFFE78;
+   .CONST $WRITE_PORT6_CONFIG 0xFFFE79;
+   .CONST $WRITE_PORT7_CONFIG 0xFFFE7A;
+   .CONST $READ_PORT0_CONFIG 0xFFFE7B;
+   .CONST $READ_PORT1_CONFIG 0xFFFE7C;
+   .CONST $READ_PORT2_CONFIG 0xFFFE7D;
+   .CONST $READ_PORT3_CONFIG 0xFFFE7E;
+   .CONST $READ_PORT4_CONFIG 0xFFFE7F;
+   .CONST $READ_PORT5_CONFIG 0xFFFE80;
+   .CONST $READ_PORT6_CONFIG 0xFFFE81;
+   .CONST $READ_PORT7_CONFIG 0xFFFE82;
+   .CONST $PM_FLASHWIN_START_ADDR 0xFFFE83;
+   .CONST $PM_FLASHWIN_SIZE 0xFFFE84;
+   .CONST $BITREVERSE_VAL 0xFFFE89;
+   .CONST $BITREVERSE_DATA 0xFFFE8A;
+   .CONST $BITREVERSE_DATA16 0xFFFE8B;
+   .CONST $BITREVERSE_ADDR 0xFFFE8C;
+   .CONST $ARITHMETIC_MODE 0xFFFE93;
+   .CONST $FORCE_FAST_MMU 0xFFFE94;
+   .CONST $DBG_COUNTERS_EN 0xFFFE9F;
+   .CONST $PM_FLASHWIN_CACHE_SIZE 0xFFFEE0;
+   .CONST $WRITE_PORT8_CONFIG 0xFFFEE1;
+   .CONST $WRITE_PORT9_CONFIG 0xFFFEE2;
+   .CONST $WRITE_PORT10_CONFIG 0xFFFEE3;
+   .CONST $READ_PORT8_CONFIG 0xFFFEE5;
+   .CONST $READ_PORT9_CONFIG 0xFFFEE6;
+   .CONST $READ_PORT10_CONFIG 0xFFFEE7;
+
+   .CONST $READ_CONFIG_GAP $READ_PORT8_CONFIG - $READ_PORT7_CONFIG;
+   .CONST $READ_DATA_GAP $READ_PORT8_DATA - $READ_PORT7_DATA;
+   .CONST $WRITE_CONFIG_GAP $WRITE_PORT8_CONFIG - $WRITE_PORT7_CONFIG;
+   .CONST $WRITE_DATA_GAP $WRITE_PORT8_DATA - $WRITE_PORT7_DATA;
+
+
+   .CONST $INT_UNBLOCK $INT_ENABLE;
+.linefile 23 "C:/ADK3.5/kalimba/architecture/architecture.h" 2
+.linefile 13 "C:/ADK3.5/kalimba/lib_sets/sdk/include/message.h" 2
+
+
+
+
+
+
+   .CONST $message.MAX_LONG_MESSAGE_TX_PAYLOAD_SIZE 80;
+   .CONST $message.MAX_LONG_MESSAGE_RX_PAYLOAD_SIZE 80;
+
+
+
+   .CONST $message.MAX_LONG_MESSAGE_TX_SIZE ($message.MAX_LONG_MESSAGE_TX_PAYLOAD_SIZE + 2);
+   .CONST $message.MAX_LONG_MESSAGE_RX_SIZE ($message.MAX_LONG_MESSAGE_RX_PAYLOAD_SIZE + 2);
+
+
+   .CONST $message.QUEUE_SIZE_IN_MSGS (($message.MAX_LONG_MESSAGE_TX_SIZE+3)>>2)+1;
+
+
+   .CONST $message.QUEUE_SIZE_IN_WORDS ($message.QUEUE_SIZE_IN_MSGS * (1+4));
+   .CONST $message.LONG_MESSAGE_BUFFER_SIZE (((($message.MAX_LONG_MESSAGE_RX_SIZE+3)>>2)+1) * 4);
+
+
+
+   .CONST $message.MAX_MESSAGE_HANDLERS 50;
+
+
+
+
+
+   .CONST $message.REATTEMPT_SEND_PERIOD 1000;
+
+
+   .CONST $message.TO_DSP_SHARED_WIN_SIZE 4;
+   .CONST $message.TO_MCU_SHARED_WIN_SIZE 4;
+   .CONST $message.ACK_FROM_MCU ($MCUWIN1_START + 0);
+   .CONST $message.ACK_FROM_DSP ($MCUWIN1_START + 1);
+   .CONST $message.DATA_TO_MCU ($MCUWIN1_START + 2);
+   .CONST $message.DATA_TO_DSP ($MCUWIN1_START + 2 + $message.TO_DSP_SHARED_WIN_SIZE);
+
+
+   .CONST $message.LAST_ENTRY -1;
+
+
+   .CONST $message.LONG_MESSAGE_MODE_ID -2;
+
+
+   .CONST $message.NEXT_ADDR_FIELD 0;
+   .CONST $message.ID_FIELD 1;
+   .CONST $message.HANDLER_ADDR_FIELD 2;
+   .CONST $message.MASK_FIELD 3;
+   .CONST $message.STRUC_SIZE 4;
+
+
+   .CONST $message.QUEUE_WORDS_PER_MSG (1+4);
+.linefile 12 "C:/ADK3.5/kalimba/lib_sets/sdk/include/core_library.h" 2
+.linefile 1 "C:/ADK3.5/kalimba/lib_sets/sdk/include/cbuffer.h" 1
+.linefile 11 "C:/ADK3.5/kalimba/lib_sets/sdk/include/cbuffer.h"
+   .CONST $cbuffer.SIZE_FIELD 0;
+   .CONST $cbuffer.READ_ADDR_FIELD 1;
+   .CONST $cbuffer.WRITE_ADDR_FIELD 2;
+
+
+
+
+      .CONST $cbuffer.STRUC_SIZE 3;
+
+
+
+
+ .CONST $frmbuffer.CBUFFER_PTR_FIELD 0;
+ .CONST $frmbuffer.FRAME_PTR_FIELD 1;
+ .CONST $frmbuffer.FRAME_SIZE_FIELD 2;
+ .CONST $frmbuffer.STRUC_SIZE 3;
+.linefile 42 "C:/ADK3.5/kalimba/lib_sets/sdk/include/cbuffer.h"
+      .CONST $cbuffer.NUM_PORTS 12;
+      .CONST $cbuffer.WRITE_PORT_OFFSET 0x00000C;
+      .CONST $cbuffer.PORT_NUMBER_MASK 0x00000F;
+      .CONST $cbuffer.TOTAL_PORT_NUMBER_MASK 0x00001F;
+      .CONST $cbuffer.TOTAL_CONTINUOUS_PORTS 8;
+
+
+
+
+
+
+
+   .CONST $cbuffer.MMU_PAGE_SIZE 64;
+
+
+   .CONST $cbuffer.READ_PORT_MASK 0x800000;
+   .CONST $cbuffer.WRITE_PORT_MASK $cbuffer.READ_PORT_MASK + $cbuffer.WRITE_PORT_OFFSET;
+
+
+
+
+   .CONST $cbuffer.FORCE_ENDIAN_MASK 0x300000;
+   .CONST $cbuffer.FORCE_ENDIAN_SHIFT_AMOUNT -21;
+   .CONST $cbuffer.FORCE_LITTLE_ENDIAN 0x100000;
+   .CONST $cbuffer.FORCE_BIG_ENDIAN 0x300000;
+
+
+   .CONST $cbuffer.FORCE_SIGN_EXTEND_MASK 0x0C0000;
+   .CONST $cbuffer.FORCE_SIGN_EXTEND_SHIFT_AMOUNT -19;
+   .CONST $cbuffer.FORCE_SIGN_EXTEND 0x040000;
+   .CONST $cbuffer.FORCE_NO_SIGN_EXTEND 0x0C0000;
+
+
+   .CONST $cbuffer.FORCE_BITWIDTH_MASK 0x038000;
+   .CONST $cbuffer.FORCE_BITWIDTH_SHIFT_AMOUNT -16;
+   .CONST $cbuffer.FORCE_8BIT_WORD 0x008000;
+   .CONST $cbuffer.FORCE_16BIT_WORD 0x018000;
+   .CONST $cbuffer.FORCE_24BIT_WORD 0x028000;
+   .CONST $cbuffer.FORCE_32BIT_WORD 0x038000;
+
+
+   .CONST $cbuffer.FORCE_SATURATE_MASK 0x006000;
+   .CONST $cbuffer.FORCE_SATURATE_SHIFT_AMOUNT -14;
+   .CONST $cbuffer.FORCE_NO_SATURATE 0x002000;
+   .CONST $cbuffer.FORCE_SATURATE 0x006000;
+
+
+   .CONST $cbuffer.FORCE_PADDING_MASK 0x001C00;
+   .CONST $cbuffer.FORCE_PADDING_SHIFT_AMOUNT -11;
+   .CONST $cbuffer.FORCE_PADDING_NONE 0x000400;
+   .CONST $cbuffer.FORCE_PADDING_LS_BYTE 0x000C00;
+   .CONST $cbuffer.FORCE_PADDING_MS_BYTE 0x001400;
+
+
+   .CONST $cbuffer.FORCE_PCM_AUDIO $cbuffer.FORCE_LITTLE_ENDIAN +
+                                                      $cbuffer.FORCE_SIGN_EXTEND +
+                                                      $cbuffer.FORCE_SATURATE;
+   .CONST $cbuffer.FORCE_24B_PCM_AUDIO $cbuffer.FORCE_LITTLE_ENDIAN +
+                                                      $cbuffer.FORCE_32BIT_WORD +
+                                                      $cbuffer.FORCE_PADDING_MS_BYTE +
+                                                      $cbuffer.FORCE_NO_SATURATE;
+
+   .CONST $cbuffer.FORCE_16BIT_DATA_STREAM $cbuffer.FORCE_BIG_ENDIAN +
+                                                      $cbuffer.FORCE_NO_SIGN_EXTEND +
+                                                      $cbuffer.FORCE_NO_SATURATE;
+.linefile 13 "C:/ADK3.5/kalimba/lib_sets/sdk/include/core_library.h" 2
+.linefile 1 "C:/ADK3.5/kalimba/lib_sets/sdk/include/interrupt.h" 1
+.linefile 27 "C:/ADK3.5/kalimba/lib_sets/sdk/include/interrupt.h"
+   .CONST $INTERRUPT_STORE_STATE_SIZE 48;
+.linefile 14 "C:/ADK3.5/kalimba/lib_sets/sdk/include/core_library.h" 2
+.linefile 1 "C:/ADK3.5/kalimba/lib_sets/sdk/include/pskey.h" 1
+.linefile 17 "C:/ADK3.5/kalimba/lib_sets/sdk/include/pskey.h"
+   .CONST $pskey.NEXT_ENTRY_FIELD 0;
+   .CONST $pskey.KEY_NUM_FIELD 1;
+   .CONST $pskey.HANDLER_ADDR_FIELD 2;
+   .CONST $pskey.STRUC_SIZE 3;
+
+
+
+   .CONST $pskey.MAX_HANDLERS 50;
+
+   .CONST $pskey.LAST_ENTRY -1;
+   .CONST $pskey.REATTEMPT_TIME_PERIOD 10000;
+
+   .CONST $pskey.FAILED_READ_LENGTH -1;
+.linefile 15 "C:/ADK3.5/kalimba/lib_sets/sdk/include/core_library.h" 2
+.linefile 1 "C:/ADK3.5/kalimba/lib_sets/sdk/include/flash.h" 1
+.linefile 17 "C:/ADK3.5/kalimba/lib_sets/sdk/include/flash.h"
+   .CONST $PM_FLASHWIN_SIZE_MAX 0x40000;
+
+
+
+
+   .CONST $flash.get_file_address.MAX_HANDLERS 10;
+
+
+   .CONST $flash.get_file_address.NEXT_ENTRY_FIELD 0;
+   .CONST $flash.get_file_address.FILE_ID_FIELD 1;
+   .CONST $flash.get_file_address.HANDLER_ADDR_FIELD 2;
+   .CONST $flash.get_file_address.STRUC_SIZE 3;
+
+   .CONST $flash.get_file_address.LAST_ENTRY -1;
+   .CONST $flash.get_file_address.REATTEMPT_TIME_PERIOD 10000;
+
+   .CONST $flash.get_file_address.MESSAGE_HANDLER_UNINITIALISED -1;
+.linefile 16 "C:/ADK3.5/kalimba/lib_sets/sdk/include/core_library.h" 2
+.linefile 1 "C:/ADK3.5/kalimba/lib_sets/sdk/include/wall_clock.h" 1
+.linefile 13 "C:/ADK3.5/kalimba/lib_sets/sdk/include/wall_clock.h"
+   .CONST $wall_clock.FIRMWARE_WALL_CLOCK_PERIOD_VALUE 625;
+   .CONST $wall_clock.FIRMWARE_WALL_CLOCK_PERIOD_SHIFT -1;
+
+   .CONST $wall_clock.UPDATE_TIMER_PERIOD 100000;
+
+
+
+
+
+   .CONST $wall_clock.MAX_WALL_CLOCKS 7;
+
+   .CONST $wall_clock.LAST_ENTRY -1;
+
+   .CONST $wall_clock.NEXT_ADDR_FIELD 0;
+   .CONST $wall_clock.BT_ADDR_TYPE_FIELD 1;
+   .CONST $wall_clock.BT_ADDR_WORD0_FIELD 2;
+   .CONST $wall_clock.BT_ADDR_WORD1_FIELD 3;
+   .CONST $wall_clock.BT_ADDR_WORD2_FIELD 4;
+   .CONST $wall_clock.ADJUSTMENT_VALUE_FIELD 5;
+   .CONST $wall_clock.CALLBACK_FIELD 6;
+   .CONST $wall_clock.TIMER_STRUC_FIELD 7;
+   .CONST $wall_clock.STRUC_SIZE 8 + $timer.STRUC_SIZE;
+
+   .CONST $wall_clock.BT_TICKS_IN_7500_US 24;
+.linefile 17 "C:/ADK3.5/kalimba/lib_sets/sdk/include/core_library.h" 2
+.linefile 1 "C:/ADK3.5/kalimba/lib_sets/sdk/include/pio.h" 1
+.linefile 17 "C:/ADK3.5/kalimba/lib_sets/sdk/include/pio.h"
+   .CONST $pio.NEXT_ADDR_FIELD 0;
+   .CONST $pio.PIO_BITMASK_FIELD 1;
+   .CONST $pio.HANDLER_ADDR_FIELD 2;
+   .CONST $pio.STRUC_SIZE 3;
+
+
+
+   .CONST $pio.MAX_HANDLERS 20;
+
+   .CONST $pio.LAST_ENTRY -1;
+.linefile 18 "C:/ADK3.5/kalimba/lib_sets/sdk/include/core_library.h" 2
+.linefile 1 "C:/ADK3.5/kalimba/lib_sets/sdk/include/profiler.h" 1
+.linefile 41 "C:/ADK3.5/kalimba/lib_sets/sdk/include/profiler.h"
+   .CONST $profiler.MAX_PROFILER_HANDLERS 50;
+
+   .CONST $profiler.LAST_ENTRY -1;
+
+
+
+
+
+   .CONST $profiler.UNINITIALISED -2;
+
+   .CONST $profiler.NEXT_ADDR_FIELD 0;
+   .CONST $profiler.CPU_FRACTION_FIELD 1;
+   .CONST $profiler.START_TIME_FIELD 2;
+   .CONST $profiler.INT_START_TIME_FIELD 3;
+   .CONST $profiler.TOTAL_TIME_FIELD 4;
+
+      .CONST $profiler.RUN_CLKS_MS_START_FIELD 5;
+      .CONST $profiler.RUN_CLKS_LS_START_FIELD 6;
+      .CONST $profiler.RUN_CLKS_MS_TOTAL_FIELD 7;
+      .CONST $profiler.RUN_CLKS_LS_TOTAL_FIELD 8;
+      .CONST $profiler.RUN_CLKS_AVERAGE_FIELD 9;
+      .CONST $profiler.RUN_CLKS_MS_MAX_FIELD 10;
+      .CONST $profiler.RUN_CLKS_LS_MAX_FIELD 11;
+      .CONST $profiler.INT_START_CLKS_MS_FIELD 12;
+      .CONST $profiler.INT_START_CLKS_LS_FIELD 13;
+      .CONST $profiler.INSTRS_MS_START_FIELD 14;
+      .CONST $profiler.INSTRS_LS_START_FIELD 15;
+      .CONST $profiler.INSTRS_MS_TOTAL_FIELD 16;
+      .CONST $profiler.INSTRS_LS_TOTAL_FIELD 17;
+      .CONST $profiler.INSTRS_AVERAGE_FIELD 18;
+      .CONST $profiler.INSTRS_MS_MAX_FIELD 19;
+      .CONST $profiler.INSTRS_LS_MAX_FIELD 20;
+      .CONST $profiler.INT_START_INSTRS_MS_FIELD 21;
+      .CONST $profiler.INT_START_INSTRS_LS_FIELD 22;
+      .CONST $profiler.STALLS_MS_START_FIELD 23;
+      .CONST $profiler.STALLS_LS_START_FIELD 24;
+      .CONST $profiler.STALLS_MS_TOTAL_FIELD 25;
+      .CONST $profiler.STALLS_LS_TOTAL_FIELD 26;
+      .CONST $profiler.STALLS_AVERAGE_FIELD 27;
+      .CONST $profiler.STALLS_MS_MAX_FIELD 28;
+      .CONST $profiler.STALLS_LS_MAX_FIELD 29;
+      .CONST $profiler.INT_START_STALLS_MS_FIELD 30;
+      .CONST $profiler.INT_START_STALLS_LS_FIELD 31;
+      .CONST $profiler.TEMP_COUNT_FIELD 32;
+      .CONST $profiler.COUNT_FIELD 33;
+      .CONST $profiler.STRUC_SIZE 34;
+.linefile 19 "C:/ADK3.5/kalimba/lib_sets/sdk/include/core_library.h" 2
+.linefile 1 "C:/ADK3.5/kalimba/lib_sets/sdk/include/fwrandom.h" 1
+.linefile 17 "C:/ADK3.5/kalimba/lib_sets/sdk/include/fwrandom.h"
+   .CONST $fwrandom.NEXT_ENTRY_FIELD 0;
+   .CONST $fwrandom.NUM_REQ_FIELD 1;
+   .CONST $fwrandom.NUM_RESP_FIELD 2;
+   .CONST $fwrandom.RESP_BUF_FIELD 3;
+   .CONST $fwrandom.HANDLER_ADDR_FIELD 4;
+   .CONST $fwrandom.STRUC_SIZE 5;
+
+
+
+   .CONST $fwrandom.MAX_HANDLERS 50;
+
+   .CONST $fwrandom.LAST_ENTRY -1;
+   .CONST $fwrandom.REATTEMPT_TIME_PERIOD 10000;
+   .CONST $fwrandom.MAX_RAND_BITS 512;
+
+   .CONST $fwrandom.FAILED_READ_LENGTH -1;
+.linefile 20 "C:/ADK3.5/kalimba/lib_sets/sdk/include/core_library.h" 2
+.linefile 19 "main.asm" 2
+.linefile 1 "C:/ADK3.5/kalimba/lib_sets/sdk/include/codec_library.h" 1
+.linefile 11 "C:/ADK3.5/kalimba/lib_sets/sdk/include/codec_library.h"
+.linefile 1 "C:/ADK3.5/kalimba/lib_sets/sdk/include/core_library.h" 1
+.linefile 12 "C:/ADK3.5/kalimba/lib_sets/sdk/include/codec_library.h" 2
+
+
+
+
+
+
+   .CONST $codec.NORMAL_DECODE 0;
+   .CONST $codec.NO_OUTPUT_DECODE 1;
+   .CONST $codec.GOBBLE_DECODE 2;
+
+   .CONST $codec.SUCCESS 0;
+   .CONST $codec.NOT_ENOUGH_INPUT_DATA 1;
+   .CONST $codec.NOT_ENOUGH_OUTPUT_SPACE 2;
+   .CONST $codec.ERROR 3;
+   .CONST $codec.EOF 4;
+   .CONST $codec.FRAME_CORRUPT 5;
+
+   .CONST $codec.ENCODER_OUT_BUFFER_FIELD 0;
+   .CONST $codec.ENCODER_IN_LEFT_BUFFER_FIELD 1;
+   .CONST $codec.ENCODER_IN_RIGHT_BUFFER_FIELD 2;
+   .CONST $codec.ENCODER_MODE_FIELD 3;
+   .CONST $codec.ENCODER_DATA_OBJECT_FIELD 4;
+   .CONST $codec.ENCODER_STRUC_SIZE 5;
+
+   .CONST $codec.DECODER_IN_BUFFER_FIELD 0;
+   .CONST $codec.DECODER_OUT_LEFT_BUFFER_FIELD 1;
+   .CONST $codec.DECODER_OUT_RIGHT_BUFFER_FIELD 2;
+   .CONST $codec.DECODER_MODE_FIELD 3;
+   .CONST $codec.DECODER_NUM_OUTPUT_SAMPLES_FIELD 4;
+   .CONST $codec.DECODER_DATA_OBJECT_FIELD 5;
+   .CONST $codec.TWS_CALLBACK_FIELD 6;
+   .CONST $codec.DECODER_STRUC_SIZE 7;
+
+   .CONST $codec.DECRYPTER_IN_BUFFER_FIELD 0;
+   .CONST $codec.DECRYPTER_OUT_BUFFER_FIELD 1;
+   .CONST $codec.DECRYPTER_EXTRA_STRUC_PTR_FIELD 2;
+   .CONST $codec.DECRYPTER_STRUC_SIZE 3;
+
+   .CONST $codec.STREAM_CAN_IDLE 0;
+   .CONST $codec.STREAM_DONT_IDLE 1;
+
+
+   .CONST $codec.FRAME_DECODE 0;
+   .CONST $codec.INIT_DECODER 1;
+   .CONST $codec.RESET_DECODER 2;
+   .CONST $codec.SILENCE_DECODER 3;
+   .CONST $codec.SUSPEND_DECODER 4;
+   .CONST $codec.RESUME_DECODER 5;
+   .CONST $codec.STORE_BOUNDARY_SNAPSHOT 6;
+   .CONST $codec.RESTORE_BOUNDARY_SNAPSHOT 7;
+   .CONST $codec.FAST_SKIP 8;
+   .CONST $codec.SET_SKIP_FUNCTION 9;
+   .CONST $codec.SET_AVERAGE_BITRATE 10;
+   .CONST $codec.SET_FILE_TYPE 11;
+   .CONST $codec.DECRYPTER_SET_DECODER 12;
+   .CONST $codec.DECRYPTER_SET_PARAMETERS 13;
+
+
+
+
+   .CONST $codec.stream_encode.ADDR_FIELD 0;
+   .CONST $codec.stream_encode.RESET_ADDR_FIELD 1;
+   .CONST $codec.stream_encode.ENCODER_STRUC_FIELD $codec.stream_encode.RESET_ADDR_FIELD + 1;
+
+   .CONST $codec.stream_encode.STATE_FIELD $codec.stream_encode.ENCODER_STRUC_FIELD + $codec.ENCODER_STRUC_SIZE;
+   .CONST $codec.stream_encode.MEDIA_HDR_ADDR_FIELD $codec.stream_encode.STATE_FIELD + 1;
+   .CONST $codec.stream_encode.STRUC_SIZE $codec.stream_encode.MEDIA_HDR_ADDR_FIELD + 1;
+
+
+   .CONST $codec.stream_encode.OUT_BUFFER_FIELD $codec.stream_encode.ENCODER_STRUC_FIELD + $codec.ENCODER_OUT_BUFFER_FIELD;
+   .CONST $codec.stream_encode.IN_LEFT_BUFFER_FIELD $codec.stream_encode.ENCODER_STRUC_FIELD + $codec.ENCODER_IN_LEFT_BUFFER_FIELD;
+   .CONST $codec.stream_encode.IN_RIGHT_BUFFER_FIELD $codec.stream_encode.ENCODER_STRUC_FIELD + $codec.ENCODER_IN_RIGHT_BUFFER_FIELD;
+   .CONST $codec.stream_encode.MODE_FIELD $codec.stream_encode.ENCODER_STRUC_FIELD + $codec.ENCODER_MODE_FIELD;
+
+
+
+
+
+
+   .CONST $codec.SBC_RTP_AND_PAYLOAD_HEADER_SIZE 13;
+   .CONST $codec.MP3_RTP_AND_PAYLOAD_HEADER_SIZE 16;
+   .CONST $codec.APTX_RTP_AND_PAYLOAD_HEADER_SIZE 0;
+
+
+   .CONST $codec.media_header.WRITE_HDR_FIELD 0;
+   .CONST $codec.media_header.RTP_SEQUENCE_NUM_FIELD 1;
+   .CONST $codec.media_header.RTP_TIMESTAMP_MS_FIELD 2;
+   .CONST $codec.media_header.RTP_TIMESTAMP_LS_FIELD 3;
+   .CONST $codec.media_header.FRAME_COUNT_FIELD 4;
+   .CONST $codec.media_header.SAMPLES_PER_FRAME 5;
+   .CONST $codec.media_header.PUT_BITS_ADDR_FIELD 6;
+   .CONST $codec.media_header.GET_ENCODED_FRAME_INFO 7;
+   .CONST $codec.media_header.NUM_FRAMES_FIELD 8;
+   .CONST $codec.media_header.L2CAP_ATU_SIZE_FIELD 9;
+   .CONST $codec.media_header.SHUNT_FRAME_BYTE_COUNT_FIELD 10;
+   .CONST $codec.media_header.RTP_AND_PAYLOAD_HEADER_SIZE_FIELD 11;
+   .CONST $codec.media_header.FASTSTREAM_ENABLED_FIELD 12;
+   .CONST $codec.media_header.MEDIA_HDR_STRUC_SIZE $codec.media_header.FASTSTREAM_ENABLED_FIELD + 1;
+
+   .CONST $codec.stream_encode.STATE_STOPPED 0;
+   .CONST $codec.stream_encode.STATE_STREAMING 1;
+   .CONST $codec.stream_encode.STATE_MASK 1;
+
+   .CONST $codec.stream_decode.ADDR_FIELD 0;
+   .CONST $codec.stream_decode.RESET_ADDR_FIELD 1;
+   .CONST $codec.stream_decode.SILENCE_ADDR_FIELD 2;
+   .CONST $codec.stream_decode.DECODER_STRUC_FIELD $codec.stream_decode.SILENCE_ADDR_FIELD + 1;
+
+   .CONST $codec.stream_decode.COMFORT_NOISE_GAIN_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_STRUC_SIZE + 0;
+   .CONST $codec.stream_decode.GOOD_WORKING_BUFLEVEL_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_STRUC_SIZE + 1;
+   .CONST $codec.stream_decode.POORLINK_DETECT_BUFLEVEL_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_STRUC_SIZE + 2;
+   .CONST $codec.stream_decode.POORLINK_PERIOD_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_STRUC_SIZE + 3;
+   .CONST $codec.stream_decode.PLAYING_ZERO_DATARATE_PERIOD_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_STRUC_SIZE + 4;
+   .CONST $codec.stream_decode.BUFFERING_ZERO_DATARATE_PERIOD_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_STRUC_SIZE + 5;
+   .CONST $codec.stream_decode.POORLINK_DETECT_TABLE_ADDR_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_STRUC_SIZE + 6;
+   .CONST $codec.stream_decode.POORLINK_DETECT_TABLE_SIZE_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_STRUC_SIZE + 7;
+   .CONST $codec.stream_decode.WARP_RATE_HIGH_COEF_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_STRUC_SIZE + 8;
+   .CONST $codec.stream_decode.WARP_RATE_LOW_COEF_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_STRUC_SIZE + 9;
+   .CONST $codec.stream_decode.WARP_RATE_TRANSITION_LEVEL_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_STRUC_SIZE + 10;
+   .CONST $codec.stream_decode.POORLINK_DETECT_TABLE_OFFSET_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_STRUC_SIZE + 11;
+   .CONST $codec.stream_decode.RAND_LAST_VAL_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_STRUC_SIZE + 12;
+   .CONST $codec.stream_decode.STATE_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_STRUC_SIZE + 13;
+   .CONST $codec.stream_decode.POORLINK_ENDTIME_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_STRUC_SIZE + 14;
+   .CONST $codec.stream_decode.ZERO_DATARATE_ENDTIME_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_STRUC_SIZE + 15;
+   .CONST $codec.stream_decode.PLAYING_STARTTIME_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_STRUC_SIZE + 16;
+   .CONST $codec.stream_decode.PREV_WRITE_PTR_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_STRUC_SIZE + 17;
+   .CONST $codec.stream_decode.FAST_AVERAGE_BUFLEVEL_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_STRUC_SIZE + 18;
+   .CONST $codec.stream_decode.SLOW_AVERAGE_BUFLEVEL_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_STRUC_SIZE + 19;
+   .CONST $codec.stream_decode.SLOW_AVERAGE_SAMPLE_TIME_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_STRUC_SIZE + 20;
+   .CONST $codec.stream_decode.WARP_TARGET_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_STRUC_SIZE + 21;
+   .CONST $codec.stream_decode.STRUC_SIZE $codec.stream_decode.WARP_TARGET_FIELD + 1;
+
+
+   .CONST $codec.stream_decode.IN_BUFFER_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_IN_BUFFER_FIELD;
+   .CONST $codec.stream_decode.OUT_LEFT_BUFFER_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_OUT_LEFT_BUFFER_FIELD;
+   .CONST $codec.stream_decode.OUT_RIGHT_BUFFER_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_OUT_RIGHT_BUFFER_FIELD;
+   .CONST $codec.stream_decode.MODE_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_MODE_FIELD;
+   .CONST $codec.stream_decode.NUM_OUTPUT_SAMPLES_FIELD $codec.stream_decode.DECODER_STRUC_FIELD + $codec.DECODER_NUM_OUTPUT_SAMPLES_FIELD;
+
+
+
+   .CONST $codec.stream_decode.STATE_BUFFERING 0;
+   .CONST $codec.stream_decode.STATE_PLAYING 1;
+   .CONST $codec.stream_decode.STATE_MASK 1;
+
+   .CONST $codec.stream_decode_sync.CONDITION_READ_WALL_CLOCK 2;
+   .CONST $codec.stream_decode_sync.CONDITION_DECODE_FRAME 4;
+   .CONST $codec.stream_decode_sync.CONDITION_INSERT_SAMPLES 8;
+
+   .CONST $codec.stream_decode.CONDITION_POORLINK 2;
+   .CONST $codec.stream_decode.CONDITION_DETECT_POORLINK_ENABLE 4;
+   .CONST $codec.stream_decode.CONDITION_ZERO_DATARATE 8;
+   .CONST $codec.stream_decode.CONDITION_STOPPING 16;
+
+   .CONST $codec.stream_decode.FAST_AVERAGE_SHIFT_CONST -6;
+   .CONST $codec.stream_decode.SLOW_AVERAGE_SHIFT_CONST -2;
+   .CONST $codec.stream_decode.SLOW_AVERAGE_SAMPLE_PERIOD 50000;
+.linefile 177 "C:/ADK3.5/kalimba/lib_sets/sdk/include/codec_library.h"
+   .CONST $codec.stream_relay.GET_FRAME_INFO_ADDR_FIELD 0;
+   .CONST $codec.stream_relay.IN_BUFFER_FIELD 1;
+   .CONST $codec.stream_relay.LOCAL_RELAY_BUFFER_FIELD 2;
+   .CONST $codec.stream_relay.REMOTE_RELAY_BUFFER_FIELD 3;
+   .CONST $codec.stream_relay.BUFFER_DELAY_IN_US_FIELD 4;
+   .CONST $codec.stream_relay.WARP_RATE_COEF_FIELD 5;
+   .CONST $codec.stream_relay.NUM_AUDIO_SAMPLES_CONSUMED_PNTR_FIELD 6;
+   .CONST $codec.stream_relay.WALL_CLOCK_STRUC_PNTR_FIELD 7;
+   .CONST $codec.stream_relay.NUM_MICRO_SECS_PER_1024_SAMPLES_FIELD 8;
+   .CONST $codec.stream_relay.PREVIOUS_AUDIO_FRAME_LENGTH_FIELD 9;
+   .CONST $codec.stream_relay.SLOW_AVERAGE_BUFLEVEL_FIELD 10;
+   .CONST $codec.stream_relay.SLOW_AVERAGE_SAMPLE_TIME_FIELD 11;
+   .CONST $codec.stream_relay.STATE_FIELD 12;
+   .CONST $codec.stream_relay.TIME_TO_PLAY_FIELD 13;
+   .CONST $codec.stream_relay.NUM_AUDIO_SAMPLES_IN_BUFFER_FIELD 14;
+   .CONST $codec.stream_relay.GOOD_WORKING_BUFLEVEL_FIELD 15;
+   .CONST $codec.stream_relay.STRUC_SIZE 16;
+
+   .CONST $codec.stream_relay.SLOW_AVERAGE_SAMPLE_PERIOD 50000;
+   .CONST $codec.stream_relay.SLOW_AVERAGE_SHIFT_CONST -2;
+
+   .CONST $codec.stream_relay.STATE_BUFFERING 0;
+   .CONST $codec.stream_relay.STATE_PLAYING 1;
+
+
+
+   .CONST $codec.stream_decode_sync.ADDR_FIELD 0;
+   .CONST $codec.stream_decode_sync.RESET_ADDR_FIELD 1;
+   .CONST $codec.stream_decode_sync.SILENCE_ADDR_FIELD 2;
+   .CONST $codec.stream_decode_sync.GET_FRAME_INFO_ADDR_FIELD 3;
+   .CONST $codec.stream_decode_sync.LEFT_DAC_PORT_FIELD 4;
+   .CONST $codec.stream_decode_sync.RIGHT_DAC_PORT_FIELD 5;
+   .CONST $codec.stream_decode_sync.IN_BUFFER_FIELD 6;
+   .CONST $codec.stream_decode_sync.OUT_LEFT_BUFFER_FIELD 7;
+   .CONST $codec.stream_decode_sync.OUT_RIGHT_BUFFER_FIELD 8;
+   .CONST $codec.stream_decode_sync.MODE_FIELD 9;
+   .CONST $codec.stream_decode_sync.NUM_OUTPUT_SAMPLES_FIELD 10;
+   .CONST $codec.stream_decode_sync.COMFORT_NOISE_GAIN_FIELD 11;
+   .CONST $codec.stream_decode_sync.DELAY_TO_WARP_COEF_FIELD 12;
+   .CONST $codec.stream_decode_sync.MAX_PLAY_TIME_OFFSET_IN_US_FIELD 13;
+   .CONST $codec.stream_decode_sync.GENERATE_SILENCE_THRESHOLD_FIELD 14;
+   .CONST $codec.stream_decode_sync.AMOUNT_OF_SILENCE_TO_GENERATE_FIELD 15;
+   .CONST $codec.stream_decode_sync.CURRENT_MODE_FIELD 16;
+   .CONST $codec.stream_decode_sync.DECODER_MODE_FIELD 17;
+   .CONST $codec.stream_decode_sync.FRAME_PLAY_TIME_FIELD 18;
+   .CONST $codec.stream_decode_sync.NUM_MICRO_SECS_PER_1024_SAMPLES_FIELD 19;
+   .CONST $codec.stream_decode_sync.NUM_SAMPLES_PER_US_FIELD 20;
+   .CONST $codec.stream_decode_sync.PADDING_BYTE_FIELD 21;
+   .CONST $codec.stream_decode_sync.RAND_LAST_VAL_FIELD 22;
+   .CONST $codec.stream_decode_sync.REQUESTED_WARP_FIELD 23;
+   .CONST $codec.stream_decode_sync.STREAMING_FIELD 24;
+   .CONST $codec.stream_decode_sync.AUDIO_SAMPLES_CONSUMED_FIELD 25;
+   .CONST $codec.stream_decode_sync.WALL_CLOCK_STRUC_FIELD 26;
+   .CONST $codec.stream_decode_sync.STRUC_SIZE ($codec.stream_decode_sync.WALL_CLOCK_STRUC_FIELD + $wall_clock.STRUC_SIZE);
+
+   .CONST $codec.stream_decode_sync.STREAMING_STOPPED 0;
+   .CONST $codec.stream_decode_sync.STREAMING_PLAYING 1;
+
+
+
+   .CONST $codec.av_encode.ADDR_FIELD 0;
+   .CONST $codec.av_encode.RESET_ADDR_FIELD $codec.av_encode.ADDR_FIELD + 1;
+
+   .CONST $codec.av_encode.ENCODER_STRUC_FIELD $codec.av_encode.RESET_ADDR_FIELD + 1;
+   .CONST $codec.av_encode.OUT_BUFFER_FIELD $codec.av_encode.ENCODER_STRUC_FIELD;
+   .CONST $codec.av_encode.IN_LEFT_BUFFER_FIELD $codec.av_encode.OUT_BUFFER_FIELD + 1;
+   .CONST $codec.av_encode.IN_RIGHT_BUFFER_FIELD $codec.av_encode.IN_LEFT_BUFFER_FIELD + 1;
+   .CONST $codec.av_encode.MODE_FIELD $codec.av_encode.IN_RIGHT_BUFFER_FIELD + 1;
+
+   .CONST $codec.av_encode.ENCODER_DATA_OBJECT_FIELD $codec.av_encode.MODE_FIELD + 1;
+   .CONST $codec.av_encode.BUFFERING_THRESHOLD_FIELD $codec.av_encode.ENCODER_DATA_OBJECT_FIELD + 1;
+   .CONST $codec.av_encode.STALL_COUNTER_FIELD $codec.av_encode.BUFFERING_THRESHOLD_FIELD + 1;
+
+   .CONST $codec.av_encode.STRUC_SIZE $codec.av_encode.STALL_COUNTER_FIELD + 1;
+
+
+   .CONST $codec.av_decode.ADDR_FIELD 0;
+   .CONST $codec.av_decode.RESET_ADDR_FIELD $codec.av_decode.ADDR_FIELD + 1;
+   .CONST $codec.av_decode.SILENCE_ADDR_FIELD $codec.av_decode.RESET_ADDR_FIELD + 1;
+
+   .CONST $codec.av_decode.DECODER_STRUC_FIELD $codec.av_decode.SILENCE_ADDR_FIELD + 1;
+   .CONST $codec.av_decode.IN_BUFFER_FIELD $codec.av_decode.DECODER_STRUC_FIELD;
+   .CONST $codec.av_decode.OUT_LEFT_BUFFER_FIELD $codec.av_decode.IN_BUFFER_FIELD + 1;
+   .CONST $codec.av_decode.OUT_RIGHT_BUFFER_FIELD $codec.av_decode.OUT_LEFT_BUFFER_FIELD + 1;
+   .CONST $codec.av_decode.MODE_FIELD $codec.av_decode.OUT_RIGHT_BUFFER_FIELD + 1;
+   .CONST $codec.av_decode.DECODER_NUM_OUTPUT_SAMPLES_FIELD $codec.av_decode.MODE_FIELD + 1;
+
+   .CONST $codec.av_decode.DECODER_DATA_OBJECT_FIELD $codec.av_decode.DECODER_NUM_OUTPUT_SAMPLES_FIELD + 1;
+   .CONST $codec.av_decode.TWS_CALLBACK_FIELD $codec.av_decode.DECODER_DATA_OBJECT_FIELD + 1;
+   .CONST $codec.av_decode.DECODE_TO_STALL_THRESHOLD $codec.av_decode.TWS_CALLBACK_FIELD + 1;
+   .CONST $codec.av_decode.STALL_BUFFER_LEVEL_FIELD $codec.av_decode.DECODE_TO_STALL_THRESHOLD + 1;
+   .CONST $codec.av_decode.NORMAL_BUFFER_LEVEL_FIELD $codec.av_decode.STALL_BUFFER_LEVEL_FIELD + 1;
+   .CONST $codec.av_decode.CODEC_PURGE_ENABLE_FIELD $codec.av_decode.NORMAL_BUFFER_LEVEL_FIELD + 1;
+   .CONST $codec.av_decode.MASTER_RESET_FUNC_FIELD $codec.av_decode.CODEC_PURGE_ENABLE_FIELD + 1;
+
+   .CONST $codec.av_decode.CODEC_PREV_WADDR_FIELD $codec.av_decode.MASTER_RESET_FUNC_FIELD + 1;
+   .CONST $codec.av_decode.PAUSE_TIMER_FIELD $codec.av_decode.CODEC_PREV_WADDR_FIELD + 1;
+   .CONST $codec.av_decode.CURRENT_RUNNING_MODE_FIELD $codec.av_decode.PAUSE_TIMER_FIELD + 1;
+   .CONST $codec.av_decode.CAN_SWITCH_FIELD $codec.av_decode.CURRENT_RUNNING_MODE_FIELD + 1;
+   .CONST $codec.av_decode.PREV_TIME_FIELD $codec.av_decode.CAN_SWITCH_FIELD + 1;
+
+   .CONST $codec.av_decode.STRUC_SIZE $codec.av_decode.PREV_TIME_FIELD + 1;
+
+   .CONST $codec.av_decode.PAUSE_TO_CLEAR_THRESHOLD 150;
+   .CONST $codec.av_decode.STALL_TO_DECODE_THRESHOLD 70;
+   .CONST $codec.av_encode.STALL_THRESHOLD 10;
+
+   .CONST $codec.pre_post_proc.PRE_PROC_FUNC_ADDR_FIELD 0;
+   .CONST $codec.pre_post_proc.PRE_PROC_FUNC_DATA1_FIELD 1;
+   .CONST $codec.pre_post_proc.PRE_PROC_FUNC_DATA2_FIELD 2;
+   .CONST $codec.pre_post_proc.POST_PROC_FUNC_ADDR_FIELD 3;
+   .CONST $codec.pre_post_proc.POST_PROC_FUNC_DATA1_FIELD 4;
+   .CONST $codec.pre_post_proc.POST_PROC_FUNC_DATA2_FIELD 5;
+   .CONST $codec.pre_post_proc.STRUC_SIZE 6;
+
+   .CONST $codec.stream_encode.mux.NEXT_SINK_HANDLER_FIELD 0;
+   .CONST $codec.stream_encode.mux.STATE_FIELD 1;
+   .CONST $codec.stream_encode.mux.PREV_READ_PNTR_FIELD 2;
+   .CONST $codec.stream_encode.mux.AMOUNT_LEFT_TO_DISCARD_FIELD 3;
+   .CONST $codec.stream_encode.mux.TERMINAL_FIELD 4;
+   .CONST $codec.stream_encode.mux.PORT_FIELD 5;
+   .CONST $codec.stream_encode.mux.BYTE_ALIGNMENT_FIELD 6;
+   .CONST $codec.stream_encode.mux.CBUFFER_STRUC_FIELD 7;
+   .CONST $codec.stream_encode.mux.STRUC_SIZE $codec.stream_encode.mux.CBUFFER_STRUC_FIELD + $cbuffer.STRUC_SIZE;
+.linefile 20 "main.asm" 2
+.linefile 1 "C:/ADK3.5/kalimba/lib_sets/sdk/include/spi_comm_library.h" 1
+.linefile 28 "C:/ADK3.5/kalimba/lib_sets/sdk/include/spi_comm_library.h"
+.CONST $SPI_COMM_VERSION 0x010000;
+
+
+.CONST $spi_comm.NEXT_ADDR_FIELD 0;
+.CONST $spi_comm.ID_FIELD 1;
+.CONST $spi_comm.HANDLER_ADDR_FIELD 2;
+.CONST $spi_comm.STRUC_SIZE 3;
+.linefile 21 "main.asm" 2
+.linefile 1 "C:/ADK3.5/kalimba/lib_sets/sdk/include/a2dp_low_latency_1mic_library_gen.h" 1
+.linefile 12 "C:/ADK3.5/kalimba/lib_sets/sdk/include/a2dp_low_latency_1mic_library_gen.h"
+.CONST $A2DP_LOW_LATENCY_1MIC_SYSID 0xE102;
+
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.CONFIG.BASS_MANAGER_BYPASS 0x000800;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.CONFIG.SPKR_EQ_BYPASS 0x000400;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.CONFIG.EQFLAT 0x000200;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.CONFIG.USER_EQ_BYPASS 0x000100;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.CONFIG.BASS_BOOST_BYPASS 0x000080;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.CONFIG.SPATIAL_BYPASS 0x000040;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.CONFIG.COMPANDER_BYPASS 0x000020;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.CONFIG.DITHER_BYPASS 0x000010;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.CONFIG.USER_EQ_SELECT 0x000007;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.CONFIG.CNGENA 0x008000;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.CONFIG.RERENA 0x004000;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.CONFIG.SND_AGCBYP 0x001000;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.CONFIG.SNDOMSENA 0x000080;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.CONFIG.SIDETONEENA 0x000010;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.CONFIG.WNRBYP 0x000008;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.CONFIG.AECENA 0x000002;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.CONFIG.HDBYP 0x000004;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.CONFIG.BYPASS_AGCPERSIST 0x040000;
+
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.CUR_MODE_OFFSET 0;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.SYSCONTROL_OFFSET 1;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.FUNC_MIPS_OFFSET 2;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.DECODER_MIPS_OFFSET 3;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.PEAK_PCMINL_OFFSET 4;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.PEAK_PCMINR_OFFSET 5;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.PEAK_DACL_OFFSET 6;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.PEAK_DACR_OFFSET 7;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.PEAK_SUB_OFFSET 8;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.CUR_DACL_OFFSET 9;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.USER_EQ_BANK_OFFSET 10;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.CONFIG_FLAG_OFFSET 11;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.DELAY 12;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.CODEC_TYPE_OFFSET 13;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.CODEC_FS_OFFSET 14;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.CODEC_CHANNEL_MODE 15;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.CODEC_STAT1 16;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.CODEC_STAT2 17;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.CODEC_STAT3 18;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.CODEC_STAT4 19;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.CODEC_STAT5 20;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.INTERFACE_TYPE 21;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.INPUT_RATE 22;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.OUTPUT_RATE 23;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.CODEC_RATE 24;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.CALL_STATE_OFFSET 25;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.SEC_STAT_OFFSET 26;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.PEAK_ADC_OFFSET 27;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.PEAK_SCO_OUT_OFFSET 28;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.PEAK_MIPS_OFFSET 29;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.PEAK_AUX_OFFSET 30;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.SIDETONE_GAIN 31;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.VOLUME 32;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.CONNSTAT 33;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.PEAK_SIDETONE 34;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.SND_AGC_SPEECH_LVL 35;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.SND_AGC_GAIN 36;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.AEC_COUPLING_OFFSET 37;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.WNR_PWR_LVL 38;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.STATUS.BLOCK_SIZE 39;
+
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.SYSMODE.STANDBY 0;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.SYSMODE.PASSTHRU 1;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.SYSMODE.FULLPROC 2;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.SYSMODE.LOWVOLUME 3;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.SYSMODE.MAX_MODES 4;
+
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.CONTROL.DAC_OVERRIDE 0x8000;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.CONTROL.CALLSTATE_OVERRIDE 0x4000;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.CONTROL.MODE_OVERRIDE 0x2000;
+
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.INTERFACE.ANALOG 0;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.INTERFACE.I2S 1;
+
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.CALLST.MUTE 0;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.CALLST.CONNECTED 1;
+
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_CONFIG 0;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_CONFIG 1;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_GAIN_EXP 2;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_GAIN_MANT 3;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE1_B2 4;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE1_B1 5;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE1_B0 6;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE1_A2 7;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE1_A1 8;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE2_B2 9;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE2_B1 10;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE2_B0 11;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE2_A2 12;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE2_A1 13;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE3_B2 14;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE3_B1 15;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE3_B0 16;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE3_A2 17;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE3_A1 18;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE4_B2 19;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE4_B1 20;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE4_B0 21;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE4_A2 22;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE4_A1 23;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE5_B2 24;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE5_B1 25;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE5_B0 26;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE5_A2 27;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_STAGE5_A1 28;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_SCALE1 29;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_SCALE2 30;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_SCALE3 31;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_SCALE4 32;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ1_SCALE5 33;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_CONFIG 34;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_GAIN_EXP 35;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_GAIN_MANT 36;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE1_B2 37;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE1_B1 38;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE1_B0 39;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE1_A2 40;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE1_A1 41;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE2_B2 42;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE2_B1 43;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE2_B0 44;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE2_A2 45;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE2_A1 46;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE3_B2 47;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE3_B1 48;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE3_B0 49;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE3_A2 50;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE3_A1 51;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE4_B2 52;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE4_B1 53;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE4_B0 54;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE4_A2 55;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE4_A1 56;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE5_B2 57;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE5_B1 58;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE5_B0 59;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE5_A2 60;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_STAGE5_A1 61;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_SCALE1 62;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_SCALE2 63;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_SCALE3 64;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_SCALE4 65;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SPKR_EQ2_SCALE5 66;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BOOST_EQ1_CONFIG 67;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BOOST_EQ1_GAIN_EXP 68;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BOOST_EQ1_GAIN_MANT 69;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BOOST_EQ1_B2 70;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BOOST_EQ1_B1 71;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BOOST_EQ1_B0 72;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BOOST_EQ1_A2 73;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BOOST_EQ1_A1 74;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BOOST_EQ1_SCALE 75;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BOOST_EQ2_CONFIG 76;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BOOST_EQ2_GAIN_EXP 77;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BOOST_EQ2_GAIN_MANT 78;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BOOST_EQ2_B2 79;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BOOST_EQ2_B1 80;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BOOST_EQ2_B0 81;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BOOST_EQ2_A2 82;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BOOST_EQ2_A1 83;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BOOST_EQ2_SCALE 84;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_CONFIG 85;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_GAIN_EXP 86;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_GAIN_MANT 87;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE1_B2 88;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE1_B1 89;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE1_B0 90;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE1_A2 91;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE1_A1 92;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE2_B2 93;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE2_B1 94;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE2_B0 95;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE2_A2 96;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE2_A1 97;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE3_B2 98;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE3_B1 99;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE3_B0 100;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE3_A2 101;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE3_A1 102;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE4_B2 103;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE4_B1 104;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE4_B0 105;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE4_A2 106;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE4_A1 107;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE5_B2 108;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE5_B1 109;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE5_B0 110;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE5_A2 111;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_STAGE5_A1 112;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_SCALE1 113;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_SCALE2 114;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_SCALE3 115;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_SCALE4 116;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ1_SCALE5 117;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_CONFIG 118;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_GAIN_EXP 119;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_GAIN_MANT 120;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE1_B2 121;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE1_B1 122;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE1_B0 123;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE1_A2 124;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE1_A1 125;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE2_B2 126;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE2_B1 127;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE2_B0 128;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE2_A2 129;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE2_A1 130;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE3_B2 131;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE3_B1 132;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE3_B0 133;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE3_A2 134;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE3_A1 135;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE4_B2 136;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE4_B1 137;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE4_B0 138;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE4_A2 139;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE4_A1 140;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE5_B2 141;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE5_B1 142;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE5_B0 143;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE5_A2 144;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_STAGE5_A1 145;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_SCALE1 146;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_SCALE2 147;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_SCALE3 148;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_SCALE4 149;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ2_SCALE5 150;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_CONFIG 151;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_GAIN_EXP 152;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_GAIN_MANT 153;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE1_B2 154;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE1_B1 155;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE1_B0 156;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE1_A2 157;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE1_A1 158;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE2_B2 159;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE2_B1 160;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE2_B0 161;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE2_A2 162;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE2_A1 163;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE3_B2 164;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE3_B1 165;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE3_B0 166;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE3_A2 167;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE3_A1 168;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE4_B2 169;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE4_B1 170;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE4_B0 171;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE4_A2 172;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE4_A1 173;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE5_B2 174;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE5_B1 175;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE5_B0 176;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE5_A2 177;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_STAGE5_A1 178;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_SCALE1 179;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_SCALE2 180;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_SCALE3 181;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_SCALE4 182;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ3_SCALE5 183;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_CONFIG 184;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_GAIN_EXP 185;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_GAIN_MANT 186;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE1_B2 187;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE1_B1 188;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE1_B0 189;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE1_A2 190;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE1_A1 191;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE2_B2 192;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE2_B1 193;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE2_B0 194;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE2_A2 195;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE2_A1 196;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE3_B2 197;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE3_B1 198;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE3_B0 199;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE3_A2 200;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE3_A1 201;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE4_B2 202;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE4_B1 203;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE4_B0 204;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE4_A2 205;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE4_A1 206;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE5_B2 207;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE5_B1 208;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE5_B0 209;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE5_A2 210;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_STAGE5_A1 211;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_SCALE1 212;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_SCALE2 213;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_SCALE3 214;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_SCALE4 215;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ4_SCALE5 216;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_CONFIG 217;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_GAIN_EXP 218;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_GAIN_MANT 219;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE1_B2 220;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE1_B1 221;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE1_B0 222;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE1_A2 223;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE1_A1 224;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE2_B2 225;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE2_B1 226;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE2_B0 227;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE2_A2 228;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE2_A1 229;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE3_B2 230;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE3_B1 231;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE3_B0 232;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE3_A2 233;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE3_A1 234;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE4_B2 235;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE4_B1 236;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE4_B0 237;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE4_A2 238;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE4_A1 239;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE5_B2 240;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE5_B1 241;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE5_B0 242;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE5_A2 243;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_STAGE5_A1 244;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_SCALE1 245;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_SCALE2 246;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_SCALE3 247;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_SCALE4 248;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ5_SCALE5 249;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_CONFIG 250;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_GAIN_EXP 251;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_GAIN_MANT 252;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE1_B2 253;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE1_B1 254;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE1_B0 255;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE1_A2 256;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE1_A1 257;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE2_B2 258;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE2_B1 259;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE2_B0 260;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE2_A2 261;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE2_A1 262;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE3_B2 263;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE3_B1 264;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE3_B0 265;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE3_A2 266;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE3_A1 267;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE4_B2 268;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE4_B1 269;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE4_B0 270;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE4_A2 271;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE4_A1 272;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE5_B2 273;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE5_B1 274;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE5_B0 275;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE5_A2 276;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_STAGE5_A1 277;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_SCALE1 278;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_SCALE2 279;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_SCALE3 280;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_SCALE4 281;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ6_SCALE5 282;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_CONFIG 283;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_GAIN_EXP 284;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_GAIN_MANT 285;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE1_B2 286;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE1_B1 287;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE1_B0 288;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE1_A2 289;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE1_A1 290;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE2_B2 291;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE2_B1 292;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE2_B0 293;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE2_A2 294;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE2_A1 295;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE3_B2 296;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE3_B1 297;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE3_B0 298;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE3_A2 299;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE3_A1 300;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE4_B2 301;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE4_B1 302;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE4_B0 303;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE4_A2 304;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE4_A1 305;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE5_B2 306;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE5_B1 307;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE5_B0 308;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE5_A2 309;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_STAGE5_A1 310;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_SCALE1 311;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_SCALE2 312;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_SCALE3 313;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_SCALE4 314;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ7_SCALE5 315;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_CONFIG 316;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_GAIN_EXP 317;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_GAIN_MANT 318;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE1_B2 319;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE1_B1 320;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE1_B0 321;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE1_A2 322;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE1_A1 323;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE2_B2 324;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE2_B1 325;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE2_B0 326;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE2_A2 327;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE2_A1 328;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE3_B2 329;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE3_B1 330;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE3_B0 331;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE3_A2 332;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE3_A1 333;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE4_B2 334;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE4_B1 335;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE4_B0 336;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE4_A2 337;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE4_A1 338;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE5_B2 339;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE5_B1 340;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE5_B0 341;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE5_A2 342;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_STAGE5_A1 343;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_SCALE1 344;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_SCALE2 345;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_SCALE3 346;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_SCALE4 347;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ8_SCALE5 348;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_CONFIG 349;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_GAIN_EXP 350;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_GAIN_MANT 351;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE1_B2 352;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE1_B1 353;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE1_B0 354;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE1_A2 355;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE1_A1 356;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE2_B2 357;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE2_B1 358;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE2_B0 359;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE2_A2 360;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE2_A1 361;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE3_B2 362;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE3_B1 363;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE3_B0 364;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE3_A2 365;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE3_A1 366;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE4_B2 367;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE4_B1 368;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE4_B0 369;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE4_A2 370;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE4_A1 371;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE5_B2 372;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE5_B1 373;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE5_B0 374;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE5_A2 375;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_STAGE5_A1 376;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_SCALE1 377;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_SCALE2 378;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_SCALE3 379;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_SCALE4 380;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ9_SCALE5 381;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_CONFIG 382;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_GAIN_EXP 383;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_GAIN_MANT 384;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE1_B2 385;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE1_B1 386;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE1_B0 387;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE1_A2 388;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE1_A1 389;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE2_B2 390;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE2_B1 391;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE2_B0 392;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE2_A2 393;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE2_A1 394;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE3_B2 395;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE3_B1 396;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE3_B0 397;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE3_A2 398;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE3_A1 399;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE4_B2 400;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE4_B1 401;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE4_B0 402;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE4_A2 403;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE4_A1 404;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE5_B2 405;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE5_B1 406;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE5_B0 407;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE5_A2 408;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_STAGE5_A1 409;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_SCALE1 410;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_SCALE2 411;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_SCALE3 412;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_SCALE4 413;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ10_SCALE5 414;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_CONFIG 415;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_GAIN_EXP 416;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_GAIN_MANT 417;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE1_B2 418;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE1_B1 419;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE1_B0 420;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE1_A2 421;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE1_A1 422;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE2_B2 423;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE2_B1 424;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE2_B0 425;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE2_A2 426;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE2_A1 427;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE3_B2 428;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE3_B1 429;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE3_B0 430;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE3_A2 431;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE3_A1 432;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE4_B2 433;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE4_B1 434;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE4_B0 435;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE4_A2 436;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE4_A1 437;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE5_B2 438;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE5_B1 439;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE5_B0 440;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE5_A2 441;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_STAGE5_A1 442;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_SCALE1 443;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_SCALE2 444;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_SCALE3 445;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_SCALE4 446;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ11_SCALE5 447;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_CONFIG 448;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_GAIN_EXP 449;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_GAIN_MANT 450;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE1_B2 451;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE1_B1 452;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE1_B0 453;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE1_A2 454;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE1_A1 455;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE2_B2 456;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE2_B1 457;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE2_B0 458;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE2_A2 459;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE2_A1 460;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE3_B2 461;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE3_B1 462;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE3_B0 463;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE3_A2 464;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE3_A1 465;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE4_B2 466;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE4_B1 467;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE4_B0 468;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE4_A2 469;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE4_A1 470;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE5_B2 471;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE5_B1 472;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE5_B0 473;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE5_A2 474;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_STAGE5_A1 475;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_SCALE1 476;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_SCALE2 477;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_SCALE3 478;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_SCALE4 479;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_USER_EQ12_SCALE5 480;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_MAX_USER_EQ_BANKS 481;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SDICONFIG 482;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_DAC_GAIN_L 483;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_DAC_GAIN_R 484;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_TABLE_SIZE 485;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SB_TABLE0 486;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SB_TABLE1 487;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SB_TABLE2 488;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SB_TABLE3 489;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SB_TABLE4 490;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SB_TABLE5 491;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SB_TABLE6 492;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SB_TABLE7 493;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SB_TABLE8 494;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SB_TABLE9 495;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SB_TABLE10 496;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SB_TABLE11 497;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SB_TABLE12 498;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SB_TABLE13 499;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SB_TABLE14 500;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SB_TABLE15 501;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SB_TABLE16 502;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SW_TABLE0 503;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SW_TABLE1 504;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SW_TABLE2 505;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SW_TABLE3 506;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SW_TABLE4 507;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SW_TABLE5 508;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SW_TABLE6 509;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SW_TABLE7 510;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SW_TABLE8 511;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SW_TABLE9 512;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SW_TABLE10 513;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SW_TABLE11 514;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SW_TABLE12 515;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SW_TABLE13 516;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SW_TABLE14 517;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SW_TABLE15 518;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_SW_TABLE16 519;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_TRIM_TABLE_SIZE 520;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_TRIM_TABLE0 521;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_TRIM_TABLE1 522;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_TRIM_TABLE2 523;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_TRIM_TABLE3 524;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_TRIM_TABLE4 525;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_TRIM_TABLE5 526;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SWAT_TRIM_TABLE6 527;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BASS_MANAGER_CONFIG 528;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BASS_MANAGER_COEF_A1 529;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BASS_MANAGER_COEF_A2 530;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BASS_MANAGER_COEF_A3 531;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BASS_MANAGER_COEF_A4 532;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BASS_MANAGER_COEF_A5 533;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_BASS_MANAGER_COEF_FREQ 534;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_REFLECTION_DELAY 535;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SE_MIX 536;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_EXPAND_THRESHOLD1 537;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_LINEAR_THRESHOLD1 538;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_COMPRESS_THRESHOLD1 539;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_LIMIT_THRESHOLD1 540;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_INV_EXPAND_RATIO1 541;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_INV_LINEAR_RATIO1 542;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_INV_COMPRESS_RATIO1 543;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_INV_LIMIT_RATIO1 544;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_EXPAND_ATTACK_TC1 545;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_EXPAND_DECAY_TC1 546;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_LINEAR_ATTACK_TC1 547;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_LINEAR_DECAY_TC1 548;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_COMPRESS_ATTACK_TC1 549;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_COMPRESS_DECAY_TC1 550;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_LIMIT_ATTACK_TC1 551;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_LIMIT_DECAY_TC1 552;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_MAKEUP_GAIN1 553;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_EXPAND_THRESHOLD2 554;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_LINEAR_THRESHOLD2 555;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_COMPRESS_THRESHOLD2 556;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_LIMIT_THRESHOLD2 557;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_INV_EXPAND_RATIO2 558;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_INV_LINEAR_RATIO2 559;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_INV_COMPRESS_RATIO2 560;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_INV_LIMIT_RATIO2 561;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_EXPAND_ATTACK_TC2 562;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_EXPAND_DECAY_TC2 563;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_LINEAR_ATTACK_TC2 564;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_LINEAR_DECAY_TC2 565;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_COMPRESS_ATTACK_TC2 566;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_COMPRESS_DECAY_TC2 567;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_LIMIT_ATTACK_TC2 568;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_LIMIT_DECAY_TC2 569;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_MAKEUP_GAIN2 570;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SIGNAL_DETECT_THRESH 571;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SIGNAL_DETECT_TIMEOUT 572;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_DITHER_NOISE_SHAPE 573;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_CODEC1_CONFIG 574;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_CODEC2_CONFIG 575;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_CODEC3_CONFIG 576;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_CODEC4_CONFIG 577;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_CODEC5_CONFIG 578;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_CODEC6_CONFIG 579;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_CODEC7_CONFIG 580;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_CODEC8_CONFIG 581;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_CODEC9_CONFIG 582;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_CODEC10_CONFIG 583;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_HFK_CONFIG 584;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_HFK_OMS_AGGR 585;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ASR_OMS_AGGR 586;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_OMS_HARMONICITY 587;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_WNR_AGGR 588;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_WNR_POWER_THRES 589;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_WNR_HOLD 590;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_CNG_Q 591;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_CNG_SHAPE 592;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_DTC_AGGR 593;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ENABLE_AEC_REUSE 594;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ADCGAIN 595;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_CONFIG 596;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_GAIN_EXP 597;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_GAIN_MANT 598;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE1_B2 599;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE1_B1 600;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE1_B0 601;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE1_A2 602;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE1_A1 603;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE2_B2 604;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE2_B1 605;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE2_B0 606;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE2_A2 607;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE2_A1 608;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE3_B2 609;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE3_B1 610;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE3_B0 611;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE3_A2 612;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE3_A1 613;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE4_B2 614;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE4_B1 615;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE4_B0 616;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE4_A2 617;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE4_A1 618;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE5_B2 619;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE5_B1 620;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE5_B0 621;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE5_A2 622;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_STAGE5_A1 623;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_SCALE1 624;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_SCALE2 625;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_SCALE3 626;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_SCALE4 627;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_PEQ_SCALE5 628;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_LVMODE_THRES 629;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_INV_DAC_GAIN_TABLE 630;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_INV_DAC_GAIN_TABLE1 631;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_INV_DAC_GAIN_TABLE2 632;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_INV_DAC_GAIN_TABLE3 633;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_INV_DAC_GAIN_TABLE4 634;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_INV_DAC_GAIN_TABLE5 635;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_INV_DAC_GAIN_TABLE6 636;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_INV_DAC_GAIN_TABLE7 637;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_INV_DAC_GAIN_TABLE8 638;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_INV_DAC_GAIN_TABLE9 639;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_INV_DAC_GAIN_TABLE10 640;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_INV_DAC_GAIN_TABLE11 641;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_INV_DAC_GAIN_TABLE12 642;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_INV_DAC_GAIN_TABLE13 643;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_INV_DAC_GAIN_TABLE14 644;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_INV_DAC_GAIN_TABLE15 645;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ST_CLIP_POINT 646;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ST_ADJUST_LIMIT 647;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_STF_SWITCH 648;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_STF_NOISE_LOW_THRES 649;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_STF_NOISE_HIGH_THRES 650;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_STF_GAIN_EXP 651;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_STF_GAIN_MANTISSA 652;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ST_PEQ_CONFIG 653;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ST_PEQ_GAIN_EXP 654;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ST_PEQ_GAIN_MANT 655;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ST_PEQ_STAGE1_B2 656;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ST_PEQ_STAGE1_B1 657;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ST_PEQ_STAGE1_B0 658;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ST_PEQ_STAGE1_A2 659;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ST_PEQ_STAGE1_A1 660;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ST_PEQ_STAGE2_B2 661;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ST_PEQ_STAGE2_B1 662;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ST_PEQ_STAGE2_B0 663;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ST_PEQ_STAGE2_A2 664;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ST_PEQ_STAGE2_A1 665;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ST_PEQ_STAGE3_B2 666;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ST_PEQ_STAGE3_B1 667;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ST_PEQ_STAGE3_B0 668;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ST_PEQ_STAGE3_A2 669;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ST_PEQ_STAGE3_A1 670;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ST_PEQ_SCALE1 671;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ST_PEQ_SCALE2 672;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ST_PEQ_SCALE3 673;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SNDGAIN_MANTISSA 674;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SNDGAIN_EXPONENT 675;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_PT_SNDGAIN_MANTISSA 676;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_PT_SNDGAIN_EXPONENT 677;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_REF_DELAY 678;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_ADCGAIN_SSR 679;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_VAD_ATTACK_TC 680;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_VAD_DECAY_TC 681;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_VAD_ENVELOPE_TC 682;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_VAD_INIT_FRAME_THRESH 683;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_VAD_RATIO 684;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_VAD_MIN_SIGNAL 685;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_VAD_MIN_MAX_ENVELOPE 686;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_VAD_DELTA_THRESHOLD 687;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_VAD_COUNT_THRESHOLD 688;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_AGC_G_INITIAL 689;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_AGC_TARGET 690;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_AGC_ATTACK_TC 691;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_AGC_DECAY_TC 692;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_AGC_A_90_PK 693;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_AGC_D_90_PK 694;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_AGC_G_MAX 695;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_AGC_START_COMP 696;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_AGC_COMP 697;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_AGC_INP_THRESH 698;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_AGC_SP_ATTACK 699;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_AGC_AD_THRESH1 700;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_AGC_AD_THRESH2 701;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_AGC_G_MIN 702;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_SND_AGC_ECHO_HOLD_TIME 703;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_RCV_VAD_ATTACK_TC 704;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_RCV_VAD_DECAY_TC 705;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_RCV_VAD_ENVELOPE_TC 706;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_RCV_VAD_INIT_FRAME_THRESH 707;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_RCV_VAD_RATIO 708;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_RCV_VAD_MIN_SIGNAL 709;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_RCV_VAD_MIN_MAX_ENVELOPE 710;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_RCV_VAD_DELTA_THRESHOLD 711;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_RCV_VAD_COUNT_THRESHOLD 712;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_HD_THRESH_GAIN 713;
+
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_DSP_USER_0 714;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_DSP_USER_1 715;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_DSP_USER_2 716;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_DSP_USER_3 717;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_DSP_USER_4 718;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_DSP_USER_5 719;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_DSP_USER_6 720;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_DSP_USER_7 721;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_DSP_USER_8 722;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.OFFSET_DSP_USER_9 723;
+.CONST $M.A2DP_LOW_LATENCY_1MIC.PARAMETERS.STRUCT_SIZE 724;
+.linefile 22 "main.asm" 2
+.linefile 33 "main.asm"
+.MODULE $M.main;
+   .CODESEGMENT MAIN_PM;
+   .DATASEGMENT DM;
+
+   .VAR set_plugin_message_struc[$message.STRUC_SIZE];
+   .VAR set_dac_rate_message_struc[$message.STRUC_SIZE];
+   .VAR set_codec_rate_message_struc[$message.STRUC_SIZE];
+   .VAR set_tone_rate_message_struc[$message.STRUC_SIZE];
+   .VAR aptx_ll_params1_message_struc[$message.STRUC_SIZE];
+   .VAR aptx_ll_params2_message_struc[$message.STRUC_SIZE];
+   .VAR set_eq_bank_message_struc[$message.STRUC_SIZE];
+   .VAR latency_reporting_message_struc[$message.STRUC_SIZE];
+
+$main:
+
+   call $stack.initialise;
+
+   call $interrupt.initialise;
+
+   call $message.initialise;
+
+   call $cbuffer.initialise;
+
+   call $pskey.initialise;
+
+   call $Security.Initialize;
+
+
+
+
+
+   call $flash.init_dmconst;
+
+
+   r1 = &set_eq_bank_message_struc;
+   r2 = 0x1039;
+   r3 = &$M.set_eq_bank.func;
+   call $message.register_handler;
+
+
+   r1 = &set_dac_rate_message_struc;
+   r2 = 0x1070;
+   r3 = &$M.set_dac_rate.func;
+   call $message.register_handler;
+
+
+   r1 = &set_codec_rate_message_struc;
+   r2 = 0x1071;
+   r3 = &$M.set_codec_rate.func;
+   call $message.register_handler;
+
+
+   r1 = &set_tone_rate_message_struc;
+   r2 = 0x1072;
+   r3 = &$M.set_tone_rate.func;
+   call $message.register_handler;
+
+
+   r1 = &set_plugin_message_struc;
+   r2 = 0x1024;
+   r3 = &$M.set_plugin.func;
+   call $message.register_handler;
+.linefile 118 "main.asm"
+   call $spi_comm.initialize;
+.linefile 127 "main.asm"
+   r1 = &$M.message.send_ready_wait_for_go.go_from_vm_message_struc;
+   r2 = $MESSAGE_GO;
+   r3 = &$M.message.send_ready_wait_for_go.go_from_vm_handler;
+   call $message.register_handler;
+
+
+   r2 = Null OR $MESSAGE_KALIMBA_READY;
+   call $message.send_short;
+
+
+   call $SendProcStart;
+
+   call $FrontEndStart;
+
+
+vm_go_wait:
+      Null = M[$M.message.send_ready_wait_for_go.go_from_vm];
+   if Z jump vm_go_wait;
+
+
+   call $ConfigureBackEnd;
+
+   call $BackEndStart;
+
+
+frame_loop:
+
+
+    call $spi_comm.polled_service_routine;
+
+    call $DecodeInput;
+
+    M[$ARITHMETIC_MODE] = NULL;
+
+
+    call $ReceiveProcRun;
+
+    call $SendProcRun;
+
+    call $EncodeOutput;
+
+
+
+
+    r0 = M[&$M.A2DP_OUT.encoder_codec_stream_struc + $codec.av_encode.MODE_FIELD];
+    Null = r0 - $codec.SUCCESS;
+    if Z jump frame_loop;
+
+    r0 = M[&$M.A2DP_IN.decoder_codec_stream_struc + $codec.av_decode.MODE_FIELD];
+    Null = r0 - $codec.SUCCESS;
+    if NZ call $SystemSleep;
+    jump frame_loop;
+
+.ENDMODULE;
+.linefile 190 "main.asm"
+.MODULE $M.Sleep;
+   .CODESEGMENT SYSTEM_SLEEP_PM;
+   .DATASEGMENT DM;
+
+    .VAR TotalTime=0;
+    .VAR LastUpdateTm=0;
+    .VAR Mips=0;
+
+$SystemSleep:
+
+
+     r1 = 1;
+     M[$frame_sync.sync_flag] = r1;
+
+     r1 = M[$TIMER_TIME];
+     r4 = M[$interrupt.total_time];
+
+     r6 = M[$CLOCK_DIVIDE_RATE];
+
+     r0 = $frame_sync.MAX_CLK_DIV_RATE;
+     M[$CLOCK_DIVIDE_RATE] = r0;
+
+
+jp_wait:
+     Null = M[$frame_sync.sync_flag];
+   if NZ jump jp_wait;
+
+
+     M[$CLOCK_DIVIDE_RATE] = r6;
+
+
+     r3 = M[$TIMER_TIME];
+     r1 = r3 - r1;
+     r4 = r4 - M[$interrupt.total_time];
+     r1 = r1 + r4;
+     r0 = M[&TotalTime];
+     r1 = r1 + r0;
+     M[&TotalTime]=r1;
+
+
+     r0 = M[LastUpdateTm];
+     r5 = r3 - r0;
+     rMAC = 1000000;
+     NULL = r5 - rMAC;
+     if NEG rts;
+
+
+  rMAC = rMAC ASHIFT -1;
+  Div = rMAC/r5;
+
+     rMAC = r5 - r1;
+
+     M[LastUpdateTm]=r3;
+
+     M[&TotalTime]=NULL;
+
+     r3 = DivResult;
+     rMAC = r3 * rMAC (frac);
+
+
+
+  r3 = 0.008;
+     rMAC = rMAC * r3 (frac);
+     M[Mips]=rMAC;
+     rts;
+
+.ENDMODULE;
+.linefile 266 "main.asm"
+.MODULE $M.A2DP_LOW_LATENCY_1MIC.SystemReInitialize;
+   .CODESEGMENT CVC_SYSTEM_REINITIALIZE_PM;
+   .DATASEGMENT DM;
+
+ func:
+
+   M[$M.CVC_SYS.AlgReInit] = Null;
+   M[$M.CVC_SYS.FrameCounter] = Null;
+
+
+
+   M1 = 1;
+   I0 = &$M.CVC.data.ParameterMap;
+
+   r0 = M[I0,M1];
+lp_param_copy:
+
+      r1 = M[I0,M1];
+
+      r0 = M[r0];
+
+      M[r1] = r0, r0 = M[I0,M1];
+
+      Null = r0;
+   if NZ jump lp_param_copy;
+.linefile 311 "main.asm"
+   push rLink;
+
+
+   r4 = &$M.CVC.data.ReInitializeTable;
+   call $frame_sync.run_function_table;
+.linefile 324 "main.asm"
+   jump $pop_rLink_and_rts;
+
+.ENDMODULE;

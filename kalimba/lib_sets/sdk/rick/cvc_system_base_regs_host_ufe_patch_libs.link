@@ -1,0 +1,24 @@
+/* Linkscript for the CVC System library */
+
+segment DM_CVC_SYS_DATA			   	40		  DM1_REGION,DM2_REGION;
+
+segment CVC_SPI_GET_PARAMS_PM             1000          PM_REGION,flash.code;
+segment CVC_SPI_GETSTATUS_PM              1000          PM_REGION,flash.code;
+segment CVC_SPI_GET_VERSION_PM            1000          PM_REGION,flash.code;
+segment CVC_SPI_REINIT_PM                 1000          PM_REGION,flash.code;
+segment CVC_SPI_GETCONTROL_PM             1000          PM_REGION,flash.code;
+segment CVC_MESSAGE_SET_MODE_PM           1000          PM_REGION,flash.code;
+segment CVC_MESSAGE_SET_PARAM_PM          1000          PM_REGION,flash.code;
+segment CVC_MESSAGE_GET_PARAM_PM          1000          PM_REGION,flash.code;
+segment CVC_MESSAGE_PING_PM               1000          PM_REGION,flash.code;
+segment CVC_MESSAGE_LOAD_PARAMS_PM        1000          PM_REGION,flash.code;
+segment CVC_MESSAGE_PSKEY_READ_HANDLER_PM 1000          PM_REGION,flash.code;
+segment CVC_MESSAGE_LOAD_PERSIST_RESP_PM  1000          PM_REGION,flash.code;
+
+segment CVC_LOAD_DEFAULT_PARAMS_PM        1000          PM_REGION,flash.code;
+
+segment CVC_INITIALIZE_PM                 1000          PM_REGION,flash.code;
+segment CVC_POWERUP_RESET_PM              1000          PM_REGION,flash.code;
+segment CVC_VOLUME_CONTROL_PM             1000          PM_REGION,flash.code;
+
+segment CVC_SSR_VM_MSG_PM                 1000          PM_REGION,flash.code;

@@ -1,0 +1,228 @@
+/* Linkscript for the cvc_headset_2mic application (NB-variant) */
+
+#if defined(ELVIS)
+    #define FLASH_LEVEL_1
+    #define FLASH_LEVEL_2
+#endif
+
+#if defined(DALE)
+    #define FLASH_LEVEL_1
+    #define FLASH_LEVEL_2
+#endif
+
+
+/* Application segments */
+segment MAIN_PM                           40          flash.code;
+segment CVC_BANDWIDTH_PM                  40          flash.code;
+segment AUDIO_CONFIG_PM                   40          flash.code;
+segment CODEC_APPLY_PM                    40          flash.code;
+segment CONFIG_APPLY_PM                   40          flash.code;
+segment CVC_SYSTEM_REINITIALIZE_PM        40          flash.code;
+segment CVC_FRAME_PROCESS_PM              40          flash.code;
+segment CVC_CONNECTION_STATUS_PM          40          flash.code;
+segment CVC_ZERO_DC_NYQUIST_PM            40          flash.code;
+segment MODE_MIXER_PROCESS_PM             40          flash.code;
+
+segment SET_MODE_GAIN_PM                  40          flash.code;
+segment PBLOCK_SEND_HANDLER_PM            40          flash.code;
+
+segment AUDIO_COPY_HANDLER_PM             40          PM_REGION;
+
+segment CVC_MODULE_CONTROL_INIT_PM        40          flash.code;
+segment CVC_MODULE_CONTROL_PM             60          PM_REGION, flash.code;
+segment CVC_USER_PROC_PM                  100         PM_REGION, flash.code;
+
+/* Library segment overrides: precede statement with "override" qualifier
+   to override a segment defined by a library */
+
+override segment CVC_SPI_GET_PARAMS_PM             40          flash.code;
+override segment CVC_SPI_GETSTATUS_PM              40          flash.code;
+override segment CVC_SPI_GET_VERSION_PM            40          flash.code;
+override segment CVC_SPI_REINIT_PM                 40          flash.code;
+override segment CVC_SPI_GETCONTROL_PM             40          flash.code;
+override segment CVC_MESSAGE_SET_MODE_PM           40          flash.code;
+override segment CVC_MESSAGE_SET_PARAM_PM          40          flash.code;
+override segment CVC_MESSAGE_GET_PARAM_PM          40          flash.code;
+override segment CVC_MESSAGE_PING_PM               40          flash.code;
+override segment CVC_MESSAGE_VOLUME_PM             40          flash.code;
+override segment CVC_MESSAGE_LOAD_PARAMS_PM        40          flash.code;
+override segment CVC_MESSAGE_PSKEY_READ_HANDLER_PM 40          flash.code;
+
+override segment CVC_LOAD_DEFAULT_PARAMS_PM        40          flash.code;
+
+override segment CVC_SIDETONE_PM                   40          flash.code;
+override segment CVC_SIDETONE_FILTER_PM            40          flash.code;
+override segment CVC_SIDETONE_FILTER_PROCESS_PM    40          PM_REGION;
+
+override segment AUXILARYAUDIO_TONE_PM             40          flash.code;
+override segment CVC_AUXILARY_AUDIO_PM             40          flash.code;
+
+override segment CVC_INITIALIZE_PM                 40          flash.code;
+override segment CVC_POWERUP_RESET_PM              40          flash.code;
+override segment CVC_VOLUME_CONTROL_PM             40          flash.code;
+
+override segment SSR_INIT_PM                       40          flash.code;
+override segment SSR_PROC_PM                       40          flash.code;
+override segment WRAPPER.SSR_PM                    40          flash.code;
+override segment SSR_WRAPPER_VM_INTERFACE_PM       40          flash.code;
+
+// only used in loopbak and passthrough mode
+override segment AUDIO_PROC_STREAM_MIXER_PROCESS_PM   50       flash.code;
+
+
+#ifdef FLASH_LEVEL_1
+   override segment FRAME_SYNC_HANDLERS_PM                      50              flash.code;
+   override segment FRAME_SYNC_SIDETONE_MIX_OP_RESET_PM         50              flash.code;
+   override segment FRAME_SYNC_DISTRIBUTE_STREAMS_RM_PM         50              flash.code;
+   override segment FRAME_SYNC_UPDATE_STREAMS_RM_PM             50              flash.code;
+
+   override segment CBUFFER_CONFIGURE_PORT_MESSAGE_HANDLER_PM   50              flash.code;
+
+   override segment CBOPS_FRAME_RESAMPLE_INITIALIZE_PM          50              flash.code;
+
+   override segment MESSAGE_SEND_LONG_PM                        50              flash.code;
+
+   override segment PSKEY_RESULT_MESSAGE_HANDLER_PM             50              flash.code;
+   override segment PSKEY_PRIVATE_SEND_REQUEST_PM               50              flash.code;
+   override segment PSKEY_READ_KEY_PM                           50              flash.code;
+
+
+   override segment AUDIO_PROC_MUTE_CONTROL_PROCESS_PM          90          flash.code;
+
+   override segment ADF_INP_PWR_MONITOR_PM                      90          flash.code;
+   override segment ADF_ADAPT_FACTOR_CALC_PM                    90          flash.code;
+   override segment ADF_DGA_CALC_PM                             90          flash.code;
+   override segment ADF_NORM_FACTOR_CALC_PM                     90          flash.code;
+   override segment ADF_NORM_OUTPUT_PM                          90          flash.code;
+   override segment ADF_INP_PWR_EST_PM                          40          PM_REGION;
+   override segment ADF_INV_PWR_CALC_PM                         40          PM_REGION;
+   override segment ADF_FUNC_PM                                 40          PM_REGION;
+   override segment ADF_DECORR_FILTER_PM                        40          PM_REGION;
+   override segment ADF_RELIABILITY_PM                          40          PM_REGION;
+   override segment ADF_UPDATE_DECORR_FILTER_PM                 40          PM_REGION;
+   override segment ADF_XCORR_EST_PM                            40          PM_REGION;
+
+   override segment NDVC_ALG_100_PROCESS_PM                     90         flash.code;
+
+   override segment AEC_500_DBL_TALK_CONTROL_PM                 90         flash.code;
+   override segment AEC_500_DBL_TALK_CONTROL_HEADSET_PM         90         flash.code;
+   override segment AEC_500_DBL_TALK_UPDATE_FER_PM              90         flash.code;
+   override segment AEC_500_FNLMS_INP_PREP                      90         flash.code;
+   override segment AEC_500_FNLMS_ADAPT_PM                      90         flash.code;
+   override segment AEC_500_FNLMS_XBUF_UPDATE_HEADSET_PM        90         flash.code;
+   override segment AEC_500_DIVERGENCE_CONTROL_PM               90         flash.code;
+   override segment AEC_500_RER_HEADSET_PM                      90         flash.code;
+
+   override segment VAD400_PROCESS_PM                           90         flash.code;
+#endif
+
+#ifdef FLASH_LEVEL_2
+   override segment AEC_500_RESIDUAL_ECHO_REDUCTION_PM          80         flash.code;
+   override segment AEC_500_COMFORT_NOISE_GENERATOR_PM          80         flash.code;
+   override segment ADAPEQ_PROCESS_PM                           80         flash.code;
+   override segment PLC100_PROCESS_PM                           80         flash.code;
+#endif
+
+#ifdef FLASH_LEVEL_1
+   override segment FILTER_BANK_TWO_CHANNEL_INITIALIZE_PM               1000        flash.code;
+   override segment FILTER_BANK_ONE_CHANNEL_INITIALIZE_PM               1000        flash.code;
+   override segment FILTER_BANK_ONE_CHANNEL_SYNTHESIS_INITIALIZE_PM     1000        flash.code;
+   override segment FILTER_BANK_ONE_CHANNEL_ANALYSIS_INITIALIZE_PM      1000        flash.code;
+   override segment FILTER_BANK_TWO_CHANNEL_ANALYSIS_INITIALIZE_PM      1000        flash.code;
+   override segment FILTER_BANK_TWO_CHANNEL_SYNTHESIS_INITIALIZE_PM     1000        flash.code;
+   override segment FILTER_BANK_TWO_CHANNEL_INPUT_STREAMING_PM          40          flash.code;
+   override segment FILTER_BANK_TWO_CHANNEL_OUTPUT_STREAMING_PM         40          flash.code;
+   override segment FILTER_BANK_ONE_CHANNEL_INPUT_STREAMING_PM          40          flash.code;
+   override segment FILTER_BANK_ONE_CHANNEL_OUTPUT_STREAMING_PM         40          flash.code;
+
+
+   override segment FILTER_BANK_TWO_CHANNEL_WINDOW_NORMALIZE_MULT2_PM   40          flash.code;
+   override segment FILTER_BANK_TWO_CHANNEL_WINDOW_NORMALIZE_PM         40          flash.code;
+   override segment FILTER_BANK_TWO_CHANNEL_WINDOW_DENORMALIZE_PM       40          flash.code;
+   override segment FILTER_BANK_ONE_CHANNEL_WINDOW_NORMALIZE_MULT2_PM   40          flash.code;
+   override segment FILTER_BANK_ONE_CHANNEL_WINDOW_NORMALIZE_PM         40          flash.code;
+   override segment FILTER_BANK_ONE_CHANNEL_WINDOW_DENORMALIZE_PM       40          flash.code;
+
+   override segment ASF_BF_INIT_PM                          1000   flash.code;
+   override segment ASF_BF_PROC_PM                          40     PM_REGION;
+
+   override segment AEC_500_DBL_TALK_CONTROL_PM             40     flash.code;
+   override segment AEC_500_RESIDUAL_ECHO_REDUCTION_PM      40     flash.code;
+   override segment AEC_500_COMFORT_NOISE_GENERATOR_PM      40     flash.code;
+
+   override segment NDVC_ALG_100_INITILIZE_PM               1000  flash.code;
+   override segment NDVC_ALG_100_PROCESS_PM                 40    flash.code;
+
+   override segment AGC400_INITIALIZE_PM                    1000  flash.code;
+   override segment AGC400_PROCESS_PM                       40    flash.code;
+
+   override segment VAD400_INITIALIZE_PM                    1000  flash.code;
+   override segment VAD400_PROCESS_PM                       40    flash.code;
+
+   override segment ADAPEQ_INITIALIZE_PM                    1000  flash.code;
+   override segment ADAPEQ_PROCESS_PM                       40    flash.code;
+
+   override segment SBC_CRC_CALC_PM                                      40          flash.code;
+   override segment SBC_CALC_SCALE_FACTORS_PM                            40          flash.code;
+   override segment SBC_CALC_BIT_ALLOCATION_PM                           40          flash.code;
+   override segment SBCDEC_SYNTHESIS_SUBBAND_FILTER_PM                   40          flash.code;
+   override segment SBCDEC_READ_AUDIO_SAMPLES_PM                         40          flash.code;
+   override segment SBCDEC_READ_SCALE_FACTORS_PM                         40          flash.code;
+   override segment SBCDEC_SAMPLE_RECONSTRUCTION_PM                      40          flash.code;
+   override segment SBCDEC_SILENCE_DECODER_PM                            1000        flash.code;
+   override segment SBCDEC_GETBITS_PM                                    40          flash.code;
+
+   override segment SBCENC_RESET_ENCODER_PM                              1000        flash.code;
+   override segment SBCENC_PUTBITS_PM                                    40          flash.code;
+   override segment SBCENC_ANALYSIS_SUBBAND_FILTER_PM                    40          flash.code;
+   override segment SBCENC_WRITE_AUDIO_SAMPLES_PM                        40          flash.code;
+   override segment SBCENC_WRITE_FRAME_HEADER_PM                         40          flash.code;
+   override segment SBCENC_WRITE_SCALE_FACTORS_PM                        40          flash.code;
+   override segment SBCENC_QUANTIZE_SAMPLES_PM                           40          flash.code;
+
+   override segment SBCENC_FRAME_ENCODE_PM                               40          flash.code;
+   override segment SBCDEC_FRAME_DECODE_PM                               40          flash.code;
+
+   override segment SBC_INIT_TABLES_PM                                   1000        flash.code;
+   override segment SBCDEC_INIT_TABLES_PM                                1000        flash.code;
+   override segment SBCENC_INIT_TABLES_PM                                1000        flash.code;
+
+   override segment WBSENC_FRAME_ENCODE_PM                               40          flash.code;
+   override segment WBSENC_SET_UP_FRAME_ENCODE_PM                        40          flash.code;
+   override segment WBSENC_PROCESS_FRAME_PM                              40          flash.code;
+
+   override segment SBCDEC_WBS_INIT_PM                                   1000        flash.code;
+   override segment SBCDEC_WBS_VALIDATE_PM                               40          flash.code;
+   override segment SBCDEC_WBS_PROC_PM                                   40          flash.code;
+   override segment SBCDEC_WBS_FINDSYNC_PM                               40          flash.code;
+   override segment SBCDEC_WBS_DECODE_PM                                 40          flash.code;
+   override segment SBCDEC_WBS_COPY_FRAME_PM                             40          flash.code;
+
+   override segment SBCDEC_PRIVATE_INIT_TABLES_PM                        40          flash.code;
+   override segment SBCENC_PRIVATE_INIT_TABLES_PM                        40          flash.code;
+   override segment SBC_PRIVATE_INIT_TABLES_COMMON_PM                    40          flash.code;
+
+   override segment SBCENC_INIT_STATIC_ENCODER_PM                        40          flash.code;
+   override segment SBCENC_DEINIT_STATIC_ENCODER_PM                      40          flash.code;
+
+   override segment SBCDEC_INIT_STATIC_DECODER_PM                        40          flash.code;
+   override segment SBCDEC_DEINIT_STATIC_DECODER_PM                      40          flash.code;
+
+   override segment SBC_INIT_COMMON_PM                                   40          flash.code;
+   override segment SBCDEC_RESET_DECODER_PM                              40          flash.code;
+
+   override segment AUDIO_PROC_PEQ_PROCESS_PM                       40          flash.code;
+   override segment AUDIO_PROC_STREAM_GAIN_PROCESS_PM               40          flash.code;
+   override segment AUDIO_PROC_STREAM_MIXER_PROCESS_PM              40          flash.code;
+   override segment AUDIO_PROC_STEREO_3D_ENHANCEMENT_PM             40          flash.code;
+   override segment AUDIO_PROC_MUTE_CONTROL_PROCESS_PM              40          flash.code;
+   override segment AUDIO_PROC_STEREO_COPY_PROCESS_PM               40          flash.code;
+
+   override segment DMSS_CVC_PROC_PM                        100    flash.code, PM_REGION;
+   override segment DMSS_CVC_FUNC_PM                        40     flash.code, PM_REGION;
+   override segment NC100_CVC_PROC_PM                       100    flash.code, PM_REGION;
+   override segment NC100_CVC_FUNC_PM                       40     flash.code, PM_REGION;
+   override segment DMS100_CVC_PROC_PM                      100    flash.code, PM_REGION;
+   override segment DMS100_CVC_FUNC_PM                      40     flash.code, PM_REGION;
+   override segment ADF200_CVC_FUNC_PM                      40     flash.code, PM_REGION;
+#endif

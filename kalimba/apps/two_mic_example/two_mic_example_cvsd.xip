@@ -1,0 +1,29 @@
+<project buildenvironment="{6907f3f0-0ed4-11d8-be02-0050dadfe87d}" buildenvironmentname="kalimba" executionenvironmentoption="BC03MM binutils" buildenvironmentoption="" executionenvironmentname="kalimba bccmd" executionenvironment="{2ca81310-0ecd-11d8-be02-0050dadfe87d}" >
+ <folder name="Header Files" >
+  <file path="two_mic_example.h" />
+  <file path="stream_copy.h" />
+  <file path="stream_mix.h" />
+ </folder>
+ <file path="main.asm" />
+ <file path="two_mic_example_config.asm" >
+  <properties>
+   <configuration name="Release" />
+  </properties>
+ </file>
+ <file path="stream_copy.asm" />
+ <file path="stream_mix.asm" />
+ <file path="two_mic_example_system.asm" />
+ <properties currentconfiguration="Release" >
+  <configuration name="Release" >
+   <property key="BUILDENV" >0</property>
+   <property key="LIB_SET" >sdk</property>
+   <property key="bootstrap" >1</property>
+   <property key="debugtransport" >[SPITRANS=LPT SPIPORT=1]</property>
+   <property key="defines" ></property>
+   <property key="hardware" >0</property>
+   <property key="libs" >core,frame_sync,cbops_multirate,plc100</property>
+   <property key="output" ></property>
+   <property key="separator_flags" >0</property>
+  </configuration>
+ </properties>
+</project>

@@ -1,0 +1,23 @@
+<project buildenvironment="{6907f3f0-0ed4-11d8-be02-0050dadfe87d}" buildenvironmentname="kalimba" executionenvironmentoption="binutils" buildenvironmentoption="" executionenvironmentname="kalimba" executionenvironment="{2ca81310-0ecd-11d8-be02-0050dadfe87d}" >
+ <file path="subwoofer_main.asm" />
+ <file path="music_example_config.asm" />
+ <file path="vm_message.asm" />
+ <file path="subwoofer.h" />
+ <file path="stream_copy.asm" />
+ <file path="subwoofer_system.asm" />
+ <file path="mips_profile.asm" />
+ <file path="spi_message.asm" />
+ <file path="l2cap_audio.asm" />
+ <file path="user_eq.asm" />
+ <file path="user_eq.h" />
+ <properties currentconfiguration="Release" >
+  <configuration name="Release" >
+   <property key="bootstrap" >1</property>
+   <property key="buildMatch" >(?:ERROR|FATAL|WARNING|MESSAGE):\s+(file)\s+(line):</property>
+   <property key="debugtransport" >[SPITRANS=USB SPIPORT=0]</property>
+   <property key="defines" ></property>
+   <property key="hardware" >0</property>
+   <property key="libs" >core, cbops, plc100, frame_sync, audio_proc, spi_comm, math, patch</property>
+  </configuration>
+ </properties>
+</project>

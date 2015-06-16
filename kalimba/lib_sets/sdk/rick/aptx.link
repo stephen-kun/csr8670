@@ -1,0 +1,11 @@
+/* Linkscript for the aptX library */
+segment APTX_PM                                              40          PM_REGION, flash.code;
+segment APTXENC_PM                                           40          PM_REGION, flash.code;
+segment APTXDEC_PM                                           40          PM_REGION, flash.code;
+
+segment SECURITY_SET_PRODUCTID_PM                           1000        PM_REGION, flash.code;
+segment SECURITY_START_PM                                   1000        PM_REGION, flash.code;
+segment SECURITY_PSKEYREADHANDLER_PM                        1000        PM_REGION, flash.code;   
+segment SECURITY_TEST                                       1000        PM_REGION, flash.code;   
+segment SECURITY_SET_SECURITY_PSKEY_PM                      1000        PM_REGION, flash.code; 
+

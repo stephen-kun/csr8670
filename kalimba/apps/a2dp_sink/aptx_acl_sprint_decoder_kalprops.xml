@@ -1,0 +1,56 @@
+<custom>
+    <property type="list" key="backchannel" format="define" name="Back Channel" defaultvalue="1">
+        <option internalval="BACK_CHANNEL">Enabled</option>
+        <option fake="">Disabled</option>
+        <description>
+           <![CDATA[
+           <B>Enable <I>application</I> back channel</B>
+           <P>Specify whether the <I>application</I> has the mono back channel enabled. For example in a gaming headset</P>
+		   <P>Make sure the VM libraries have been configured for back channel before enabling this feature</P>
+           ]]>
+        </description>
+    </property>
+    <property type="integer" internalkey="AUDIO_CBUFFER_SIZE" key="audiocbuffersize" format="definewithvalue" name="Audio Buffer Size" defaultvalue="320">
+        <description>
+            <![CDATA[
+            <B>Set audio output buffer size</B>
+            <P>Set the size of the audio output buffer, measured in number of audio samples not bytes.</P>
+            <P>Recommended value - 320 words.</P>
+            ]]>
+       </description>
+    </property>      
+    <property type="integer" internalkey="CODEC_CBUFFER_SIZE" key="codeccbuffersize" format="definewithvalue" name="Codec Buffer Size" defaultvalue="4096">
+        <description>
+            <![CDATA[
+            <B>Set codec input buffer size</B>
+            <P>Set the size of the codec input buffer, measured in number of 16 bit words ie 1 word = 2 bytes.</P>
+            <P>This parameter has been specifically chosen for aptX low latency to provide the best performance.</P>
+            <P>Do not change it unless you are very sure what you are doing.</P>
+			<P>Recommended value - 1000 words</P>
+            ]]>
+       </description>
+    </property>      
+    <property type="text" internalkey="GOOD_WORKING_BUFFER_LEVEL" key="goodworkingbufferlevel" format="definewithvalue" name="Good Working Buffer Level" defaultvalue="0.65">
+        <description>
+            <![CDATA[
+            <B>Set the Good Working Buffer Level</B>
+            <P>Input codec buffer level required before decoding starts.</P>
+            <P>This parameter has been specifically chosen for aptX low latency to provide the best performance.</P>
+            <P>Do not change it unless you are very sure what you are doing.</P>
+            <P>Recommended value - 0.125 (12.5% of the buffer size)</P>
+            ]]>
+       </description>
+    </property>      
+   
+    <property type="list" key="debugmode" format="define" name="Debug mode" defaultvalue="0">
+        <option internalval="DEBUG_ON">On</option>
+        <option fake="">Off</option>
+        <description>
+           <![CDATA[
+           <B>Set <I>application</I> debug mode</B>
+           <P>Specify whether the <I>application</I> is in debug mode. Note this does not necessarily mean the libraries
+           will be in debug mode. However if any library debug features are to be used it <B>must</B> be set.</P>
+           ]]>
+        </description>
+    </property>
+</custom>

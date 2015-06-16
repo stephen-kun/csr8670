@@ -1,0 +1,58 @@
+/* Linkscript for the FRAME_SYNC library */
+
+segment FRAME_SYNC_FRAME_PROCESS_PM                     40          PM_REGION;
+segment FRAME_SYNC_1MS_DELAY_PM                         1000        PM_REGION, flash.code;
+segment FRAME_SYNC_RESET_SYNC_FLAG_PM                   40          PM_REGION;
+segment FRAME_SYNC_DAC_SYNC_PM                          40          PM_REGION;
+segment FRAME_SYNC_SCO_COPY_OP_AMOUNT_TO_USE_PM         40          PM_REGION;
+segment FRAME_SYNC_SIDETONE_MIX_OP_RESET_PM             40          PM_REGION;
+segment FRAME_SYNC_SIDETONE_MIX_OP_MAIN_PM              40          PM_REGION;
+segment FRAME_SYNC_SIDETONE_MIX_OP_AMOUNT_TO_USE_PM     40          PM_REGION;
+segment FRAME_SYNC_AUXAUDIO_MIX_OP_MAIN_PM		  40          PM_REGION;
+segment FRAME_SYNC_SIDETONE_FILTER_OP_MAIN_PM		  40          PM_REGION;
+segment FRAME_SYNC_SIDETONE_FILTER_OP_MODE_PM		  40          PM_REGION, flash.code;
+segment FRAME_SYNC_CBUFFER_PURGE_PM                     40          PM_REGION;
+segment FRAME_SYNC_RUN_FUNCTION_TABLE_PM                40          PM_REGION;
+segment FRAME_SYNC_DISTRIBUTE_STREAMS_PM                40          PM_REGION;
+segment FRAME_SYNC_UPDATE_STREAMS_PM                    40          PM_REGION;
+segment FRAME_SYNC_HANDLERS_PM                          40          PM_REGION;
+segment FRAME_SYNC_DISTRIBUTE_STREAMS_RM_PM             40          PM_REGION;
+segment FRAME_SYNC_UPDATE_STREAMS_RM_PM                 40          PM_REGION;
+segment FRAME_SYNC_ANALYZE_STREAM_RM_PM                 40          PM_REGION;
+
+segment FRAME_SYNC_IND_PM 				        40          PM_REGION;
+
+segment FRAME_RATE_DETECT_PM 				1000          PM_REGION, flash.code;
+segment FRAME_SYNC_DISTRIBUTE_INPUT_STREAM_RM_PM        40          PM_REGION;
+segment FRAME_SYNC_DISTRIBUTE_OUTPUT_STREAM_RM_PM       40          PM_REGION;
+segment FRAME_SYNC_UPDATE_INPUT_STREAMS_RM_PM           40          PM_REGION;
+segment FRAME_SYNC_UPDATE_OUTPUT_STREAMS_RM_PM          40          PM_REGION;
+segment FRAME_SYNC_SCO_INITIALIZE_PM                    1000        PM_REGION, flash.code;
+segment FRAME_SYNC_SCO_PORT_HANDLER_PM                  40          PM_REGION;
+segment FRAME_SYNC_SCO_DECODE_PM                        40          PM_REGION;
+segment FRAME_SYNC_SCO_DECODER_PCM_INITIALIZE_PM        1000        PM_REGION, flash.code;
+segment FRAME_SYNC_SCO_DECODER_PCM_VALIDATE_PM          40          PM_REGION;
+segment FRAME_SYNC_SCO_DECODER_PCM_PROCESS_PM           40          PM_REGION;
+segment FRAME_SYNC_STREAM_DECODE_PM                     40          PM_REGION;
+segment FRAME_SYNC_STREAM_ENCODE_PM                     40          PM_REGION;
+segment FRAME_SYNC_USB_IN_STEREO_AUDIO_COPY_PM          40          PM_REGION;
+segment FRAME_SYNC_USB_IN_MONO_AUDIO_COPY_PM            40          PM_REGION;
+segment FRAME_SYNC_USB_OUT_STEREO_COPY_PM               40          PM_REGION;
+segment FRAME_SYNC_USB_OUT_MONO_COPY_PM                 40          PM_REGION;
+segment FRAME_SYNC_HW_WARP_PM	                          40          PM_REGION;
+segment FRAME_SYNC_SW_WARP_PM	                          40          PM_REGION;
+
+segment FRAME_SYNC_TASK_SCHED_ISR_PM		        40          PM_REGION;
+segment FRAME_SYNC_TASK_SCHED_RUN_PM		        40          PM_REGION;
+
+segment FRAME_SYNC_SCO_ENCODE_PM		        	  40          PM_REGION;
+
+segment SCO_TIMING_INITIALIZE_PM		        	  1000       PM_REGION,flash.code;
+segment SCO_TIMING_PORT_CONNECTED_PM	        	  40          PM_REGION;
+segment SCO_TIMING_RCV_BT_ADDRESS_PM	        	  40       PM_REGION;
+segment SCO_TIMING_RCV_SCO_PARAMS_PM	        	  40       PM_REGION;
+segment SCO_TIMING_SYNC_PM			        	  40          PM_REGION;
+
+
+
+

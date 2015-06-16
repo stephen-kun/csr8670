@@ -1,0 +1,99 @@
+<project buildenvironment="{6907f3f0-0ed4-11d8-be02-0050dadfe87d}" buildenvironmentname="Kalimba Command Line" executionenvironmentoption="BC03MM binutils" buildenvironmentoption="" executionenvironmentname="Kalimba SPI" executionenvironment="{2ca81310-0ecd-11d8-be02-0050dadfe87d}" >
+ <folder name="Header Files" >
+  <file path="user_eq.h" />
+  <file path="music_example.h" />
+  <file path="mips_profile.h" />
+  <file path="codec_decoder.h" />
+  <file path="relay_conn.h" />
+ </folder>
+ <file path="music_example_resample.asm" />
+ <file path="codec_decoder.asm" />
+ <file path="music_example_system.asm" />
+ <file path="mips_profile.asm" />
+ <file path="spi_message.asm" />
+ <file path="vm_message.asm" />
+ <file path="sr_adjustment.asm" />
+ <file path="usb_config.asm" />
+ <file path="music_example_config.asm" />
+ <file path="subwoofer.asm" />
+ <file path="user_eq.asm" />
+ <file path="latency_reporting.asm" />
+ <file path="relay_conn.asm" />
+ <properties currentconfiguration="Release" >
+  <configuration name="Debug" >
+   <property key="BUILDENV" >0</property>
+   <property key="LIB_SET" >sdk</property>
+   <property key="audiocbuffersize" >1500</property>
+   <property key="bootstrap" >1</property>
+   <property key="codeccbuffersize" >4096</property>
+   <property key="debugmode" >0</property>
+   <property key="debugtransport" >[SPI|LPT1|No]</property>
+   <property key="defines" >SUB_ENABLE,ANALOGUE_ENABLE, USB_ENABLE, SBC_ENABLE, HARDWARE_RATE_MATCH, ANC_96Kx, LATENCY_REPORTINGx</property>
+   <property key="goodworkingbufferlevel" >0.65</property>
+   <property key="hardware" >0</property>
+   <property key="image" >image</property>
+   <property key="libs" >core_debug, cbops_debug, sbc_debug, codec_debug, frame_sync_debug, audio_proc_debug, spi_comm_debug, math_debug, cvc_modules_debug</property>
+   <property key="output" ></property>
+  </configuration>
+  <configuration name="Release" >
+   <property key="BUILDENV" >0</property>
+   <property key="LIB_SET" >sdk</property>
+   <property key="audiocbuffersize" >1500</property>
+   <property key="bootstrap" >1</property>
+   <property key="codeccbuffersize" >4096</property>
+   <property key="debugmode" >1</property>
+   <property key="debugtransport" >[SPITRANS=LPT SPIPORT=1]</property>
+   <property key="defines" >SUB_ENABLE,xSHAREME_ENABLE,xTWS_ENABLE, ANALOGUE_ENABLE, USB_ENABLE, SBC_ENABLE, xHARDWARE_RATE_MATCH, ANC_96Kx, LATENCY_REPORTING</property>
+   <property key="goodworkingbufferlevel" >0.65</property>
+   <property key="hardware" >0</property>
+   <property key="image" >image</property>
+   <property key="libs" >core, cbops, sbc, codec, frame_sync, audio_proc, spi_comm, math, cvc_modules, stream_relay</property>
+   <property key="output" ></property>
+  </configuration>
+  <configuration name="ShareMe" >
+   <property key="BUILDENV" >0</property>
+   <property key="LIB_SET" >sdk</property>
+   <property key="audiocbuffersize" >1500</property>
+   <property key="bootstrap" >1</property>
+   <property key="codeccbuffersize" >4096</property>
+   <property key="debugmode" >1</property>
+   <property key="debugtransport" >[SPITRANS=LPT SPIPORT=1]</property>
+   <property key="defines" >xSUB_ENABLE,SHAREME_ENABLE,xTWS_ENABLE, ANALOGUE_ENABLE, USB_ENABLE, SBC_ENABLE, xHARDWARE_RATE_MATCH, ANC_96Kx, LATENCY_REPORTINGx</property>
+   <property key="goodworkingbufferlevel" >0.65</property>
+   <property key="hardware" >0</property>
+   <property key="image" >image</property>
+   <property key="libs" >core, cbops, sbc, codec, frame_sync, audio_proc, spi_comm, math, cvc_modules, stream_relay</property>
+   <property key="output" ></property>
+  </configuration>
+  <configuration name="TWS" >
+   <property key="BUILDENV" >0</property>
+   <property key="LIB_SET" >sdk</property>
+   <property key="audiocbuffersize" >1500</property>
+   <property key="bootstrap" >1</property>
+   <property key="codeccbuffersize" >4096</property>
+   <property key="debugmode" >1</property>
+   <property key="debugtransport" >[SPITRANS=LPT SPIPORT=1]</property>
+   <property key="defines" >TWS_RELAY_TIME,xSUB_ENABLE,xSHAREME_ENABLE,TWS_ENABLE, xTWS_WIRED_MODE_ENABLE, ANALOGUE_ENABLE, USB_ENABLE, SBC_ENABLE, xHARDWARE_RATE_MATCH, ANC_96Kx, LATENCY_REPORTINGx</property>
+   <property key="goodworkingbufferlevel" >0.65</property>
+   <property key="hardware" >0</property>
+   <property key="image" >image</property>
+   <property key="libs" >core, cbops, sbc, codec, frame_sync, audio_proc, spi_comm, math, cvc_modules, stream_relay</property>
+   <property key="output" ></property>
+  </configuration>
+  <configuration name="TWS_WIRED_MODE" >
+   <property key="BUILDENV" >0</property>
+   <property key="LIB_SET" >sdk</property>
+   <property key="audiocbuffersize" >1500</property>
+   <property key="bootstrap" >1</property>
+   <property key="codeccbuffersize" >4096</property>
+   <property key="debugmode" >1</property>
+   <property key="debugtransport" >[SPITRANS=LPT SPIPORT=1]</property>
+   <property key="defines" >TWS_RELAY_TIME,xSUB_ENABLE,xSHAREME_ENABLE,TWS_ENABLE,TWS_WIRED_MODE_ENABLE, ANALOGUE_ENABLE, USB_ENABLE, SBC_ENABLE, xHARDWARE_RATE_MATCH, ANC_96Kx, LATENCY_REPORTINGx</property>
+   <property key="goodworkingbufferlevel" >0.65</property>
+   <property key="hardware" >0</property>
+   <property key="image" >image</property>
+   <property key="libs" >core, cbops, sbc, codec, frame_sync, audio_proc, spi_comm, math, cvc_modules, stream_relay</property>
+   <property key="output" ></property>
+  </configuration>
+ </properties>
+</project>

@@ -1,0 +1,4 @@
+<workspace>
+ <project path="one_mic_example_cvsd.xip" />
+ <project path="one_mic_example_16k.xip" />
+</workspace>

@@ -1,0 +1,87 @@
+/* Linkscript for the cvc_handsfree application (NB-variant) */
+
+#if defined(ELVIS)
+    #define FLASH_LEVEL_1
+    #define FLASH_LEVEL_2
+#endif
+
+/* Application segments */
+segment MAIN_PM                           40          flash.code;
+segment CVC_BANDWIDTH_PM                  40          flash.code;
+segment AUDIO_CONFIG_PM                   40          flash.code;
+segment AUDIO_COPY_HANDLER_PM             40          PM_REGION;
+segment CODEC_APPLY_PM                    40          flash.code;   
+segment CONFIG_APPLY_PM                   40          flash.code;
+segment CVC_SYSTEM_REINITIALIZE_PM        40          flash.code;
+segment CVC_FRAME_PROCESS_PM              40          flash.code;
+segment CVC_CONNECTION_STATUS_PM          40          flash.code;
+segment CVC_ZERO_DC_NYQUIST_PM            40          flash.code;
+segment MODE_MIXER_PROCESS_PM             40          flash.code;
+segment SET_MODE_GAIN_PM                  40          flash.code;
+
+/* Library segment overrides: precede statement with "override" qualifier 
+   to override a segment defined by a library */
+
+override segment CVC_SPI_GET_PARAMS_PM             40          flash.code;
+override segment CVC_SPI_GETSTATUS_PM              40          flash.code;
+override segment CVC_SPI_GET_VERSION_PM            40          flash.code;
+override segment CVC_SPI_REINIT_PM                 40          flash.code;
+override segment CVC_SPI_GETCONTROL_PM             40          flash.code;
+override segment CVC_MESSAGE_SET_MODE_PM           40          flash.code;
+override segment CVC_MESSAGE_SET_PARAM_PM          40          flash.code;
+override segment CVC_MESSAGE_GET_PARAM_PM          40          flash.code;
+override segment CVC_MESSAGE_PING_PM               40          flash.code;
+override segment CVC_MESSAGE_VOLUME_PM             40          flash.code;
+override segment CVC_MESSAGE_LOAD_PARAMS_PM        40          flash.code;
+override segment CVC_MESSAGE_PSKEY_READ_HANDLER_PM 40          flash.code;
+
+override segment CVC_LOAD_DEFAULT_PARAMS_PM        40          flash.code;
+
+override segment CVC_SIDETONE_PM                   40          flash.code;
+override segment CVC_SIDETONE_FILTER_PM            40          flash.code;
+override segment CVC_SIDETONE_FILTER_PROCESS_PM    40          PM_REGION;
+
+override segment AUXILARYAUDIO_TONE_PM             40          flash.code;   
+override segment CVC_AUXILARY_AUDIO_PM             40          flash.code;
+
+override segment CVC_INITIALIZE_PM                 40          flash.code;
+override segment CVC_POWERUP_RESET_PM              40          flash.code;
+override segment CVC_VOLUME_CONTROL_PM             40          flash.code;
+
+override segment SSR_INIT_PM                       40              flash.code;
+override segment SSR_PROC_PM                       40              flash.code;
+override segment WRAPPER.SSR_PM                    40              flash.code;
+override segment SSR_WRAPPER_VM_INTERFACE_PM       40          flash.code;
+
+#ifdef FLASH_LEVEL_1
+   override segment AUDIO_PROC_STREAM_MIXER_PROCESS_PM          50              flash.code;
+   override segment AUDIO_PROC_MUTE_CONTROL_PROCESS_PM          50              flash.code;
+
+   override segment FRAME_SYNC_HANDLERS_PM                      50              flash.code;
+   override segment FRAME_SYNC_SIDETONE_MIX_OP_RESET_PM         50              flash.code;
+   override segment FRAME_SYNC_DISTRIBUTE_STREAMS_RM_PM         50              flash.code;
+   override segment FRAME_SYNC_UPDATE_STREAMS_RM_PM             50              flash.code;
+
+   override segment CBUFFER_CONFIGURE_PORT_MESSAGE_HANDLER_PM   50              flash.code;
+
+   override segment CBOPS_FRAME_RESAMPLE_INITIALIZE_PM          50              flash.code;
+
+   override segment MESSAGE_SEND_LONG_PM                        50              flash.code;
+
+   override segment PSKEY_RESULT_MESSAGE_HANDLER_PM             50              flash.code;
+   override segment PSKEY_PRIVATE_SEND_REQUEST_PM               50              flash.code;
+   override segment PSKEY_READ_KEY_PM                           50              flash.code;
+
+   override segment OMS270_APPLY_GAIN_PM                        50              flash.code;
+
+   override segment NDVC_ALG_100_INITILIZE_PM                  1000  flash.code;
+   override segment NDVC_ALG_100_PROCESS_PM                    40    flash.code;
+
+   override segment AGC400_INITIALIZE_PM                       1000  flash.code;
+
+   override segment VAD400_INITIALIZE_PM                       1000  flash.code;
+   override segment VAD400_PROCESS_PM                          40    flash.code;
+
+   override segment ADAPEQ_INITIALIZE_PM                       1000  flash.code;
+   override segment ADAPEQ_PROCESS_PM                          40    flash.code;
+#endif

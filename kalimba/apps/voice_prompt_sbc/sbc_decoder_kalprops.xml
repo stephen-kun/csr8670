@@ -1,0 +1,82 @@
+<custom>
+    <property type="integer" internalkey="AUDIO_CBUFFER_SIZE" key="audiocbuffersize" format="definewithvalue" name="Audio Buffer Size" defaultvalue="320">
+        <description>
+            <![CDATA[
+            <B>Set audio output buffer size</B>
+            <P>Set the size of the audio output buffer, measured in number of audio samples not bytes.</P>
+            <P>Recommended value - 320 words.</P>
+            ]]>
+       </description>
+    </property>      
+    <property type="integer" internalkey="CODEC_CBUFFER_SIZE" key="codeccbuffersize" format="definewithvalue" name="Codec Buffer Size" defaultvalue="4096">
+        <description>
+            <![CDATA[
+            <B>Set codec input buffer size</B>
+            <P>Set the size of the codec input buffer, measured in number of 16 bit words ie 1 word = 2 bytes.</P>
+            <P>This parameter impacts the robustness of the decoder to jitter and its latency. Larger values are more
+            robust to jitter but have larger latency whilst smaller values have lower latency but are less robust to
+            jitter in the data rate achieved by the source.</P>
+            <P>Recommended values are:</P>
+            <P>Maximum range and robustness - 4096 words</P>
+            <P>Standard Latency - 2048 words</P>
+            <P>Low Latency - 1024 words</P>
+            ]]>
+       </description>
+    </property>      
+    <property type="text" internalkey="COMFORT_NOISE_GAIN" key="comfortnoisegain" format="definewithvalue" name="Comfort Noise Gain" defaultvalue="0.0">
+        <description>
+            <![CDATA[
+            <B>Set Comfort Noise Gain</B>
+            <P>When the data supplied to the decoder fails for some reason, eg out of Bluetooth range, the volume of comfort
+            noise that should be played. Set to 0.0 to output silence in the abscence of data. Range (0.0 - 1.0).</P>
+            ]]>
+       </description>
+    </property>      
+    <property type="text" internalkey="GOOD_WORKING_BUFFER_LEVEL" key="goodworkingbufferlevel" format="definewithvalue" name="Good Working Buffer Level" defaultvalue="0.65">
+        <description>
+            <![CDATA[
+            <B>Set the Good Working Buffer Level</B>
+            <P>Input codec buffer level required before decoding starts. Decreasing this value will reduce the latency 
+            of the decoder but will also reduce the tolerance to jitter in the average data rate. This should be modified
+            in parallel with considerations of the size of input codec cbuffer, see stream_decode.asm documentation.</P>
+            <P>Recommended value - 0.65 (65% of the buffer size)</P>
+            ]]>
+       </description>
+    </property>      
+    <property type="text" internalkey="POORLINK_DETECT_LEVEL" key="poorlinkdetectlevel" format="definewithvalue" name="Poor link detect buffer level" defaultvalue="0.50">
+        <description>
+            <![CDATA[
+            <B>Set the Poor Link Detect Buffer Level</B>
+            <P>If the decoder runs out of data it will look back through its history for the recorded buffer level. If the
+            buffer level was below this value it will flag poorlink.</P>
+            <P>This form of checking is required to differentiate poorlink conditions from normal operation such as end of 
+            track.</P>
+            <P>Recommended values are:</P>
+            <P>Maximum range and robustness - 0.5 (50% of the good working buffer level)</P>
+            <P>Standard Latency - 0.7 (70% of the good working buffer level)</P>
+            <P>Low Latency - 0.7 (70% of the good working buffer level)</P>
+            ]]>
+       </description>
+    </property>      
+    <property type="text" internalkey="POORLINK_PERIOD" key="poorlinkperiod" format="definewithvalue" name="Poor link period &#0181;s" defaultvalue="1000000">
+        <description>
+            <![CDATA[
+            <B>Set the Poor Link Period</B>
+            <P>When poorlink has been flagged the decoder will not release the flag until a good data rate has been
+            continuously sustained for this duration, measured in micro-seconds.</P>
+            <P>Recommended value - 1000000 &#0181;s</P>
+            ]]>
+       </description>
+    </property>      
+    <property type="list" key="debugmode" format="define" name="Debug mode" defaultvalue="0">
+        <option internalval="DEBUG_ON">On</option>
+        <option fake="">Off</option>
+        <description>
+           <![CDATA[
+           <B>Set <I>application</I> debug mode</B>
+           <P>Specify whether the <I>application</I> is in debug mode. Note this does not necessarily mean the libraries
+           will be in debug mode. However if any library debug features are to be used it <B>must</B> be set.</P>
+           ]]>
+        </description>
+    </property>
+</custom>

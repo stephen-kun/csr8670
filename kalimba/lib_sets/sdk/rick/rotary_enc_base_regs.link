@@ -1,0 +1,11 @@
+/* Linkscript for the ROTARY_ENC library */
+
+segment ROTARY_ENC_PM			        40          PM_REGION, flash.code;
+segment ROTARY_ENC_INITIIALISE_PM               40          PM_REGION, flash.code;
+segment ROTARY_ENC_REGISTER_PM                  40          PM_REGION, flash.code;
+segment ROTARY_ENC_MESSAGE_HANDLER_PM           40          PM_REGION, flash.code;
+segment ROTARY_ENC_SERVICE_ROUTINE_PM           40          PM_REGION, flash.code;
+segment ROTARY_ENC_SAMPLE_PIOS_PM               40          PM_REGION, flash.code;
+segment ROTARY_ENC_TRY_TO_SEND_MESSAGE_PM       40          PM_REGION, flash.code;
+segment ROTARY_ENC_UNLOCK_SEND_FLAG_PM          40          PM_REGION, flash.code;
+

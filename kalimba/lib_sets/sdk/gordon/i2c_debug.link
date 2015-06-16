@@ -1,0 +1,10 @@
+/* Linkscript for the I2C library */
+
+
+segment I2C_RECEIVE_BYTE_PM                                                    	49          PM_REGION, flash.code;
+segment I2C_HIGH_CLK_PM                                                    	49          PM_REGION, flash.code;
+segment I2C_LOW_CLK_PM                                                    	49          PM_REGION, flash.code;
+segment I2C_START_PM                                                    	49          PM_REGION, flash.code;
+segment I2C_STOP_PM                                                   	 	49          PM_REGION, flash.code;
+segment I2C_SEND_BYTE_PM                                                    	49          PM_REGION, flash.code;
+segment I2C_RECEIVE_BYTE_PM                                                    	49          PM_REGION, flash.code;

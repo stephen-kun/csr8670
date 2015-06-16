@@ -1,0 +1,45 @@
+/* Linkscript for the CBOPS library */
+
+segment CBOPS_COPY_PM                                       40          PM_REGION;
+segment CBOPS_RESET_PM                                      40          PM_REGION;
+
+segment CBOPS_COPY_OP_MAIN_PM                               40          PM_REGION;
+segment CBOPS_SHIFT_MAIN_PM                                 40          PM_REGION;
+segment CBOPS_DITHER_AND_SHIFT_MAIN_PM                      40          PM_REGION;
+segment CBOPS_RATE_ADJUSTMENT_AND_SHIFT_AMOUNT_TO_USE_PM    40          PM_REGION;
+segment CBOPS_RATE_ADJUSTMENT_AND_SHIFT_MAIN_PM             40          PM_REGION;
+segment CBOPS_SWITCH_OP_MAIN_PM			                  40          PM_REGION;
+segment CBOPS_COMPRESS_COPY_OP_MAIN_PM			            40          PM_REGION;
+segment CBOPS_DC_REMOVE_PM          			            40          PM_REGION;
+segment CBOPS_AV_COPY_OP_PM         			            40          PM_REGION;
+segment CBOPS_STEREO_SYNC_OP_PM         	               40          PM_REGION;
+
+segment CBOPS_SIDETONE_FILTER_OP_MAIN_PM		            40          PM_REGION;
+segment CBOPS_SIDETONE_FILTER_OP_MODE_PM		            40          PM_REGION;
+segment CBOPS_SIDETONE_MIX_OP_MAIN_PM		            40          PM_REGION;
+segment CBOPS_HW_WARP_PM		                        40          PM_REGION;
+segment CBOPS_AUXAUDIO_MIX_OP_MAIN_PM		            40          PM_REGION;
+segment CBOPS_PORT_WRAP_PM		                        40          PM_REGION;
+segment CBOPS_INSERT_OP_PM		                        40          PM_REGION;
+segment CBOPS_RATE_MONITOR_OP_PM		                  40          PM_REGION;
+segment CBOPS_USB_IN_OP_PM    		                  40          PM_REGION;
+segment CBOPS_USB_OUT_OP_PM   		                  40          PM_REGION;
+
+segment IIR_RESAMPLEV2_CBOPS_PM                      	      40          PM_REGION;
+segment IIR_RESAMPLEV2_COPY_PM                   		40          PM_REGION;
+segment IIR_RESAMPLEV2_FRAMESYNC_PM                      	40          PM_REGION;
+segment IIR_RESAMPLEV2_COMMON_PM                            40          PM_REGION;
+segment IIR_RESAMPLEV2_COEFF_DM                      	      40          DM2_REGION;
+
+segment CBOPS_DEINTERLEAVE_MIX_PM                             40          PM_REGION;
+segment CBOPS_FIR_RESAMPLE_PM                                 40          PM_REGION;
+
+
+
+
+
+
+
+
+
+

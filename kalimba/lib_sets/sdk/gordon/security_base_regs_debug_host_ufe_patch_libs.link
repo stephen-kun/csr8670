@@ -1,0 +1,5 @@
+/* Linkscript for the Security library */
+
+segment SECURITY_DATA	        40		    DM1_REGION,DM2_REGION;
+segment SECURITY_PM             1000          PM_REGION,flash.code;
+

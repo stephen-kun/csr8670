@@ -1,0 +1,22 @@
+/* Linkscript for the a2dp_sink application (sbc variant) */
+
+/* same application segment assignments as sbc app */
+#include "sbc_decoder.link"
+
+/* Specific segments defined for spdif app*/
+segment SPDIF_SRA_CALC_RATE_PM                   40   PM_REGION;
+segment AC3_USER_INFO_REQUEST_MESSAGE_HANDLER_PM 40   PM_REGION;
+segment CONFIG_AC3_DECODER_MESSAGE_HANDLER_PM    40   PM_REGION;
+segment CONFIG_SPDIF_SINK_MESSAGE_HANDLER_PM     40   PM_REGION;
+segment SPDIF_CODEC_CHANGE_MASTER_RESET_PM       40   PM_REGION;
+segment FADE_OUT_BUFFER_PM                       40   PM_REGION;
+segment SPDIF_GET_DECODER_CALL_BACK_PM           40   PM_REGION;
+segment SYNCRONISE_LFE_TO_LR_CHANNELS_PM         40   PM_REGION;
+segment SPDIF_IN_COPY_HANDLER_PM                 40   PM_REGION;
+segment SPDIF_SUB_ESCO_PROCESS_PM                40   PM_REGION;
+segment SPDIF_APPLY_REALTIME_CONFIG_PM           40   PM_REGION;
+segment SPDIF_UPDATE_STAT_WORD_PM                40   PM_REGION;
+segment SPDIF_UPDATE_CONFIG_WORD_PM              40   PM_REGION;
+/* Library segment overrides: precede statement with "override" qualifier 
+   to override a segment defined by a library */
+

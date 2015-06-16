@@ -1,0 +1,5 @@
+/* Linkscript for the FASTSTREAM library */
+
+
+segment FASTSTREAM_SBCENC_POST_FUNC_PM                         30          PM_REGION;
+

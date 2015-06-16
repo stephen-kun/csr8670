@@ -1,0 +1,15 @@
+-DKALASM3
+-DCVC_WIREDx
+-DFRAME_SYNC_DEBUGx
+-DBASE_REGISTER_MODEx
+-Duses_SSRx
+-DGORDON
+-DKAL_ARCH3
+-DKALASM3
+-g
+-mchip=gordon
+-IC:/ADK3.5/kalimba
+-IC:/ADK3.5/kalimba/architecture
+-IC:/ADK3.5/kalimba/lib_sets/sdk/include
+-IC:/ADK3.5/kalimba/external_includes/vm
+-IC:/ADK3.5/kalimba/external_includes/firmware

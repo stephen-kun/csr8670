@@ -1,0 +1,27 @@
+<project buildenvironment="{6907f3f0-0ed4-11d8-be02-0050dadfe87d}" buildenvironmentname="kalimba" executionenvironmentoption="BC03MM binutils" buildenvironmentoption="" executionenvironmentname="kalimba bccmd" executionenvironment="{2ca81310-0ecd-11d8-be02-0050dadfe87d}" >
+ <file path="mv_codec_encoder.h" />
+ <file path="mv_codec_encoder_aptx_acl_sprint.asm" />
+ <file path="sample_rate_converter.asm" />
+ <properties currentconfiguration="CSR8670_Release" >
+  <configuration name="BC5MM_Release" >
+   <property key="audiocbuffersize" >320</property>
+   <property key="bootstrap" >0</property>
+   <property key="codeccbuffersize" >2048</property>
+   <property key="debugmode" >1</property>
+   <property key="debugtransport" >[SPITRANS=LPT SPIPORT=1]</property>
+   <property key="defines" >ENABLE_BACK_CHANNEL, LOW_COMPLEXITY_SRC_FILTERx, WOODSTOCK</property>
+   <property key="hardware" >1</property>
+   <property key="libs" >core,cbops,math,codec,aptx_sprint,sbc_wbs_acl,faststream,cvc_system,frame_sync</property>
+  </configuration>
+  <configuration name="CSR8670_Release" >
+   <property key="audiocbuffersize" >320</property>
+   <property key="bootstrap" >0</property>
+   <property key="codeccbuffersize" >2048</property>
+   <property key="debugmode" >1</property>
+   <property key="debugtransport" >[SPITRANS=LPT SPIPORT=1]</property>
+   <property key="defines" >ENABLE_BACK_CHANNEL, LOW_COMPLEXITY_SRC_FILTERx, WOODSTOCK, SPDIF_ENABLE</property>
+   <property key="hardware" >3</property>
+   <property key="libs" >core,cbops,math,codec,aptx_sprint,sbc_wbs_acl,faststream,cvc_system,spdif_source_app,frame_sync</property>
+  </configuration>
+ </properties>
+</project>

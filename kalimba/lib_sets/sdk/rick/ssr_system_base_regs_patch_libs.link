@@ -1,0 +1,7 @@
+/* Linkscript for the asr_system library */
+
+segment WRAPPER.SSR_PM                                  999         PM_REGION, flash.code;
+segment SSR_WRAPPER_VM_INTERFACE_PM                     999         PM_REGION, flash.code;
+segment SSR_PREPROC_PM                                  999         PM_REGION, flash.code;
+segment SSR_START_HANDLER_PM                            999         PM_REGION, flash.code;
+segment SSR_CONFIG_HANDLER_PM                           999         PM_REGION, flash.code;

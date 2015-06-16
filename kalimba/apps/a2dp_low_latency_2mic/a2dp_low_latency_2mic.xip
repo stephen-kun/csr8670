@@ -1,0 +1,105 @@
+<project buildenvironment="{6907f3f0-0ed4-11d8-be02-0050dadfe87d}" buildenvironmentname="kalimba" executionenvironmentoption="binutils" buildenvironmentoption="" executionenvironmentname="kalimba" executionenvironment="{2ca81310-0ecd-11d8-be02-0050dadfe87d}" >
+ <folder name="Header Files" >
+  <file path="mips_profile.h" />
+  <file path="sr_adjustment_gaming.h" />
+  <file path="a2dp_low_latency_2mic.h" />
+ </folder>
+ <file path="sr_adjustment_gaming.asm" />
+ <file path="frontend.asm" />
+ <file path="main.asm" />
+ <file path="receive_proc.asm" />
+ <file path="send_proc.asm" />
+ <file path="backend.asm" />
+ <file path="mips_profile.asm" />
+ <file path="latency_reporting_ll.asm" />
+ <properties currentconfiguration="Faststream_Release" >
+  <configuration name="FS_Sprint_Debug" >
+   <property key="BUILDENV" >0</property>
+   <property key="LIB_SET" >sdk</property>
+   <property key="audiocbuffersize" >320</property>
+   <property key="bootstrap" >1</property>
+   <property key="codeccbuffersize" >1000</property>
+   <property key="debugmode" >0</property>
+   <property key="debugtransport" >[SPI|LPT1|No]</property>
+   <property key="defines" >FASTSTREAM_ENABLE,APTX_ACL_SPRINT_ENABLE, LATENCY_REPORTINGx</property>
+   <property key="goodworkingbufferlevel" >0.30</property>
+   <property key="hardware" >0</property>
+   <property key="image" >image</property>
+   <property key="libs" >security,cvc_system,cvc_modules,core_debug, cbops_multirate_debug, codec_debug, faststream_debug, frame_sync_debug, audio_proc_debug, spi_comm_debug, math_debug, sbc_wbs_acl,aptx_sprint</property>
+   <property key="output" ></property>
+   <property key="warpfilter" >1</property>
+   <property key="warpratehighcoefficient" >0.01</property>
+   <property key="warpratelowcoefficient" >0.001</property>
+   <property key="warpratemaxramp" >0.005</property>
+   <property key="warpratetransitionlevelwords" >100</property>
+   <property key="zerodataratebuffering" >200000</property>
+   <property key="zerodataratestopping" >150000</property>
+  </configuration>
+  <configuration name="FS_Sprint_Release" >
+   <property key="BUILDENV" >0</property>
+   <property key="LIB_SET" >sdk</property>
+   <property key="audiocbuffersize" >320</property>
+   <property key="bootstrap" >1</property>
+   <property key="codeccbuffersize" >1000</property>
+   <property key="debugmode" >1</property>
+   <property key="debugtransport" >[SPITRANS=KALSIM SPIPORT=1]</property>
+   <property key="defines" >FASTSTREAM_ENABLE,APTX_ACL_SPRINT_ENABLE, LATENCY_REPORTINGx</property>
+   <property key="goodworkingbufferlevel" >0.30</property>
+   <property key="hardware" >0</property>
+   <property key="image" >image</property>
+   <property key="libs" >security,cvc_system,cvc_modules,core, cbops_multirate, codec, faststream, frame_sync, audio_proc, spi_comm, math, sbc_wbs_acl,aptx_sprint</property>
+   <property key="output" ></property>
+   <property key="warpfilter" >1</property>
+   <property key="warpratehighcoefficient" >0.01</property>
+   <property key="warpratelowcoefficient" >0.001</property>
+   <property key="warpratemaxramp" >0.005</property>
+   <property key="warpratetransitionlevelwords" >100</property>
+   <property key="zerodataratebuffering" >200000</property>
+   <property key="zerodataratestopping" >150000</property>
+  </configuration>
+  <configuration name="Faststream_Debug" >
+   <property key="BUILDENV" >0</property>
+   <property key="LIB_SET" >sdk</property>
+   <property key="audiocbuffersize" >320</property>
+   <property key="bootstrap" >1</property>
+   <property key="codeccbuffersize" >1000</property>
+   <property key="debugmode" >0</property>
+   <property key="debugtransport" >[SPI|LPT1|No]</property>
+   <property key="defines" >FASTSTREAM_ENABLE,xAPTX_ACL_SPRINT_ENABLE</property>
+   <property key="goodworkingbufferlevel" >0.30</property>
+   <property key="hardware" >0</property>
+   <property key="image" >image</property>
+   <property key="libs" >security,cvc_system,cvc_modules,core_debug, cbops_multirate_debug, codec_debug, faststream_debug, frame_sync_debug, audio_proc_debug, spi_comm_debug, math_debug, sbc_wbs_acl</property>
+   <property key="output" ></property>
+   <property key="warpfilter" >1</property>
+   <property key="warpratehighcoefficient" >0.01</property>
+   <property key="warpratelowcoefficient" >0.001</property>
+   <property key="warpratemaxramp" >0.005</property>
+   <property key="warpratetransitionlevelwords" >100</property>
+   <property key="zerodataratebuffering" >200000</property>
+   <property key="zerodataratestopping" >150000</property>
+  </configuration>
+  <configuration name="Faststream_Release" >
+   <property key="BUILDENV" >0</property>
+   <property key="LIB_SET" >sdk</property>
+   <property key="audiocbuffersize" >320</property>
+   <property key="bootstrap" >1</property>
+   <property key="codeccbuffersize" >1000</property>
+   <property key="debugmode" >1</property>
+   <property key="debugtransport" >[SPITRANS=KALSIM SPIPORT=1]</property>
+   <property key="defines" >FASTSTREAM_ENABLE,xAPTX_ACL_SPRINT_ENABLE, LATENCY_REPORTINGx</property>
+   <property key="goodworkingbufferlevel" >0.30</property>
+   <property key="hardware" >0</property>
+   <property key="image" >image</property>
+   <property key="libs" >security,cvc_system,cvc_modules,core, cbops_multirate, codec, faststream, frame_sync, audio_proc, spi_comm, math, sbc_wbs_acl</property>
+   <property key="output" ></property>
+   <property key="warpfilter" >1</property>
+   <property key="warpratehighcoefficient" >0.01</property>
+   <property key="warpratelowcoefficient" >0.001</property>
+   <property key="warpratemaxramp" >0.005</property>
+   <property key="warpratetransitionlevelwords" >100</property>
+   <property key="zerodataratebuffering" >200000</property>
+   <property key="zerodataratestopping" >150000</property>
+  </configuration>
+ </properties>
+</project>

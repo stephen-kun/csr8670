@@ -1,0 +1,19 @@
+<project buildenvironment="{6907f3f0-0ed4-11d8-be02-0050dadfe87d}" buildenvironmentname="kalimba" executionenvironmentoption="BC03MM binutils" buildenvironmentoption="" executionenvironmentname="kalimba bccmd" executionenvironment="{2ca81310-0ecd-11d8-be02-0050dadfe87d}" >
+ <file path="cvc_headset_main.asm" />
+ <file path="cvc_headset_config.asm" />
+ <file path="cvc_FrontEnd.asm" />
+ <file path="cvc_BackEnd.asm" />
+ <properties currentconfiguration="Release" >
+  <configuration name="Release" >
+   <property key="BUILDENV" >0</property>
+   <property key="LIB_SET" >sdk</property>
+   <property key="bootstrap" >1</property>
+   <property key="debugtransport" >[SPITRANS=USB SPIPORT=0]</property>
+   <property key="defines" >uses_SSR,FRAME_SYNC_DEBUGx,BASE_REGISTER_MODEx, uses_96kx</property>
+   <property key="hardware" >0</property>
+   <property key="libs" >security,core_big_stack,frame_sync,cbops_multirate, cvc_modules,spi_comm,math,plc100,audio_proc,cvc_system,ssr_system,sbc_wbs</property>
+   <property key="output" >cvc_headset</property>
+   <property key="separator_flags" >0</property>
+  </configuration>
+ </properties>
+</project>

@@ -1,0 +1,14 @@
+/* Linkscript for the MALLOC library */
+
+segment MALLOC_INIT_PM                          40          PM_REGION, flash.code;
+segment MALLOC_ADD_SIZE_PM                      40          PM_REGION, flash.code;
+segment MALLOC_ALLOC_PM                         40          PM_REGION, flash.code;
+segment MALLOC_FREE_PM                          40          PM_REGION, flash.code;
+segment MALLOC_ZERO_ALLOC_PM                    40          PM_REGION, flash.code;
+segment MALLOC_GET_BLOCK_SIZE_PM                40          PM_REGION, flash.code;
+segment MALLOC_GET_BLOCK_INFO_PM                40          PM_REGION, flash.code;
+segment MALLOC_REALLOC_POOLS_PM                 40          PM_REGION, flash.code;
+segment MALLOC_PM_INITIALISE_PM                 40          PM_REGION, flash.code;
+segment MALLOC_PM_ALLOC_PM                      40          PM_REGION, flash.code;
+segment MALLOC_PM_FREE_PM                       40          PM_REGION, flash.code;
+

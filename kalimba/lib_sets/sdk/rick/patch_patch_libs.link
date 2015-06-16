@@ -1,0 +1,16 @@
+/* Linkscript for the PATCH library */
+
+segment PATCH_INITIALISE_PM                     40          PM_REGION, flash.code;
+segment PATCH_ADD_PM                            40          PM_REGION;
+segment PATCH_ID_SEARCH_PM                      40          PM_REGION;
+segment PATCH_PRIV_POPULATE_PM                  40          PM_REGION, flash.code;
+segment PATCH_PRIV_WRITE_PM_RAM_PM              40          PM_REGION, flash.code;
+segment PATCH_PRIV_WRITE_DM_RAM_PM              40          PM_REGION, flash.code;
+segment PATCH_PRIV_GET_BLOCK_PM                 40          PM_REGION, flash.code;
+segment PATCH_PRIV_FREE_BLOCK_PM                40          PM_REGION, flash.code;
+
+segment KAP_LOADER_PATCH_UTILS_PM			39		PM_REGION,flash.code;
+segment KAP_LOADER_FLASH_FS_PM			40		PM_REGION,flash.code;
+segment KAP_LOADER_PSSTORE_PM				40		PM_REGION,flash.code;
+segment KAP_LOADER_COMMON_PM				40		PM_REGION,flash.code;
+

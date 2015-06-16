@@ -1,0 +1,139 @@
+/* Linkscript for the cvc_module library */
+
+/* Internal to module library */
+
+segment CVC_CONST_DM1                           40     DM1_REGION;
+segment CVC_CONST_DM2                           40     DM2_REGION;
+segment CVC_CONST_DM                            40     DM1_REGION, DM2_REGION;
+segment CVC_MODULES_DM                          40     DM1_REGION, DM2_REGION;
+
+segment CVC_INIT_PM                             1000   flash.code, PM_REGION;
+segment CVC_PROC_PM                             100    PM_REGION, flash.code;
+segment CVC_FUNC_PM                             39     PM_REGION, flash.code;
+
+segment DMSS_CVC_PROC_PM                        100    PM_REGION, flash.code;
+segment DMSS_CVC_FUNC_PM                        40     PM_REGION, flash.code;
+segment NC100_CVC_PROC_PM                       100    PM_REGION, flash.code;
+segment NC100_CVC_FUNC_PM                       40     PM_REGION, flash.code;
+segment DMS100_CVC_PROC_PM                      100    PM_REGION, flash.code;
+segment DMS100_CVC_FUNC_PM                      40     PM_REGION, flash.code;
+segment ADF200_CVC_FUNC_PM                      40     PM_REGION, flash.code;
+
+segment CVCLIB_PM                               35     PM_REGION, flash.code;
+
+segment MLOG_PM                                             1000        PM_REGION, flash.code;
+
+segment FILTER_BANK_TWO_CHANNEL_INITIALIZE_PM               1000        PM_REGION, flash.code;
+segment FILTER_BANK_TWO_CHANNEL_INPUT_STREAMING_PM          40          PM_REGION;
+segment FILTER_BANK_TWO_CHANNEL_WINDOW_NORMALIZE_MULT2_PM   40          PM_REGION;
+segment FILTER_BANK_TWO_CHANNEL_WINDOW_NORMALIZE_PM         40          PM_REGION;
+segment FILTER_BANK_TWO_CHANNEL_WINDOW_DENORMALIZE_PM       40          PM_REGION;
+segment FILTER_BANK_TWO_CHANNEL_OUTPUT_STREAMING_PM         40          PM_REGION;
+segment FILTER_BANK_ONE_CHANNEL_INITIALIZE_PM               1000        PM_REGION, flash.code;
+segment FILTER_BANK_ONE_CHANNEL_INPUT_STREAMING_PM          40          PM_REGION;
+segment FILTER_BANK_ONE_CHANNEL_WINDOW_NORMALIZE_MULT2_PM   40          PM_REGION;
+segment FILTER_BANK_ONE_CHANNEL_WINDOW_NORMALIZE_PM         40          PM_REGION;
+segment FILTER_BANK_ONE_CHANNEL_WINDOW_DENORMALIZE_PM       40          PM_REGION;
+segment FILTER_BANK_ONE_CHANNEL_OUTPUT_STREAMING_PM         40          PM_REGION;
+
+segment FILTER_BANK_CEPSTRUM128_PM                          40          PM_REGION;
+segment FILTER_BANK_CEPSTRUM_PM                             40          PM_REGION;
+
+segment FILTER_BANK_CFFT_PM                                 40          PM_REGION;
+segment FILTER_BANK_FFT_UNPACK_PM                           40          PM_REGION;
+segment FILTER_BANK_IFFT_UNPACK_PM                          40          PM_REGION;
+segment FILTER_BANK_FFT_SPLIT_PM                            40          PM_REGION;
+segment FILTER_BANK_IFFT_SPLIT_PM                           40          PM_REGION;
+
+segment FILTER_BANK_ONE_CHANNEL_ANALYSIS_INITIALIZE_PM      1000        PM_REGION, flash.code;
+segment FILTER_BANK_ONE_CHANNEL_ANALYSIS_PROCESS_PM         40          PM_REGION;
+segment FILTER_BANK_ONE_CHANNEL_SYNTHESIS_INITIALIZE_PM     1000        PM_REGION, flash.code;
+segment FILTER_BANK_ONE_CHANNEL_SYNTHESIS_PROCESS_PM        40          PM_REGION;
+segment FILTER_BANK_TWO_CHANNEL_ANALYSIS_INITIALIZE_PM      1000        PM_REGION, flash.code;
+segment FILTER_BANK_TWO_CHANNEL_ANALYSIS_PROCESS_PM         40          PM_REGION;
+segment FILTER_BANK_TWO_CHANNEL_SYNTHESIS_INITIALIZE_PM     1000        PM_REGION, flash.code;
+segment FILTER_BANK_TWO_CHANNEL_SYNTHESIS_PROCESS_PM        40          PM_REGION;
+
+segment FILTER_BANK_FLASH_LOAD_PM                           1000        PM_REGION, flash.code;
+
+segment NDVC_ALG_100_INITILIZE_PM               1000  PM_REGION, flash.code;
+segment NDVC_ALG_100_PROCESS_PM                 40    PM_REGION;
+
+segment AGC400_INITIALIZE_PM                    1000  PM_REGION, flash.code;
+segment AGC400_PROCESS_PM                       40    PM_REGION;
+
+segment VAD400_INITIALIZE_PM                    1000  PM_REGION, flash.code;
+segment VAD400_PROCESS_PM                       40    PM_REGION;
+
+segment ADAPEQ_INITIALIZE_PM                    1000  PM_REGION, flash.code;
+segment ADAPEQ_PROCESS_PM                       40    PM_REGION;
+
+segment ADF_FUNC_PM                             40    PM_REGION;
+segment ADF_ADAPT_FACTOR_CALC_PM                40    PM_REGION;
+segment ADF_DECORR_FILTER_PM                    40    PM_REGION;
+segment ADF_DGA_CALC_PM                         40    PM_REGION;
+segment ADF_INP_PWR_MONITOR_PM                  40    PM_REGION;
+segment ADF_INP_PWR_EST_PM                      40    PM_REGION;
+segment ADF_INV_PWR_CALC_PM                     40    PM_REGION;
+segment ADF_NORM_OUTPUT_PM                      40    PM_REGION;
+segment ADF_NORM_FACTOR_CALC_PM                 40    PM_REGION;
+segment ADF_RELIABILITY_PM                      40    PM_REGION;
+segment ADF_UPDATE_DECORR_FILTER_PM             40    PM_REGION;
+segment ADF_XCORR_EST_PM                        40    PM_REGION;
+
+// ADF100
+segment ADF_INITIALIZE_PM                       1000  PM_REGION, flash.code;
+segment ADF_PROCCESS_PM                         40    PM_REGION;
+segment ADF_MGDC_PM                             40    PM_REGION;
+segment ADF_ADFPS_PM                            40    PM_REGION;
+segment ADF_CVCLIB_MOVING_AVERAGE_PM            40    PM_REGION;
+segment ADF_PREP_PM                             40    PM_REGION;
+segment ADF_PREP_INITIALIZE_PM                  1000  PM_REGION, flash.code;
+segment ADF_NO_ADF_PM                           50    PM_REGION, flash.code;
+segment ADF_RNR_PM                              40    PM_REGION;
+segment ADF_RNR_GAIN_APPLY_PM                   50    PM_REGION, flash.code;
+segment ADF_POSTP_PM                            40    PM_REGION;
+segment ADF_POWER_MONITOR_PM                    40    PM_REGION;
+segment ADF_EST_TIR_PM                          40    PM_REGION;
+
+segment AEC_500_INITIALIZE_PM                   1000   PM_REGION, flash.code;
+segment AEC_500_FNLMS_APPLY_UPDATE_PM           40     PM_REGION;
+segment AEC_500_FNLMS_XBUF_UPDATE_PM            40     PM_REGION;
+segment AEC_500_FNLMS_PROCESS_PM                40     PM_REGION;
+segment AEC_500_DBL_TALK_CONTROL_PM             40     PM_REGION;
+segment AEC_500_RESIDUAL_ECHO_REDUCTION_PM      40     PM_REGION;
+segment AEC_500_COMFORT_NOISE_GENERATOR_PM      40     PM_REGION;
+segment AEC_500_FNLMS_INP_PREP                  50     PM_REGION, flash.code;
+segment AEC_500_FNLMS_ADAPT_PM                  50     PM_REGION, flash.code;
+segment AEC_500_FNLMS_XBUF_UPDATE_HEADSET_PM    50     PM_REGION, flash.code;
+segment AEC_500_FNLMS_XBUF_UPDATE_HANDSFREE_PM  50     PM_REGION, flash.code;
+segment AEC_500_DBL_TALK_CONTROL_HEADSET_PM     50     PM_REGION, flash.code;
+segment AEC_500_DBL_TALK_CONTROL_HANDSFREE_PM   50     PM_REGION, flash.code;
+
+segment AEC_500_DBL_TALK_UPDATE_FER_PM          50     PM_REGION, flash.code;
+segment AEC_500_DIVERGENCE_CONTROL_PM           50     PM_REGION, flash.code;
+
+segment AEC_500_DBL_TALK_UPDATE_L_RATSQG_PM     50     PM_REGION, flash.code;
+segment AEC_500_FDNLP_PM                        50     PM_REGION, flash.code;
+segment AEC_500_VECTOR_SORT_AND_CALC_MEAN_PM    50     PM_REGION, flash.code;
+segment AEC_500_VSM_PM                          50     PM_REGION, flash.code;
+segment AEC_500_CALC_ECHO_GAIN_PM               50     PM_REGION, flash.code;
+segment AEC_500_HD_APPLY_PM                     50     PM_REGION, flash.code;
+segment AEC_500_TEST_ACOUSTIC_THRESHOLD_PM      50     PM_REGION, flash.code;
+segment AEC_500_THRESHOLD_DETECTION_PM          50     PM_REGION, flash.code;
+
+segment AEC_500_RER_HEADSET_PM                  50     PM_REGION, flash.code;
+segment AEC_500_RER_HANDSFREE_PM                50     PM_REGION, flash.code;
+segment AEC_500_RER_ADFRNR_PM                   50     PM_REGION, flash.code;
+
+segment AEC_500_RERDT_RESET_PM                  1000   PM_REGION, flash.code;
+segment AEC_500_RERDT_DT_NZ_EST_PM              50     PM_REGION, flash.code;
+segment AEC_500_RERDT_DT_DET_PM                 50     PM_REGION, flash.code;
+segment AEC_500_RERDT_RER_PM                    50     PM_REGION, flash.code;
+
+segment SSR_INIT_PM                             1000   flash.code, PM_REGION;
+segment SSR_PROC_PM                             999    PM_REGION, flash.code;
+
+segment ASF_BF_INIT_PM                          1000   flash.code, PM_REGION;
+segment ASF_BF_PROC_PM                          40     PM_REGION, flash.code;
+

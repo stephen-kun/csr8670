@@ -1,0 +1,56 @@
+<custom>
+     <property type="integer" internalkey="USB_OUT_CBUFFER_SIZE" key="usboutbuffersize" format="definewithvalue" name="USB Output Audio Buffer Size" defaultvalue="512">
+            <description>
+                <![CDATA[
+                <B>Set USB output audio buffer size</B>
+                <P>Set the size of USB output audio buffer, measured in number of audio samples not bytes.</P>
+                <P>Recommended value - 512 words.</P>
+                ]]>
+           </description>
+    </property> 
+    
+    <property type="integer" internalkey="AUDIO_CBUFFER_SIZE" key="audiocbuffersize" format="definewithvalue" name="Audio Buffer Size" defaultvalue="320">
+        <description>
+            <![CDATA[
+            <B>Set audio output buffer size</B>
+            <P>Set the size of the audio output buffer, measured in number of audio samples not bytes.</P>
+            <P>Recommended value - 320 words.</P>
+            ]]>
+       </description>
+    </property>      
+
+    <property type="integer" internalkey="SPDIF_CBUFFER_SIZE" key="spdifcbuffersize" format="definewithvalue" name="Spdif Buffer Size" defaultvalue="1024">
+        <description>
+            <![CDATA[
+            <B>Set spdif input buffer size</B>
+            <P>Set the size of the spdif input buffer, measured in number of audio samples not bytes.</P>
+            <P>Recommended value - 1024 words.</P>
+            ]]>
+       </description>
+    </property>      
+
+    <property type="integer" internalkey="CODEC_CBUFFER_SIZE" key="codeccbuffersize" format="definewithvalue" name="Codec Buffer Size" defaultvalue="4096">
+        <description>
+            <![CDATA[
+            <B>Set codec input buffer size</B>
+            <P>Set the size of the codec input buffer, measured in number of 16 bit words ie 1 word = 2 bytes.</P>
+            <P>This parameter impacts the robustness of the decoder to jitter and its latency. Larger values are more
+            robust to jitter but have larger latency whilst smaller values have lower latency but are less robust to
+            jitter in the data rate achieved by the source.</P>
+            <P>Recommended values is 4096</P>
+            ]]>
+       </description>
+    </property>      
+    
+    <property type="list" key="debugmode" format="define" name="Debug mode" defaultvalue="0">
+        <option internalval="DEBUG_ON">On</option>
+        <option fake="">Off</option>
+        <description>
+           <![CDATA[
+           <B>Set <I>application</I> debug mode</B>
+           <P>Specify whether the <I>application</I> is in debug mode. Note this does not necessarily mean the libraries
+           will be in debug mode. However if any library debug features are to be used it <B>must</B> be set.</P>
+           ]]>
+        </description>
+    </property>
+</custom>

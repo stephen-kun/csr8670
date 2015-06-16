@@ -1,0 +1,59 @@
+chip gordon;
+
+/*   | Region Name                | Start Addr  | End Addr  | Type
+     +----------------------------+-------------+-----------+------- */
+region PM_REGION                    0x000000      0x002BFF    CODE;
+region PM_CACHE_REGION              0x002C00      0x002FFF    CODE;
+region DM1_REGION                   0x000000      0x007FFF    DATA;
+region DM2_REGION                   0xFF3000      0xFFAFFF    DATA;
+
+region PMFLASH_REGION               0x003000      0xFFFFFF    CODE;
+region DMFLASHWIN1_REGION           0xFFB000      0xFFBFFF    DATA;
+region DMFLASHWIN2_REGION           0xFFC000      0xFFCFFF    DATA;
+region DMFLASHWIN3_REGION           0xFFD000      0xFFDFFF    DATA;
+region DMFLASHWIN1_LARGE_REGION     0xD00000      0xDFFFFF    DATA;
+region DMFLASHWIN2_LARGE_REGION     0xE00000      0xEFFFFF    DATA;
+region DMFLASHWIN3_LARGE_REGION     0xF00000      0xFCFFFF    DATA;
+
+/* We map a flash window into this region.  It doesn't represent the physical address (an offset must be applied). */
+region DMFLASH_REGION               0x000000      0xFFFFFF    DATA;
+
+/*    | Overlay name                  | Region                    | Bit width
+      +-------------------------------+---------------------------+----------- */
+overlay flash.code                      PMFLASH_REGION              32;
+overlay flash.data16                    DMFLASHWIN1_LARGE_REGION    16;
+overlay flash.data24                    DMFLASHWIN2_LARGE_REGION    24;
+overlay flash.windowed_data16           DMFLASH_REGION              16;
+
+
+start $reset;
+
+/*    | Segment Name                  | Options             | Priority   | Regions    
+      +-------------------------------+---------------------+------------+----------- */
+segment DM1CIRC                         circular              10           DM1_REGION;
+segment DM1                                                   20           DM1_REGION;
+segment DM2CIRC                         circular              10           DM2_REGION;
+segment DM2                                                   20           DM2_REGION;
+segment DMCIRC                          balanced,circular     30           DM1_REGION, DM2_REGION;
+segment DM                              balanced              40           DM1_REGION, DM2_REGION;
+segment (overlay info)                  balanced              40           DM1_REGION, DM2_REGION;
+segment DMCONST16                                             10           flash.data16;
+segment DMCONST                                               10           flash.data24;
+segment DMCONST_WINDOWED16                                    10           flash.windowed_data16;
+
+
+segment DM_STATIC                       balanced              30           DM1_REGION, DM2_REGION;   /* temporary fix for DM_STATIC       */
+segment DM1CIRC_SCRATCH                 circular              30           DM1_REGION;               /* temporary fix for DM1CIRC_SCRATCH */
+segment DM2CIRC_SCRATCH                 circular              30           DM2_REGION;               /* temporary fix for DM2CIRC_SCRATCH */
+segment DM_SCRATCH                      balanced              30           DM1_REGION, DM2_REGION;   /* temporary fix for DM_SCRATCH      */
+segment DM1_SCRATCH                                           30           DM1_REGION;               /* temporary fix for DM1_SCRATCH     */
+segment DM2_SCRATCH                                           30           DM2_REGION;               /* temporary fix for DM2_SCRATCH     */
+
+
+segment PM_RST                                                10           PM_REGION;
+segment PM_ISR                                                20           PM_REGION;
+segment PM_RAM                                                30           PM_REGION;
+segment PM                                                    40           PM_REGION, flash.code;
+segment PM_FLASH                                              10           flash.code;
+
+

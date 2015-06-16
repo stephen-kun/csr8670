@@ -1,0 +1,8 @@
+/* Linkscript for the PLC100 library */
+
+segment PLC100_INITIAZLIZE_PM          1000        PM_REGION, flash.code;
+segment PLC100_PROCESS_PM              40          PM_REGION;
+segment PLC100_GET_CCF_PM              40          PM_REGION;
+segment PLC100_WAVE_MATCH_PM           40          PM_REGION;
+segment PLC100_OLAWIN_DM               40          DM1_REGION, DM2_REGION;
+segment PLC100_CONST_DM                40          DM1_REGION, DM2_REGION;

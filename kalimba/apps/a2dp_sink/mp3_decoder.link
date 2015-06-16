@@ -1,0 +1,7 @@
+/* Linkscript for the a2dp_sink application (mp3 variant) */
+
+/* same application segment assignments as sbc app */
+#include "sbc_decoder.link"
+
+/* Additional library segment overrides: precede statement with "override" qualifier 
+   to override a segment defined by a library */

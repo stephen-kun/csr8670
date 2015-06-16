@@ -1,0 +1,6 @@
+<workspace>
+ <project path="usb_dongle_8k_mono.xip" />
+ <project path="usb_dongle_16k_mono.xip" />
+ <project path="usb_dongle_48_to_16k_stereo.xip" />
+ <project path="usb_dongle_48_to_8k_stereo.xip" />
+</workspace>

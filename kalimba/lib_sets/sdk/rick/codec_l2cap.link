@@ -1,0 +1,8 @@
+/* Linkscript for the CODEC library */
+
+segment CODEC_STREAM_ENCODE_PM                               40          PM_REGION, flash.code;
+segment CODEC_STREAM_DECODE_PM                               40          PM_REGION, flash.code;
+segment CODEC_STREAM_DECODE_SYNC_PM                          40          PM_REGION, flash.code;
+segment CODEC_STREAM_RELAY_PM                                40          PM_REGION, flash.code;
+segment CODEC_WRITE_RTP_HEADER_PM                            40          PM_REGION, flash.code;
+segment CODEC_GET_ENCODED_FRAME_INFO_PM                      40          PM_REGION, flash.code;

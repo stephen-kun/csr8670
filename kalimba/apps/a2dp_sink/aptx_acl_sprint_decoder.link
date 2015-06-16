@@ -1,0 +1,11 @@
+/* Linkscript for the a2dp_sink application (aptx-ll variant) */
+
+/* same application segment assignments as sbc app */
+#include "sbc_decoder.link"
+
+/* Additional library segment overrides: precede statement with "override" qualifier 
+   to override a segment defined by a library */
+segment CONFIG_DAC_RESAMPLER_PM           40          flash.code;
+segment CONFIG_ADC_RESAMPLER_PM           40          flash.code;
+segment GET_APTX_LL_PARAMS_FROM_VM1_PM    40          flash.code;
+segment GET_APTX_LL_PARAMS_FROM_VM2_PM    40          flash.code;

@@ -1,0 +1,18 @@
+<project buildenvironment="{6907f3f0-0ed4-11d8-be02-0050dadfe87d}" buildenvironmentname="kalimba" executionenvironmentoption="BC03MM binutils" buildenvironmentoption="" executionenvironmentname="kalimba bccmd" executionenvironment="{2ca81310-0ecd-11d8-be02-0050dadfe87d}" >
+ <file path="mv_codec_encoder.h" />
+ <file path="mv_codec_encoder.asm" />
+ <file path="sample_rate_converter.asm" />
+ <properties currentconfiguration="Release" >
+  <configuration name="Release" >
+   <property key="LIB_SET" >sdk</property>
+   <property key="audiocbuffersize" >1024</property>
+   <property key="bootstrap" >0</property>
+   <property key="codeccbuffersize" >2048</property>
+   <property key="debugmode" >1</property>
+   <property key="debugtransport" >[SPITRANS=LPT SPIPORT=1]</property>
+   <property key="defines" >SELECTED_ENCODER_APTX, LOW_COMPLEXITY_SRC_FILTERx, WOODSTOCK, SPDIF_ENABLE</property>
+   <property key="hardware" >0</property>
+   <property key="libs" >core,cbops,math,codec,aptx,spdif_source_app</property>
+  </configuration>
+ </properties>
+</project>

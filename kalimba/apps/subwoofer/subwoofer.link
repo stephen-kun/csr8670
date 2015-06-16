@@ -1,0 +1,46 @@
+/* Linkscript for the a2dp_sink application (sbc variant) */
+
+/* Application segments: put infrequently run modules into flash.code region */
+segment MAIN_PM                           40          flash.code;
+segment AUDIO_IN_COPY_HANDLER_PM          40          PM_REGION;
+segment AUDIO_OUT_COPY_HANDLER_PM         40          PM_REGION;
+segment CODEC_COPY_HANDLER_PM             40          PM_REGION;
+segment CON_IN_COPY_HANDLER_PM            40          PM_REGION;
+segment TONE_COPY_HANDLER_PM              40          PM_REGION;
+segment GET_DAC_RATE_PM                   40          flash.code;
+segment SET_DAC_RATE_FROM_VM_PM           40          flash.code;
+segment SET_CODEC_RATE_FROM_VM_PM         40          flash.code;
+segment CONFIG_RATE_MATCHING_PM           40          flash.code;
+segment MASTER_APP_RESET_PM               40          flash.code;
+segment APPLY_WARP_RATE_PM                40          PM_REGION;
+segment MUTE_CONTROL_FUNC_PM              40          flash.code;
+segment MIPS_PROFILE_PM                   40          PM_REGION;
+segment COPY_CODEC_STATS_POINTERS_PM      40          flash.code;
+segment CONFIG_RESAMPLER_PM               40          flash.code;
+segment MUSIC_EXAMPLE_PROCESS_PM          40          flash.code;
+segment MUSIC_EXAMPLE_REINIT_PM           40          flash.code;
+segment MUSIC_EXAMPLE_PEQ_PM              40          flash.code;
+segment MUSIC_EXAMPLE_COMPANDER_PM        40          flash.code;
+segment MUSIC_EXAMPLE_MIX_PM              40          PM_REGION;
+segment MUSIC_EXAMPLE_POWER_UP_RESET_PM   40          flash.code;
+segment MUSIC_EXAMPLE_LOAD_DEFAULT_PARAMS_PM       40          flash.code;
+segment MUSIC_EXAMPLE_EXTRACT_FASTSTREAM_INFO_PM   40          flash.code;
+segment MUSIC_EXAMPLE_SPI_GETPARAMS_PM    40          flash.code;
+segment MUSIC_EXAMPLE_SPI_GETVERSION_PM   40          flash.code;
+segment MUSIC_EXAMPLE_SPI_REINIT_PM       40          flash.code;
+segment MUSIC_EXAMPLE_SPI_GETCONTROL_PM   40          flash.code;
+segment MUSIC_EXAMPLE_SPI_GETSTATUS_PM    40          flash.code;
+segment MUSIC_EXAMPLE_SRA_CALCRATE_PM     40          PM_REGION;
+segment MUSIC_EXAMPLE_SRA_TAGTIMES_PM     40          PM_REGION;
+segment MUSIC_EXAMPLE_STREAMCOPY_PM       40          PM_REGION;
+segment MUSIC_EXAMPLE_VM_SETMODE_PM       40          flash.code;
+segment MUSIC_EXAMPLE_VM_SETPARAM_PM      40          flash.code;
+segment MUSIC_EXAMPLE_VM_GETPARAM_PM      40          flash.code;
+segment MUSIC_EXAMPLE_VM_PING_PM          40          flash.code;
+segment MUSIC_EXAMPLE_VM_VOLUME_PM        40          flash.code;
+segment MUSIC_EXAMPLE_VM_LOADPARAMS_PM    40          flash.code;
+segment MUSIC_EXAMPLE_PSKEYREADHANDLER_PM 40          flash.code;
+
+/* Library segment overrides: precede statement with "override" qualifier
+   to override a segment defined by a library */
+

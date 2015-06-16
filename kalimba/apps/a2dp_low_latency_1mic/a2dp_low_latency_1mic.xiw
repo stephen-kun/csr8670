@@ -1,0 +1,4 @@
+<workspace>
+ <project path="a2dp_low_latency_1mic.xip" />
+ <project path="../../../../../../../../../../ADK2.5/apps/sink/sink.xip" />
+</workspace>
