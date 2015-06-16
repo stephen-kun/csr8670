@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>ReadMe for My First Kalimba Application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <style type="text/css">
+
+	h1,h2,h3,h4{font-family: arial;color: #0060a9}
+	body,a{font-family: arial}
+
+    </style>
+  </head>
+
+  <body>
+    <h1>ReadMe for My First Kalimba Application</h1>
+    <hr>
+    <p>
+      <a href="#Description">Description</a>
+      <br><a href="#Prerequisites">Prerequisites</a>
+      <br><a href="#RunningApplication">Running the Application</a>
+      <br><a href="#ConfigurationDetails">Configuration Details</a>
+      <br><a href="#AdditionalNotes">Additional Notes</a>
+      <br><a href="#IncludedFiles">Files Included in the Project</a>
+      <br><a href="#Troubleshooting">Troubleshooting</a>
+    </p>
+
+    <h2><a name="Description">Description</a></h2>
+    <p>
+      This example application consists of both DSP and VM software to implement a simple audio example using the Kalimba DSP.
+      The application routes audio from the development board mic/line inputs to the headset output.
+    <p>
+      <b>Note:</b> No Bluetooth functionality is required or invoked in this example.
+    </p>
+    <p>
+      This ReadMe is not intended to describe procedures that are covered in the xIDE user guide such as building projects in xIDE etc. For the detailed information on how to run the <code>my_first_dsp_app</code>, please refer to the application note CS-101420-AN.
+    </p>
+    <p>
+       For further information, please read the SDK support documentation or visit the CSR technical newsgroups (see <a href="http://news.csr.com"> http://news.csr.com</a>)
+
+     </p>
+
+    <h2><a name="Prerequisites">Prerequisites</a></h2>
+    <h3>Hardware requirements</h3>
+    <p>
+      This application requires:
+      <ul>
+        <li>A BlueCore Kalimba DSP development board with audio output support
+        (e.g. DEV-PC-1645 development board or CNS10001 development board) </li>
+        <li>A headset</li>
+	    <li>A host PC system with SPI data connection </li>
+      </ul>
+    </p>
+    <p>
+      To download the application to the BlueCore chip, an SPI connection is required between the development hardware and the PC hosting xIDE.
+    </p>
+    <h3>Software requirements</h3>
+    <p>
+      No additional software is required.
+    </p>
+
+    <h2><a name="RunningApplication">Quick Start</a></h2>
+    <ol>
+        <li>Open the <code>my_first_dsp_app</code> example workspace (<code>my_first_dsp_app.xiw</code>) in xIDE.</li>
+        <li>Select the <code>kalimba - 'my_first_dsp_app_kalimba'</code> project from the drop-down field in the toolbar in xIDE.</li>
+        <li>Build (<b>F7</b>) the application from within xIDE.</li>
+        <li><i>Alternatively, right-click on the <code>kalimba - 'my_first_dsp_app_kalimba'</code> project in the <b>Files</b> pane on the left hand side and select <b>Build</b></i>.</li>
+        <li>Select the <code>vm - my_first_dsp_app</code> project from the drop-down field, Build (<b>F7</b>) and then Run (<b>F5</b>) the
+           application.</li>
+	<li>The application should now play audio received at the mic/line inputs on the headset.</li>
+    </ol>
+    <h3>Controlling the Application</h3>
+    	Once executed the application runs until stopped, reset or powered down. This is a simple application and no control features are provided.
+
+    <h2><a name="ConfigurationDetails">Configuration Details</a></h2>
+    No specific application configuration is required.
+    <h3>PS Keys</h3>
+    <p>
+      Default PSKeys can be used.
+    </p>
+    <p>
+      Please use the 'Describe' feature in the supplied PSTool application for
+      more details about PS Keys.
+    </p>
+    <h2><a name="IncludedFiles">Files Included in the Project</a></h2>
+    <table border="1">
+      <tr><th width=300>File(s)</th><th width=600>Description</th></tr>
+      <tr><td><code>my_first_dsp_app.xiw</code></td><td>Main workspace file</td></tr>
+      <tr><td><code>my_first_dsp_app.xip</code></td><td>VM project file</td></tr>
+      <tr><td><code>my_first_dsp_app_kalimba.xip</code></td><td>DSP project file</td></tr>
+      <tr><td><code>main.c</code></td><td>VM application C code</td></tr>
+      <tr><td><code>my_first_dsp_app.asm</code></td><td>DSP application assembler code</td></tr>
+    </table>
+
+    <h2><a name="Troubleshooting">Troubleshooting</a></h2>
+    <table border="1">
+      <tr><th width=450>Symptom</th><th width=450>Suggested actions</th></tr>
+      <tr><td>No audio from headset</td><td>
+      <ol>
+      <li>Check the audio connections</i></li>
+      <li>Check the development board switch and jumper positions</i></li>
+      <li>Check VM and Kalimba are both running (from xIDE)</i></li>
+      </ol></td></tr>
+    </table>
+
+    <p>
+	    See <a href="..\..\TroubleshootingTheVMAndDSP.html">Troubleshooting the VM and DSP</a>.
+    </p>
+
+    <br><br><hr>
+    %%htmlcopyright(2010).<br>%%version
+  </body>
+</html>

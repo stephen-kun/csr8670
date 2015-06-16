@@ -1,0 +1,34 @@
+<project buildenvironment="{84faf732-1340-4049-9094-244167adf571}" buildenvironmentname="vm" executionenvironmentoption="" buildenvironmentoption="" executionenvironmentname="vm" executionenvironment="{2b2c6868-a56e-4266-962a-cddf1c979343}" >
+ <folder name="C Files" >
+  <extension name="c" />
+  <file path="ag_main.c" />
+  <file path="simple_ag_buttons.c" />
+  <file path="leds.c" />
+ </folder>
+ <folder name="Header Files" >
+  <extension name="h" />
+  <file path="simple_ag_buttons.h" />
+  <file path="leds.led" />
+  <file path="leds.h" />
+ </folder>
+ <file path="simple_ag_buttons.button" />
+ <file path="simple_ag.mak" />
+ <properties currentconfiguration="Release" >
+  <configuration name="Release" >
+   <property key="board" >1</property>
+   <property key="buildMatch" >(file):(line):</property>
+   <property key="buildtransport" >0</property>
+   <property key="debug" >1</property>
+   <property key="debugtransport" >[SPITRANS=LPT SPIPORT=1]</property>
+   <property key="defines" >DEV_PC_1645, xDEBUG_PRINT_ENABLED</property>
+   <property key="execution_mode" >0</property>
+   <property key="firmware" >0</property>
+   <property key="firmwareimage" ></property>
+   <property key="flashsize" >0</property>
+   <property key="libs" >bdaddr, codec, connection_no_ble, aghfp_wbs, region, service, audio, csr_tone_plugin, wbs, csr_common_example_plugin, audio_plugin_common, csr_i2s_audio_plugin, pio_common, pblock, csr_cvc_common_plugin</property>
+   <property key="output" ></property>
+   <property key="panic" >1</property>
+   <property key="stacksize" ></property>
+  </configuration>
+ </properties>
+</project>

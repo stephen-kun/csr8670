@@ -1,0 +1,9 @@
+image/a2dp_low_latency_1mic/a2dp_low_latency_1mic.kap
+image/a2dp_low_latency_2mic/a2dp_low_latency_2mic.kap
+image/cvc_handsfree/cvc_handsfree.kap
+image/cvc_handsfree_2mic/cvc_handsfree_2mic.kap
+image/cvc_headset/cvc_headset.kap
+image/cvc_headset_2mic/cvc_headset_2mic.kap
+image/faststream_decoder/faststream_decoder.kap
+image/sbc_decoder/sbc_decoder.kap
+image/vm.app

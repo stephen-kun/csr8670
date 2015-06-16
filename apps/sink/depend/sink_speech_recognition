@@ -1,0 +1,1 @@
+sink_speech_recognition.o: sink_speech_recognition.c

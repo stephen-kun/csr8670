@@ -1,0 +1,1 @@
+sink_input_manager.o: sink_input_manager.c

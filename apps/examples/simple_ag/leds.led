@@ -1,0 +1,28 @@
+//an example application which makes use of the ledparse
+//generated led functions
+
+//define some special led pins
+led 0 BLUE
+led 1 RED
+
+//define some patterns to be used
+
+pattern LEDS_OFF RPT
+    RED BLUE OFF 0
+
+pattern BLUE_ONE_SEC_ON_RPT    RPT
+    BLUE ON  1000
+    BLUE OFF 200    
+
+pattern BLUE_SHORT_ON_RPT  RPT
+    BLUE ON  200
+    BLUE OFF 200
+    
+
+
+pattern RED_BLUE_ALT_RPT_FAST    RPT
+    RED  ON  100
+    RED  OFF 0
+    BLUE ON  100
+    BLUE OFF 0    
+    

@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>ReadMe for the Blinking Lights Tutorial</title>
+        <style type="text/css">
+            h1,h2,h3,h4{font-family: arial;color: #0060a9}
+            body,a{font-family: arial}
+        </style>
+    </head><body>
+<h1>ReadMe for the Blinking Lights Tutorial</h1>
+<hr size="1">
+    <h2><a name="About This Tutorial">About this Tutorial</a></h2>
+        <p>This tutorial demonstrates the use of PIO lines as output for LEDs, starting with a simple single blinking LED 
+        and progressing to a sophisticated multi-pattern LED display using auto-generated code. This tutorial assumes basic knowledge of the C language.
+        </p>
+        <p>
+            This tutorial is divided into three parts:
+        </p>
+        <ol>
+            <li>Blinking Lights 1: Using Message Handlers and timed messages to make LEDs blink</li>
+            <li>Blinking Lights 2: The API for controlling dedicated LED supported by some BlueCore variants</li>
+            <li>Blinking Lights 3: Using a <code>.led</code> configuration file to auto-generate LED pattern display code</li>
+        </ol>
+
+        <p>
+            Each part is wrapped in a separate xIDE workspace (<code>bl_part<i>n</i>.xiw</code>) and contains the source code and ReadMe for a simple (in structure and functionality) and working example application. 
+        </p>
+        <p>
+            To start this tutorial, open <code>bl_part1</code> workspace (<code>tutorials/blinking_lights/bl_part1.xiw</code>) in xIDE.
+        </p>
+
+    <h2><a name="AdditionalNotes">Additional Notes</a></h2>
+
+    <ol>
+      <li>This top-level workspace and project is intentionally empty.</li>
+      <li>The tutorials contain code fragments from the provided source code files.</li>
+      <li>Part 1 requires devices with PIO-driven LEDs.</li>
+      <li>Part 2 requires devices with onboard (non-PIO driven) LED support.</li> 
+      <li>Part 3 requires devices with either PIO-driven LEDs or onboard (non-PIO driven) LED support (e.g. BlueCore5 modules).</li> 
+         </ol>
+<hr size="1">
+    Copyright Cambridge Silicon Radio Limited 2008-2014.<br>
+    Part of BlueLab-6.5.2-Release
+</body></html>

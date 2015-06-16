@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>ReadMe for the Blinking Lights Tutorial Part 1</title>
+        <style type="text/css">
+            h1,h2,h3,h4{font-family: arial;color: #0060a9}
+            body,a{font-family: arial}
+        </style>
+    </head><body>
+    <h1>ReadMe for the Blinking Lights Tutorial Part 1</h1>
+    <hr size="1">
+    <h2>Description</h2>
+    <p>
+        This tutorial demonstrates how to implement timed events and introduces
+        Peripheral Input/Output (PIO) functions for VM applications. PIOs are
+        often used for simple user interaction such as button presses or for
+        simple output such as flashing the LEDs.
+    </p>
+    <p>
+        The recommended hardware for this tutorial is a CaSiRA endpoint device with PIO-driven LEDs.
+     </p>
+
+    <h2>Code</h2>
+    <p>
+        This application makes two LEDs flash at different frequencies using
+        time delayed messages. The LEDs are controlled through the PIO pins.<br>
+    </p>
+
+    <p>
+        In order to use the PIO API, the <i>pio.h</i> header file must be included.<br>
+    </p>
+    <table border="1" width="100%"><tbody><tr><td><pre>
+
+    7:    #include &lt;message.h&gt;        
+    8:    #include &lt;pio.h&gt;        /* Peripheral Input/Output */
+    </pre></td></tr></tbody></table>
+    <p>
+        The PIOs are mapped to a register such that each bit is a Peripheral Input or Output pin, for example:<br>
+    </p>
+    <table border="2">
+    <tbody><tr><td><b>Bit</b>       </td><td> 8     </td><td> 7     </td><td> 6     </td><td> 5     </td><td> 4     </td><td> 3     </td><td> 2     </td><td> 1</td></tr>
+    <tr><td><b>Hex value</b> </td><td>0x80   </td><td> 0x40  </td><td> 0x20  </td><td> 0x10  </td><td> 0x08  </td><td> 0x04  </td><td> 0x02  </td><td> 0x01</td></tr>
+    </tbody></table>
+    
+    <p>
+        For this tutorial it is assumed that Pin 1 (0x01) and Pin 2 (0x02) are
+        attached to LEDs (as on a CaSiRa endpoint device). The frequency at which the LEDs
+        change state shall be set to 200 ms for the first LED (LED 1) and 400
+        ms for the second LED (LED 2).
+    </p>
+    <table border="1" width="100%"><tbody><tr><td><pre>
+ 
+    10:   #define LED1     0x01        /* bit 1 */
+    11:   #define DELAY1   200         /* ms */
+    12:
+    13:   #define LED2     0x02        /* bit 2 */
+    14:   #define DELAY2   400         /* ms */
+    </pre></td></tr></tbody></table><br>
+    <p>
+        A message handler is needed for each LED. Only the message handler for LED1 is shown here.
+    </p>
+    <table border="1" width="100%"><tbody><tr><td><pre>
+
+    16:   static void led_controller1( Task t, MessageId id, Message payload )
+    17:   {
+    18:      PioSet32( LED1, (PioGet32() ^ LED1) );
+    19:      MessageSendLater( t, 0, 0, DELAY1 );
+    20:   }
+
+    28:   static TaskData led_controller1_task = { led_controller1 };
+</pre></td></tr></tbody></table>
+    <p>
+        In the above code, the <code>PioSet32(&lt;pio&gt;, &lt;state&gt;)</code> function is used to set PIO 1. The state for the PIO is determined by using the <code>PioGet32(<pio>)</pio></code>
+        function to get the current state of all the PIO and then XORing that
+        with the LED 1 bit. This effectively toggles value of the bit each time
+        this message handler is called. 
+    </p>
+    <p>
+        The <code>MessageSendLater(&lt;task&gt;, &lt;id&gt;, &lt;payload&gt;, &lt;delay&gt;)</code> function is will then ensure that the message handler for LED 1 is called again after a delay of 200 MS (<code>DELAY1</code>).<br>
+    </p>
+    <p>
+        The message handler for LED 2 is identical except that the PIO bit is for 0x02 (<code>LED2</code>) and the delay is for 400 ms (<code>DELAY2</code>). <br>
+    </p>
+        <b>NOTE:</b> Normally, it is not considered good programming practice
+    to duplicate functions with only minor changes between them but this
+    has been done here to simplify the tutorial. 
+    </p>
+<table border="1" width="100%"><tbody><tr><td><pre>
+
+    32:  int main(void)
+    33:  {
+    34:      PioSetDir32(0xFF, 0xFF);         /* Set all PIO to be output */
+    35:      PioSet32(0xFF, 0);               /* Set all PIO off (0) */
+    36:  
+    37:      MessageSend( &amp;led_controller1_task, 0 , 0 );
+    38:      MessageSend( &amp;led_controller2_task, 0 , 0 );
+    39:      MessageLoop();
+    40:  
+    41:      return 0;
+    42:  }
+</pre></td></tr></tbody></table><br>
+    <p>
+        The <code>main()</code> function calls the <code>PioSetDir32()</code>
+        to set the direction of the pins as input or output. 1 sets a pin for
+        output and 0 for input. In this example they are all set as outputs.
+        Then <code>PioSet32()</code> is called to set all outputs to off (0).<br>
+    </p>
+    <p>
+        The <code>MessageSend()</code> calls send initial messages to the LED message handlers and then call the <code>MessageLoop()</code> function to start the message scheduler.<br>
+    </p>
+    <p>
+        When executing this application on a CaSiRa, LED 1 and 2 will flash on
+    and off. LED 1 will toggle at twice the frequency of LED 2.<br>
+    </p>
+    <p>
+
+    <h2>Summary</h2>
+        This tutorial demonstrates how to use <code>MessageSendLater()</code> to time application events and introduces basic Peripheral Output such as LEDs.<br>
+
+    <hr>
+    Copyright Cambridge Silicon Radio Limited 2008-2014.<br>
+    Part of BlueLab-6.5.2-Release
+</body></html>

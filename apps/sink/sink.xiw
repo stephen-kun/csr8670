@@ -1,0 +1,12 @@
+<workspace>
+ <project path="sink.xip" />
+ <project path="../../kalimba/apps/cvc_headset/cvc_headset.xip" />
+ <project path="../../kalimba/apps/cvc_headset_2mic/cvc_headset_2mic.xip" />
+ <project path="../../kalimba/apps/cvc_handsfree_2mic/cvc_handsfree_2mic.xip" />
+ <project path="../../kalimba/apps/cvc_handsfree/cvc_handsfree.xip" />
+ <project path="../../kalimba/apps/a2dp_sink/sbc_decoder.xip" />
+ <project path="../../kalimba/apps/a2dp_low_latency_2mic/a2dp_low_latency_2mic.xip" />
+ <project path="../../kalimba/apps/a2dp_low_latency_1mic/a2dp_low_latency_1mic.xip" />
+ <project path="../../kalimba/apps/a2dp_sink/spdif_sink.xip" />
+ <project path="../../kalimba/apps/a2dp_sink/faststream_decoder.xip" />
+</workspace>

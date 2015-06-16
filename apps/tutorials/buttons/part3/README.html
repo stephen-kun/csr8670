@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>Buttons Tutorial: Part 3</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <style type="text/css">
+
+	h1,h2,h3,h4{font-family: arial;color: #0060a9}
+	body,a{font-family: arial}
+
+    </style>
+  </head>
+
+  <body>
+    <h1>Buttons Tutorial: Part 3 - Button Handlers 2</h1>
+    <h4>Holding a button, holding and then releasing a button, and repeated messages whilst holding down a button</h4>
+    <hr>
+    
+    <h2><a name="about">About Part 3</a></h2>
+    <p>
+      Part 3 of this tutorial adds three common button use cases compared to
+      part 2. 
+    </p>
+    <p>
+      The simple button use cases described here are holding down a button,
+      holding down and then releasing a button, and repeated messages being issued whilst a 
+      button is pressed.
+    </p>
+
+    <h2><a name="code">The Code</a></h2>
+    <p>
+      Code fragments from Parts 1 and 2 can be re-used but to maintain the simplicity 
+of the code, old messages are replaced with the new ones.
+    </p>
+
+    <h3><a name="button"><code>part3_buttons.button</code></a></h3>
+    <p>
+      The button functionality is defined in the <code>part3_buttons.button</code>
+      file.
+    </p>
+    <p>
+      The structure of the button file is exactly same as in part 2, except that the messages
+      are different. Handling buttons really is that simple using the SDK
+      button interface as every single button event is... an event!
+    </p>
+    <p>
+      The <code>held</code> message is sent when the button has been pressed down
+      for the duration given as a parameter. All timeout are in
+      milliseconds, i.e. 2000 means 2 seconds and 500 means half a second.
+    </p>
+    <p>
+      In addition to the buttons defined in parts 1 and 2, this tutorial requires two buttons
+      to be held down instead of one. That is simply done by using two PIO names
+      instead of one.
+    </p>
+    <table border="1" width="100%"><tr><td><pre> 44: 
+ 47: // Send message AB_HELD when BUTTON_A and BUTTON_B are pressed for a second
+ 48: message AB_HELD
+ 49:     BUTTON_A BUTTON_B   held 1000
+ 50: </pre></td></tr></table>
+
+    <p>
+      The <code>held_release</code> message is sent when the button is released
+      after being pressed down for the duration given as a parameter.
+    </p>
+    <table border="1" width="100%"><tr><td><pre> 48: 
+ 51: // Send message A_HELD_RELEASE when BUTTON_A is released after being pressed
+ 52: // for at least 3 seconds.
+ 53: // Note: a sent 'held' message cancels any further 'held_release' messages.
+ 54: message A_HELD_RELEASE
+ 55:     BUTTON_A    held_release 3000
+ 56: </pre></td></tr></table>
+
+    <p>
+      The <code>repeat</code> keyword is used to repeat the message periodically as long 
+as the original message conditions are met. The time between individual messages are given as a parameter.
+    </p>
+    <table border="1" width="100%"><tr><td><pre> 54: 
+ 57: // Send message B_HELD when BUTTON_B has been pressed for a second
+ 58: // Repeat the message every second button is still held
+ 59: message B_HELD
+ 60:     BUTTON_B    held 1000
+ 61:     BUTTON_B    repeat 1000
+ 62: </pre></td></tr></table>
+
+    <h3><a name="main"><code>main.c</code></a></h3>
+    <p>
+      The only changes that are required in the main application are for the handling
+of the the new messages.
+    </p>
+
+    <h2><a name="test">Testing the Application</a></h2>
+    <p>
+      This application only reacts to changes on PIO 0 (Button A) and PIO 1
+      (Button B). A message is sent when either
+    </p>
+    <ul>
+      <li>Both buttons A and B has been pressed down for a second,</li>
+      <li>Button A has been pressed at least 3 seconds and is then released,
+        or </li>
+      <li>Button B has been pressed down for a second, or kept pressed down
+        for a second since the last message.</li>
+    </ul>
+
+    <p>
+      As button messages are automatically handled based on very simple
+      criteria, there may be situations where more complex uses cases must be
+      handled. That does not mean that everything must be handled manually, as
+      in part 1, but only the complex buttons are handled separately. This
+      approach is described in part 4 of the tutorial (<code>buttons/part4.xiw</code>).
+    </p>
+
+    <br><br><hr>
+    Copyright Cambridge Silicon Radio Limited 2005-2014.<br>
+    Part of BlueLab-6.5.2-Release
+  </body>
+</html>

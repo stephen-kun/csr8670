@@ -1,0 +1,354 @@
+<custom>
+	<property type="list" key="battery_operation" format="define" name="Battery Operation" defaultvalue="1">
+       <option fake="">Disabled</option>
+       <option internalval="ENABLE_BATTERY_OPERATION">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable support for Battery operation
+           ]]>
+        </description>
+   </property>   
+   <property type="list" key="config_storage" format="define" name="Config type." defaultvalue="1">
+       <option internalval="ENABLE_PSKEY_CONFIG">PS Keys only</option>
+       <option internalval="ENABLE_FILE_CONFIG">File system only</option>
+       <option internalval="ENABLE_FILE_CONFIG -DENABLE_PSKEY_CONFIG">PS Keys and File system</option>
+       <description>
+           <![CDATA[
+           Configures where the static configuration settings will be stored.
+           
+           File system (default)-  files containing static configuration are stored within the   
+                          onchip file system. In this mode more PS Keys are free for other use.
+                          PS Keys are still used for config updated by the application.
+                          
+		   PS Keys - The configuration will be stored entirely in PS Keys.
+           
+           File system and PS Keys - Both methods of configuration storage are enabled.  
+                     A configuration in PS takes priority over that stored in the File system.
+           ]]>
+       </description>
+   </property>   
+   <property type="list" key="device_id_pskey" format="define" name="Device ID PS Key" defaultvalue="1">
+        <option fake="">Disabled</option>
+        <option internalval="DEVICE_ID_PSKEY">Enabled</option>
+        <description>
+           <![CDATA[
+           Enable Device ID Profile (DIP). 
+		   Allows for PS configurable Device Id information, from PSKEY_DEVICE_ID, 
+		   but requires permanent use of a memory pool to hold the SDP record
+           ]]>
+        </description>
+   </property>
+   <property type="list" key="enable_ble" format="define" name="Enable BLE" defaultvalue="0">
+      <option internalval="BLE_DISABLED">BLE Disabled</option>
+      <option internalval="BLE_ENABLED">BLE Enabled</option>
+      <description>
+           <![CDATA[
+           Enable BLE (Bluetooth SMART) for the device.
+           
+           This define states whether BLE will be enabled or disabled for 
+           the device. Please note that when BLE is disabled for the device, certain
+           sub-features that rely on the BLE transport will also be disabled.
+           [0]= Disable BLE
+           [1]= Enable BLE
+           ]]>
+      </description>
+   </property>
+   <property type="list" key="enable_gatt" format="define" name="Enable GATT" defaultvalue="0">
+      <option internalval="GATT_DISABLED">GATT Disabled</option>
+      <option internalval="GATT_CLIENT_ENABLED">GATT Client Enabled</option>
+      <option internalval="GATT_SERVER_ENABLED">GATT Server Enabled</option>
+      <description>
+           <![CDATA[
+           Enable GATT support for the device.
+           
+           This define states whether GATT will be enabled or disabled for 
+           the device; this application only supports GATT implementations where
+           the device can either be a GATT server offering GATT services or as a
+           GATT client being able to parse services offered on remote GATT servers.
+           [0]= Disable GATT
+           [1]= Register device as a GATT Client
+           [2]= Register device as a GATT Server
+           ]]>
+      </description>
+   </property>
+    <property type="list" key="enable_gatt_bas" format="define" name="GATT Battery Service" defaultvalue="0">
+      <option internalval="GATT_SERVER_BAS_DISABLED">GATT Server: BAS Disabled</option>
+      <option internalval="GATT_SERVER_BAS_ENABLED">GATT Server: BAS Enabled</option>
+      <description>
+           <![CDATA[
+           Enable GATT Battery Service (BAS) for the device.
+           
+           This define states whether the GATT Battery Service will be 
+           enabled or disabled for the device. If "Enable GATT" option is not
+           set to "GATT Server Enabled", this option will be ignored.
+           [0]= Disable BAS
+           [1]= Enable BAS
+           ]]>
+      </description>
+   </property>
+   <property type="list" key="enable_ir_remote" format="define" name="Infrared Remote support" defaultvalue="1">
+       <option fake="">Disabled</option>
+       <option internalval="ENABLE_IR_REMOTE">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable support for Infrared remote controllers. CSR8670 only.
+           ]]>
+       </description>
+   </property>
+   <property type="list" key="enable_capsense" format="define" name="Capsense" defaultvalue="1">
+       <option fake="">Disabled</option>
+       <option internalval="ENABLE_CAPSENSE">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable Capacitive touch sensors. CSR8670 only.
+           ]]>
+       </description>
+   </property>
+   <property type="list" key="enable_avrcp" format="define" name="AVRCP" defaultvalue="1">
+       <option fake="">Disabled</option>
+       <option internalval="ENABLE_AVRCP">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable Audio/Video Remote Control Profile (AVRCP).
+           ]]>
+       </description>
+   </property>
+   <property type="list" key="enable_avrcp_now_playing" format="define" name="AVRCP Now Playing" defaultvalue="0">
+       <option fake="">Disabled</option>
+       <option internalval="ENABLE_AVRCP_NOW_PLAYING">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable Now Playing functionality of AVRCP 1.5.
+           ]]>
+       </description>
+   </property>   
+   <property type="list" key="enable_avrcp_player_app" format="define" name="AVRCP Player App" defaultvalue="0">
+       <option fake="">Disabled</option>
+       <option internalval="ENABLE_AVRCP_PLAYER_APP_SETTINGS">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable Player Application Settings functionality of AVRCP 1.5.
+           ]]>
+       </description>
+   </property> 
+      <property type="list" key="enable_avrcp_browsing" format="define" name="AVRCP Browsing" defaultvalue="0">
+       <option fake="">Disabled</option>
+       <option internalval="ENABLE_AVRCP_BROWSING">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable Browsing functionality of AVRCP 1.5.
+           ]]>
+       </description>
+   </property>   
+   <property type="list" key="include_dsp" format="define" name="Use DSP for SCO" defaultvalue="1">
+       <option fake="">Disabled</option>
+       <option internalval="INCLUDE_DSP">Enabled</option>
+       <description>
+           <![CDATA[
+           Configures the DSP to be used for SCO connections
+           ]]>
+       </description>
+   </property>   
+   <property type="list" key="include_cvc" format="define" name="cVc" defaultvalue="1">
+       <option fake="">Disabled</option>
+       <option internalval="INCLUDE_CVC">Enabled</option>
+       <description>
+           <![CDATA[
+           Configures sink.mak to copy cVc applications into the image directory.  Further cVc configuration can be done in the Sink Confiuguration Tool and the Universal Front End.  
+           
+           Note if using cVc a license key must be used before SCO audio will be heard.
+           ]]>
+       </description>
+   </property>
+   <property type="list" key="three_way_calling" format="define" name="Three Way Calling" defaultvalue="1">
+       <option fake="">Disabled</option>
+       <option internalval="THREE_WAY_CALLING">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable Three Way Calling.
+           ]]>
+       </description>
+   </property>
+   <property type="list" key="enable_soundbar" format="define" name="SOUNDBAR" defaultvalue="0">
+       <option fake="">Disabled</option>
+       <option internalval="ENABLE_SOUNDBAR">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable Soundbar features 
+           ]]>
+       </description>
+   </property>
+   <property type="list" key="enable_subwoofer" format="define" name="Subwoofer Link" defaultvalue="0">
+       <option fake="">Disabled</option>
+       <option internalval="ENABLE_SUBWOOFER">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable support for connections to a subwoofer device (SOUNDBAR must also be enabled)
+           ]]>
+       </description>
+   </property>
+  <property type="list" key="enable_partymode" format="define" name="Party Mode" defaultvalue="0">
+       <option fake="">Disabled</option>
+       <option internalval="ENABLE_PARTYMODE">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable support for party mode (SOUNDBAR must also be enabled)
+           ]]>
+       </description>
+   </property>
+   <property type="list" key="enable_usb" format="define" name="USB" defaultvalue="0">
+       <option fake="">Disabled</option>
+       <option internalval="ENABLE_USB">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable USB functionality.
+           ]]>
+       </description>
+   </property>
+   <property type="list" key="enable_usb_audio" format="define" name="USB Audio" defaultvalue="0">
+       <option fake="">Disabled</option>
+       <option internalval="ENABLE_USB_AUDIO">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable USB Audio functionality.
+           ]]>
+       </description>
+   </property>
+   <property type="list" key="copy_usb_ms_readme" format="define" name="USB MS Readme" defaultvalue="0">
+       <option fake="">Disabled</option>
+       <option internalval="COPY_USB_MS_README">Enabled</option>
+       <description>
+           <![CDATA[
+           Headet.mak directive that copies the example USB mass storage 
+		   files into the filesystem
+           ]]>
+       </description>
+   </property>
+   <property type="list" key="enable_speech_regcognition" format="define" name="Speech Recognition" defaultvalue="0">
+       <option fake="">Disabled</option>
+       <option internalval="ENABLE_SPEECH_RECOGNITION">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable Speech recognition.
+           ]]>
+       </description>
+   </property>
+   <property type="list" key="enable_wired" format="define" name="Wired Audio" defaultvalue="0">
+       <option fake="">Disabled</option>
+       <option internalval="ENABLE_WIRED">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable Wired Audio support.
+           ]]>
+       </description>
+   </property>
+   <property type="list" key="enable_fm" format="define" name="FM Audio" defaultvalue="0">
+       <option fake="">Disabled</option>
+       <option internalval="ENABLE_FM">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable FM Audio support.
+           ]]>
+       </description>
+   </property>
+   <property type="list" key="enable_fm_rds" format="define" name="FM Audio RDS" defaultvalue="0">
+       <option fake="">Disabled</option>
+       <option internalval="ENABLE_FM_RDS">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable FM Audio RDS support.
+           ]]>
+       </description>
+   </property>
+    <property type="list" key="enable_pbap" format="define" name="PBAP" defaultvalue="0">
+       <option fake="">Disabled</option>
+       <option internalval="ENABLE_PBAP">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable Phone Book Access Profile (PBAP) features.
+           ]]>
+       </description>
+   </property>
+   <property type="list" key="enable_gaia" format="define" name="GAIA" defaultvalue="0">
+       <option fake="">Disabled</option>
+       <option internalval="ENABLE_GAIA">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable Generic Application Interface Architecture (GAIA). 
+           ]]>
+       </description>
+   </property>
+   <property type="list" key="enable_gaia_spp" format="define" name="GAIA SPP" defaultvalue="0">
+       <option fake="">Disabled</option>
+       <option internalval="ENABLE_GAIA_SPP">Enabled</option>
+       <description>
+           <![CDATA[
+           Use SPP instead of RFCOMM for the GAIA service. 
+           ]]>
+       </description>
+   </property>
+   <property type="list" key="enable_gaia_persistent_user_eq_bank" format="define" name="GAIA_PERSISTENT_EQ" defaultvalue="0">
+       <option fake="">Disabled</option>
+       <option internalval="ENABLE_GAIA_PERSISTENT_USER_EQ_BANK">Enabled</option>
+       <description>
+           <![CDATA[
+           Store User Defined EQ Bank 1 Settings in Persistent Storage for the GAIA service. Compiler flags for GAIA service must be enabled alongside this flag for this feature to be enabled.  
+           ]]>
+       </description>
+   </property>
+   <property type="list" key="enable_mapc" format="define" name="MAP" defaultvalue="0">
+       <option fake="">Disabled</option>
+       <option internalval="ENABLE_MAPC">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable Message Access Profile (MAP) features. 
+           ]]>
+       </description>
+   </property>    
+   <property type="list" key="enable_display" format="define" name="Display" defaultvalue="0">
+       <option fake="">Disabled</option>
+       <option internalval="ENABLE_DISPLAY">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable Display (e.g. CNS10010v1 add on board).
+           ]]>
+       </description>
+   </property>       
+   <property type="list" key="include_a2dp_extra_codecs" format="define" name="Extra Codec" defaultvalue="0">
+       <option fake="">Disabled</option>
+       <option internalval="INCLUDE_A2DP_EXTRA_CODECS">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable support for the A2DP codecs MP3, AAC and aptX.
+           ]]>
+       </description>
+   </property>      
+   <property type="list" key="include_aptx_acl_sprint" format="define" name="aptX Sprint" defaultvalue="0">
+       <option fake="">Disabled</option>
+       <option internalval="INCLUDE_APTX_ACL_SPRINT">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable support for the A2DP codec aptX Low Latency variant.
+           ]]>
+       </description>
+   </property>      
+   <property type="list" key="include_faststream" format="define" name="Faststream" defaultvalue="0">
+       <option fake="">Disabled</option>
+       <option internalval="INCLUDE_FASTSTREAM">Enabled</option>
+       <description>
+           <![CDATA[
+           Enable support for the A2DP Faststream variant.
+           ]]>
+       </description>
+   </property>      
+   <property type="list" key="enable_peer_device" format="define" name="Peer Device Support" defaultvalue="0">
+       <option fake="">Disabled</option>
+       <option internalval="ENABLE_PEER -DPEER_AS -DPEER_AVRCP">Audio Sharing</option>
+       <option internalval="ENABLE_PEER -DPEER_TWS -DPEER_AVRCP">True Wireless</option>
+       <description>
+           <![CDATA[
+           Enable support for connections to peer devices.
+           ]]>
+       </description>
+   </property>
+</custom>

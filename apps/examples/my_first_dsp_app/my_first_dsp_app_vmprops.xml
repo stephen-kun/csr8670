@@ -1,0 +1,11 @@
+<custom> 
+   <property type="list" key="config_storage" format="define" name="Development board" defaultvalue="1">
+       <option internalval="H13179V2">H13179v2</option>
+       <option internalval="CNS10001V4">CNS10001v4</option>
+       <description>
+           <![CDATA[
+           Configures the CSR BlueCore development board in use.
+           ]]>
+       </description>
+   </property>   
+</custom>

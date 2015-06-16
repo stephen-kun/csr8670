@@ -1,0 +1,12 @@
+<project buildenvironment="{6907f3f0-0ed4-11d8-be02-0050dadfe87d}" buildenvironmentname="kalimba" executionenvironmentoption="BC03MM" buildenvironmentoption="" executionenvironmentname="kalimba bccmd" executionenvironment="{2ca81310-0ecd-11d8-be02-0050dadfe87d}" >
+ <file path="my_second_dsp_app.asm" />
+ <file path="user_code.h" />
+ <properties currentconfiguration="Release" >
+  <configuration name="Release" >
+   <property key="buildMatch" >(?:ERROR|FATAL|WARNING|MESSAGE):\s+(file)\s+(line):</property>
+   <property key="debugtransport" >[SPI|LPT1|No]</property>
+   <property key="defines" >xFIR_HPF</property>
+   <property key="libs" >core,cbops,fir_gdn</property>
+  </configuration>
+ </properties>
+</project>

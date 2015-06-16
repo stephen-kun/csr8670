@@ -1,0 +1,40 @@
+// ********************   EXAMPLE CVC CONFIGURATION    ********************//
+// *********** Immediate Failure with Invalid CVC security key ************//
+//
+// IMPORTANT - PLEASE READ
+//
+//
+// IT IS YOUR RESPONSIBILITY TO ENSURE THAT THIS KEY FILE IS THE VALID AND
+// PROPER KEY FILE TO BE USED WITH YOUR VERSION OF CVC IN YOUR SYSTEM.
+// PLEASE TEST AS NECESSARY TO ENSURE THIS IS THE CASE. IF YOU ENCOUNTER
+// DIFFICULTIES PLEASE CONTACT CSR BEFORE THE KEY FILE/CVC IS IMPLEMENTED
+// INTO PRODUCT.
+//
+// TO THE FULLEST EXTENT PERMITTED BY LAW CSR ACCEPTS NO RESPONSIBILITY
+// AND/OR LIABILITY FOR THE ATTEMPTED USE OF INCOMPATBLE KEY FILES WITH CVC.
+//
+// Notes: 
+//
+// GENERAL:
+// If this psr file is used as is without a valid cvc security key the
+// cvc will promptly mute the audio and switch to standby.
+//
+//
+// DEFAULT:        
+// This example setting is used for best performance. All cvc major modules are 
+// enabled. Product tuning is required to achieve maximum performance.
+//
+//**************************************************************************************//
+
+
+// PSKEY_DSP44 = CVC Configuration for DEFAULT
+&2284 = 2284 0000 0001 0000
+
+
+//***************************************************************************************//
+// PLEASE OBTAIN VALID CVC SECURITY KEY FROM CSR SALES OFFICE
+// PSKEY_DSP48 = CVC Security Key location
+// &2288 = xxxx xxxx xxxx xxxx xxxx 
+// THE VALID SECURITY KEY CAN ALSO BE ENTERED USING THE PARAMETER MANAGER TOOL TO THE
+// ABOVE LOCATION. REMEMBER TO RESET THE DSP TO APPLY THE CHANGES. 
+//***************************************************************************************//

@@ -1,0 +1,1109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ConfigSet Product="Source"
+           Version="2">
+    
+    <ConfigGroup Id="Audio"
+                 Node="Basic">
+        <ConfigGroup Id="Input Type"
+                     Node="Basic">
+            <ConfigItem
+                Id="Input Source"
+                ShortId="featuresInputSource"
+                Desc="Configure the audio input source."
+                Type="enum"
+                PSKey="Text=PSKEY_USR3,Address=0x28d,Word=1,Bit=12,Size=4">
+                <enum key="USB"
+                      value="0"/>
+                <enum key="Analogue"
+                      value="1"/>
+                <enum key="SPDIF"
+                      value="2"/>
+            </ConfigItem>
+        </ConfigGroup>
+    </ConfigGroup>
+
+    <ConfigGroup Id="Battery"
+                 Node="Basic">
+        <ConfigGroup Id="Vref Reference Voltage Configuration"
+                     Node="Basic">
+            <ConfigItem
+                Id="VREF ADC Source"
+                ShortId="PRVrefAdcSource"
+                Desc="The VREF ADC source."
+                Type="enum"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=1,Bit=8,Size=8">
+                <enum key="AIO0"
+                      value="0"/>
+                <enum key="AIO1"
+                      value="1"/>
+                <enum key="AIO2"
+                      value="2"/>
+                <enum key="AIO3"
+                      value="3"/>
+                <enum key="VREF"
+                      value="4"/>
+                <enum key="VDD_BATT"
+                      value="5"/>
+                <enum key="BYP_VREGIN"
+                      value="6"/>
+                <enum key="VDD_SENSE"
+                      value="7"/>
+                <enum key="VREGEN"
+                      value="8"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="VREF Measurement Interval when charging [s]"
+                ShortId="PRVrefMeasurementIntervalCharging"
+                Desc="Interval (in seconds) between measurements when charging."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=1,Bit=0,Size=8"/>
+            <ConfigItem
+                Id="VREF Measurement Interval when not charging [s]"
+                ShortId="PRVrefMeasurementIntervalNotCharging"
+                Desc="Interval (in seconds) between measurements when not charging."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=2,Bit=0,Size=16"/>
+        </ConfigGroup>
+        <ConfigGroup Id="Vbat Battery Voltage Monitoring"
+                     Node="Basic">
+            <ConfigItem
+                Id="VBAT ADC Source"
+                ShortId="PRVbatAdcSource"
+                Desc="The VBAT ADC source."
+                Type="enum"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=3,Bit=8,Size=8">
+                <enum key="AIO0"
+                      value="0"/>
+                <enum key="AIO1"
+                      value="1"/>
+                <enum key="AIO2"
+                      value="2"/>
+                <enum key="AIO3"
+                      value="3"/>
+                <enum key="VREF"
+                      value="4"/>
+                <enum key="VDD_BATT"
+                      value="5"/>
+                <enum key="BYP_VREGIN"
+                      value="6"/>
+                <enum key="VDD_SENSE"
+                      value="7"/>
+                <enum key="VREGEN"
+                      value="8"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="VBAT Measurement Interval when charging [s]"
+                ShortId="PRVbatMeasurementIntervalCharging"
+                Desc="Interval (in seconds) between measurements when charging."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=3,Bit=0,Size=8"/>
+            <ConfigItem
+                Id="VBAT Measurement Interval when not charging [s]"
+                ShortId="PRBatMeasurementIntervalNotCharging"
+                Desc="Interval (in seconds) between measurements when not charging."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=4,Bit=0,Size=16"/>
+            <ConfigItem
+                Id="VBAT Notify Period 1 [mins]"
+                ShortId="PRVBatNotifyPeriod1"
+                Desc="Interval (in minutes) between notifications (0 to disable)."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=5,Bit=8,Size=8"/>
+            <ConfigItem
+                Id="VBAT Limit 1"
+                ShortId="PRVbatLimit1"
+                Desc="Battery Voltage Threshold (mV/POWER_VSCALE). 0xFF to indicate Limit End."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=5,Bit=0,Size=8"/>
+            <ConfigItem
+                Id="VBAT Notify Period 2 [mins]"
+                ShortId="PRVBatNotifyPeriod2"
+                Desc="Interval (in minutes) between notifications (0 to disable)."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=6,Bit=8,Size=8"/>
+            <ConfigItem
+                Id="VBAT Limit 2"
+                ShortId="PRVbatLimit1"
+                Desc="Battery Voltage Threshold (mV/POWER_VSCALE). 0xFF to indicate Limit End."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=6,Bit=0,Size=8"/>
+            <ConfigItem
+                Id="VBAT Notify Period 3 [mins]"
+                ShortId="PRVBatNotifyPeriod1"
+                Desc="Interval (in minutes) between notifications (0 to disable)."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=7,Bit=8,Size=8"/>
+            <ConfigItem
+                Id="VBAT Limit 3"
+                ShortId="PRVbatLimit1"
+                Desc="Battery Voltage Threshold (mV/POWER_VSCALE). 0xFF to indicate Limit End."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=7,Bit=0,Size=8"/>
+            <ConfigItem
+                Id="VBAT Notify Period 4 [mins]"
+                ShortId="PRVBatNotifyPeriod1"
+                Desc="Interval (in minutes) between notifications (0 to disable)."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=8,Bit=8,Size=8"/>
+            <ConfigItem
+                Id="VBAT Limit 4"
+                ShortId="PRVbatLimit1"
+                Desc="Battery Voltage Threshold (mV/POWER_VSCALE). 0xFF to indicate Limit End."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=8,Bit=0,Size=8"/>
+            <ConfigItem
+                Id="VBAT Notify Period 5 [mins]"
+                ShortId="PRVBatNotifyPeriod1"
+                Desc="Interval (in minutes) between notifications (0 to disable)."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=9,Bit=8,Size=8"/>
+            <ConfigItem
+                Id="VBAT Limit 5"
+                ShortId="PRVbatLimit1"
+                Desc="Battery Voltage Threshold (mV/POWER_VSCALE). 0xFF to indicate Limit End."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=9,Bit=0,Size=8"/>
+            <ConfigItem
+                Id="VBAT Notify Period 6 [mins]"
+                ShortId="PRVBatNotifyPeriod1"
+                Desc="Interval (in minutes) between notifications (0 to disable)."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=10,Bit=8,Size=8"/>
+            <ConfigItem
+                Id="VBAT Limit 6"
+                ShortId="PRVbatLimit1"
+                Desc="Battery Voltage Threshold (mV/POWER_VSCALE). 0xFF to indicate Limit End."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=10,Bit=0,Size=8"/>
+        </ConfigGroup>
+        <ConfigGroup Id="Vthm Thermistor Configuration"
+                     Node="Basic">
+            <ConfigItem
+                Id="VTHM ADC Source"
+                ShortId="PRVthmAdcSource"
+                Desc="The VTHM ADC source."
+                Type="enum"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=11,Bit=8,Size=8">
+                <enum key="AIO0"
+                      value="0"/>
+                <enum key="AIO1"
+                      value="1"/>
+                <enum key="AIO2"
+                      value="2"/>
+                <enum key="AIO3"
+                      value="3"/>
+                <enum key="VREF"
+                      value="4"/>
+                <enum key="VDD_BATT"
+                      value="5"/>
+                <enum key="BYP_VREGIN"
+                      value="6"/>
+                <enum key="VDD_SENSE"
+                      value="7"/>
+                <enum key="VREGEN"
+                      value="8"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="VTHM Measurement Interval when charging [s]"
+                ShortId="PRVthmMeasurementIntervalCharging"
+                Desc="Interval (in seconds) between measurements when charging."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=11,Bit=0,Size=8"/>
+            <ConfigItem
+                Id="VTHM Measurement Interval when not charging [s]"
+                ShortId="PRVthmMeasurementIntervalNotCharging"
+                Desc="Interval (in seconds) between measurements when not charging."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=12,Bit=0,Size=16"/>
+            <ConfigItem
+                Id="VTHM Delay [ms]"
+                ShortId="PRVthmDelay"
+                Desc="Delay (ms) between setting PIO and reading ADC."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=13,Bit=12,Size=4"/>
+            <ConfigItem
+                Id="VTHM Raw Limits"
+                ShortId="PRVthmRawLimits"
+                Desc="Set limits in ADC counts rather than voltage."
+                Type="enum"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=13,Bit=6,Size=1">
+                <enum key="Set limits in voltage"
+                      value="0"/>
+                <enum key="Set limits in ADC counts"
+                      value="1"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="VTHM Drive PIO"
+                ShortId="PRVthmDrivePio"
+                Desc="Drive thermistor from a PIO."
+                Type="enum"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=13,Bit=5,Size=1">
+                <enum key="No PIO driven"
+                      value="0"/>
+                <enum key="Drive PIO"
+                      value="1"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="VTHM PIO"
+                ShortId="PRVthmPio"
+                Desc="PIO to use to drive thermistor."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=13,Bit=0,Size=4"/>
+            <ConfigItem
+                Id="VTHM Limits 1"
+                ShortId="PRVthmLimits1"
+                Desc="Voltage Thresholds (mV/ADC Counts). ffff = Last Entry."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=14,Bit=0,Size=16"/>
+            <ConfigItem
+                Id="VTHM Limits 2"
+                ShortId="PRVthmLimits2"
+                Desc="Voltage Thresholds (mV/ADC Counts). ffff = Last Entry."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=15,Bit=0,Size=16"/>
+            <ConfigItem
+                Id="VTHM Limits 3"
+                ShortId="PRVthmLimits3"
+                Desc="Voltage Thresholds (mV/ADC Counts). ffff = Last Entry."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=16,Bit=0,Size=16"/>
+            <ConfigItem
+                Id="VTHM Limits 4"
+                ShortId="PRVthmLimits4"
+                Desc="Voltage Thresholds (mV/ADC Counts). ffff = Last Entry."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=17,Bit=0,Size=16"/>
+            <ConfigItem
+                Id="VTHM Limits 5"
+                ShortId="PRVthmLimits5"
+                Desc="Voltage Thresholds (mV/ADC Counts). ffff = Last Entry."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=18,Bit=0,Size=16"/>
+            <ConfigItem
+                Id="VTHM Limits 6"
+                ShortId="PRVthmLimits6"
+                Desc="Voltage Thresholds (mV/ADC Counts). ffff = Last Entry."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=19,Bit=0,Size=16"/>
+            <ConfigItem
+                Id="VTHM Limits 7"
+                ShortId="PRVthmLimits7"
+                Desc="Voltage Thresholds (mV/ADC Counts). ffff = Last Entry."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=20,Bit=0,Size=16"/>
+        </ConfigGroup>
+        <ConfigGroup Id="Vchg Charger Configuration"
+                     Node="Basic">
+            <ConfigItem
+                Id="VCHG ADC Source"
+                ShortId="PRVchgAdcSource"
+                Desc="The VCHG ADC source."
+                Type="enum"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=21,Bit=8,Size=8">
+                <enum key="AIO0"
+                      value="0"/>
+                <enum key="AIO1"
+                      value="1"/>
+                <enum key="AIO2"
+                      value="2"/>
+                <enum key="AIO3"
+                      value="3"/>
+                <enum key="VREF"
+                      value="4"/>
+                <enum key="VDD_BATT"
+                      value="5"/>
+                <enum key="BYP_VREGIN"
+                      value="6"/>
+                <enum key="VDD_SENSE"
+                      value="7"/>
+                <enum key="VREGEN"
+                      value="8"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="VCHG Measurement Interval when charging [s]"
+                ShortId="PRVchgMeasurementIntervalCharging"
+                Desc="Interval (in seconds) between measurements when charging."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=21,Bit=0,Size=8"/>
+            <ConfigItem
+                Id="VCHG Measurement Interval when not charging [s]"
+                ShortId="PRVchgMeasurementIntervalNotCharging"
+                Desc="Interval (in seconds) between measurements when not charging."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=22,Bit=0,Size=16"/>
+            <ConfigItem
+                Id="VCHG Limit"
+                ShortId="PRVchgLimit"
+                Desc="VCHG Threshold (mV/POWER_VSCALE)."
+                Type="uint"
+                PSKey="Text=PSKEY_USR16,Address=0x29a,Word=23,Bit=0,Size=16"/>
+        </ConfigGroup>
+    </ConfigGroup>
+
+    <ConfigGroup Id="Bluetooth"
+                 Node="Basic">
+        <ConfigGroup Id="Connection Management"
+                     Node="Basic">
+            <ConfigGroup Id="Pairing"
+                         Node="Basic">
+                <ConfigItem
+                    Id="Number of PIN codes"
+                    ShortId="pinNum"
+                    Desc="Number of PIN codes."
+                    Type="uint"
+                    Range="Min=0,Max=4"
+                    PSKey="Text=PSKEY_USR15,Address=0x299,Word=1,Bit=0,Size=16"/>
+                <ConfigItem
+                    Id="PIN Code 1"
+                    Desc=""
+                    Type="StrUnpackedASCII"
+                    StrLenBytes="Fixed:4"
+                    PSKey="Text=PSKEY_USR15,Address=0x299,Word=2,Bit=0,Size=16"/>
+                <ConfigItem
+                    Id="PIN Code 2"
+                    Desc=""
+                    Type="StrUnpackedASCII"
+                    StrLenBytes="Fixed:4"
+                    PSKey="Text=PSKEY_USR15,Address=0x299,Word=6,Bit=0,Size=16"/>
+                <ConfigItem
+                    Id="PIN Code 3"
+                    Desc=""
+                    Type="StrUnpackedASCII"
+                    StrLenBytes="Fixed:4"
+                    PSKey="Text=PSKEY_USR15,Address=0x299,Word=10,Bit=0,Size=16"/>
+                <ConfigItem
+                    Id="PIN Code 4"
+                    Desc=""
+                    Type="StrUnpackedASCII"
+                    StrLenBytes="Fixed:4"
+                    PSKey="Text=PSKEY_USR15,Address=0x299,Word=14,Bit=0,Size=16"/>
+                <!--<ConfigItem
+                    Id="PIN Code 5"
+                    Desc=""
+                    Type="StrUnpackedASCII"
+                    StrLenBytes="Fixed:4"
+                    PSKey="Text=PSKEY_USR15,Address=0x299,Word=18,Bit=0,Size=16"/>
+                <ConfigItem
+                    Id="PIN Code 6"
+                    Desc=""
+                    Type="StrUnpackedASCII"
+                    StrLenBytes="Fixed:4"
+                    PSKey="Text=PSKEY_USR15,Address=0x299,Word=22,Bit=0,Size=16"/>
+                <ConfigItem
+                    Id="PIN Code 7"
+                    Desc=""
+                    Type="StrUnpackedASCII"
+                    StrLenBytes="Fixed:4"
+                    PSKey="Text=PSKEY_USR15,Address=0x299,Word=26,Bit=0,Size=16"/>
+                <ConfigItem
+                    Id="PIN Code 8"
+                    Desc=""
+                    Type="StrUnpackedASCII"
+                    StrLenBytes="Fixed:4"
+                    PSKey="Text=PSKEY_USR15,Address=0x299,Word=30,Bit=0,Size=16"/>
+                <ConfigItem
+                    Id="PIN Code 9"
+                    Desc=""
+                    Type="StrUnpackedASCII"
+                    StrLenBytes="Fixed:4"
+                    PSKey="Text=PSKEY_USR15,Address=0x299,Word=34,Bit=0,Size=16"/>
+                <ConfigItem
+                    Id="PIN Code 10"
+                    Desc=""
+                    Type="StrUnpackedASCII"
+                    StrLenBytes="Fixed:4"
+                    PSKey="Text=PSKEY_USR15,Address=0x299,Word=38,Bit=0,Size=16"/>-->
+            </ConfigGroup>
+            <ConfigGroup Id="Reconnection"
+                         Node="Basic">
+                <ConfigItem
+                    Id="Reconnection Policy"
+                    ShortId="featuresConnectPolicy"
+                    Desc="Determines which policy the source should use to choose which device to connect to."
+                    Type="enum"
+                    PSKey="Text=PSKEY_USR3,Address=0x28d,Word=1,Bit=10,Size=2">
+                    <enum key="Connect to last device"
+                          value="0"/>
+                    <enum key="Iterate through PDL"
+                          value="1"/>
+                </ConfigItem>
+                <ConfigItem
+                    Id="AGHFP Maximum Connection Retries"
+                    ShortId="featuresAghfpMaxConnRetries"
+                    Desc="Number of times the source will attempt to reconnect the AGHFP profile."
+                    Type="uint"
+                    PSKey="Text=PSKEY_USR3,Address=0x28d,Word=1,Bit=0,Size=8"/>
+                <ConfigItem
+                    Id="A2DP Maximum Connection Retries"
+                    ShortId="featuresA2dpMaxConnRetries"
+                    Desc="Number of times the source will attempt to reconnect the A2DP profile."
+                    Type="uint"
+                    PSKey="Text=PSKEY_USR3,Address=0x28d,Word=2,Bit=8,Size=8"/>
+                <ConfigItem
+                    Id="AVRCP Maximum Connection Retries"
+                    ShortId="featuresAvrcpMaxConnRetries"
+                    Desc="Number of times the source will attempt to reconnect the AVRCP profile."
+                    Type="uint"
+                    PSKey="Text=PSKEY_USR3,Address=0x28d,Word=2,Bit=0,Size=8"/>
+                <ConfigItem
+                    Id="Combined Maximum Connection Retries"
+                    ShortId="featuresMaxConnRetries"
+                    Desc="Maximum number of reconnection attempts by the source for all profiles."
+                    Type="uint"
+                    PSKey="Text=PSKEY_USR3,Address=0x28d,Word=3,Bit=0,Size=16"/>
+            </ConfigGroup>
+        </ConfigGroup>
+        <ConfigGroup Id="DualStream"
+                     Node="Basic">
+            <ConfigGroup Id="DualStream 2nd Device Bluetooth Address"
+                         Node="Basic">
+                <ConfigItem
+                    Id="NAP"
+                    ShortId="Ds2DNap"
+                    Desc="DualStream 2nd Device Bluetooth Address NAP."
+                    Type="uint"
+                    PresentHex="true"
+                    PSKey="Text=PSKEY_USR13,Address=0x297,Word=4,Bit=0,Size=16"/>
+                <ConfigItem
+                    Id="UAP"
+                    ShortId="Ds2DUap"
+                    Desc="DualStream 2nd Device Bluetooth Address UAP."
+                    Type="uint"
+                    PresentHex="true"
+                    PSKey="Text=PSKEY_USR13,Address=0x297,Word=3,Bit=0,Size=8"/>
+                <ConfigItem
+                    Id="LAP"
+                    ShortId="Ds2DLap"
+                    Desc="DualStream 2nd Device Bluetooth Address LAP."
+                    Type="ulong"
+                    PresentHex="true"
+                    PSKey="Text=PSKEY_USR13,Address=0x297,MsWord=1,MsBit=0,MsSize=8,LsWord=2,LsBit=0,LsSize=16"/>
+            </ConfigGroup>
+            <ConfigItem
+                Id="Enable DualStream"
+                ShortId="dualStreamEnable"
+                Desc="Enable the DualStream feature."
+                Type="bool"
+                PSKey="Text=PSKEY_USR2,Address=0x28c,Word=1,Bit=1,Size=1"/>
+            <ConfigItem
+                Id="Connect both devices"
+                ShortId="dualStreamConnectBothDevices"
+                Desc="Determines if the source application should attempt to connect to the second device after connection to the first device has completed."
+                Type="bool"
+                PSKey="Text=PSKEY_USR2,Address=0x28c,Word=1,Bit=0,Size=1"/>
+        </ConfigGroup>
+        <ConfigGroup Id="Profiles"
+                     Node="Basic">
+            <ConfigGroup Id="A2DP"
+                         Node="Basic">
+                <ConfigGroup Id="Codecs"
+                             Node="Basic">
+                    <ConfigGroup Id="SBC"
+                                 Node="Basic">
+                        <ConfigItem
+                            Id="Sampling Frequency / Channel Mode"
+                            Desc="Specifies the supported SBC sampling frequencies and channel modes. * Note: The encoder might not support these sampling frequencies, please refer to Source application documentation."
+                            Type="bitfield"
+                            PSKey="Text=PSKEY_USR4,Address=0x28e,Word=1,Bit=0,Size=8">
+                            <bitfield key="Channel Mode Joint Stereo"
+                                      value="0"/>
+                            <bitfield key="Channel Mode Stereo"
+                                      value="1"/>
+                            <bitfield key="Channel Mode Dual Channel"
+                                      value="2"/>
+                            <bitfield key="Channel Mode Mono"
+                                      value="3"/>
+                            <bitfield key="Sampling Frequency 48 kHz"
+                                      value="4"/>
+                            <bitfield key="Sampling Frequency 44.1 kHz *"
+                                      value="5"/>
+                            <bitfield key="Sampling Frequency 32 kHz *"
+                                      value="6"/>
+                            <bitfield key="Sampling Frequency 16 kHz *"
+                                      value="7"/>
+                        </ConfigItem>
+                        <ConfigItem
+                            Id="Maximum Bitpool"
+                            ShortId="sbcMaxBitpool"
+                            Desc="Specifies the maximum bitpool size supported for SBC."
+                            Type="uint"
+                            Range="Min=2,Max=250"
+                            EnableTrackBar="true"
+                            PSKey="Text=PSKEY_USR4,Address=0x28e,Word=2,Bit=0,Size=16"/>
+                        <ConfigItem
+                            Id="Minimum Bitpool"
+                            ShortId="sbcMinBitpool"
+                            Desc="Specifies the minimum bitpool size supported for SBC."
+                            Type="uint"
+                            Range="Min=2,Max=250"
+                            EnableTrackBar="true"
+                            PSKey="Text=PSKEY_USR4,Address=0x28e,Word=3,Bit=0,Size=16"/>
+                        <ConfigItem
+                            Id="SBC Force Max Bitpool"
+                            ShortId="featuresForceMaxBitpool"
+                            Desc="Force the source to alays use the maximum SBC bitpool that was configured."
+                            Type="bool"
+                            PSKey="Text=PSKEY_USR3,Address=0x28d,Word=1,Bit=8,Size=1"/>
+                    </ConfigGroup>
+
+                    <ConfigGroup Id="FastStream"
+                                 Node="Basic">
+                        <ConfigItem
+                            Id="Music / Voice Support"
+                            Desc="Specifies the supported audio directions over FastStream."
+                            Type="bitfield"
+                            PSKey="Text=PSKEY_USR5,Address=0x28f,Word=1,Bit=8,Size=8">
+                            <bitfield key="FastStream Music"
+                                      value="0"/>
+                            <bitfield key="FastStream Voice"
+                                      value="1"/>
+                        </ConfigItem>
+                        <ConfigItem
+                            Id="Music / Voice Sampling Frequencies"
+                            Desc="Specifies the supported audio configuration. * Note: The encoder might not support these sampling frequencies - please refer to Source application documentation."
+                            Type="bitfield"
+                            PSKey="Text=PSKEY_USR5,Address=0x28f,Word=1,Bit=0,Size=8">
+                            <bitfield key="FastStream Music Sampling Frequency 48 kHz"
+                                      value="0"/>
+                            <bitfield key="FastStream Music Sampling Frequency 44.1 kHz *"
+                                      value="1"/>
+                            <bitfield key="FastStream Voice Sampling Frequency 16 kHz"
+                                      value="5"/>
+                        </ConfigItem>
+                    </ConfigGroup>
+
+                    <ConfigGroup Id="AptX"
+                                 Node="Basic">
+                        <ConfigItem
+                            Id="AptX Sampling Frequencies"
+                            Desc="Specifies AptX sampling frequencies supported. * Note: The encoder might not support these sampling frequencies - please refer to Source application documentation."
+                            Type="bitfield"
+                            PSKey="Text=PSKEY_USR10,Address=0x294,Word=1,Bit=0,Size=8">
+                            <bitfield key="Sampling Frequency 48 kHz"
+                                      value="4"/>
+                            <bitfield key="Sampling Frequency 44.1 kHz *"
+                                      value="5"/>
+                            <bitfield key="Sampling Frequency 32 kHz *"
+                                      value="6"/>
+                            <bitfield key="Sampling Frequency 16 kHz *"
+                                      value="7"/>
+                        </ConfigItem>
+                    </ConfigGroup>
+
+                    <ConfigGroup Id="AptX Low Latency"
+                                 Node="Basic">
+                        <ConfigItem
+                            Id="Bi-directional Audio"
+                            ShortId="aptxLLBidirectional"
+                            Desc="When true, specifies that bi-directional support is enabled (i.e. Voice back channel)."
+                            Type="bool"
+                            PSKey="Text=PSKEY_USR14,Address=0x298,Word=1,Bit=8,Size=1"/>
+                        <ConfigItem
+                            Id="AptX Low Latency Sampling Frequencies"
+                            Desc="Specifies AptX Low Latency sampling frequencies supported. * Note: The encoder might not support this sampling frequency - please refer to Source application documentation."
+                            Type="bitfield"
+                            PSKey="Text=PSKEY_USR14,Address=0x298,Word=1,Bit=0,Size=8">
+                            <bitfield key="Sampling Frequency 48 kHz"
+                                      value="4"/>
+                            <bitfield key="Sampling Frequency 44.1 kHz *"
+                                      value="5"/>
+                        </ConfigItem>
+                    </ConfigGroup>
+
+                    <ConfigItem
+                        Id="SBC Enable"
+                        ShortId="a2dpCodecsSBCEnable"
+                        Desc="Adds support for SBC Codec."
+                        Type="bool"
+                        PSKey="Text=PSKEY_USR6,Address=0x290,Word=1,Bit=0,Size=1"/>
+                    <ConfigItem
+                        Id="FastStream Enable"
+                        ShortId="a2dpCodecsFastStreamEnable"
+                        Desc="Adds support for FastStream Codec."
+                        Type="bool"
+                        PSKey="Text=PSKEY_USR6,Address=0x290,Word=1,Bit=4,Size=1"/>
+                    <ConfigItem
+                        Id="AptX Enable"
+                        ShortId="a2dpCodecsAptXEnable"
+                        Desc="Adds support for AptX Codec."
+                        Type="bool"
+                        PSKey="Text=PSKEY_USR6,Address=0x290,Word=1,Bit=8,Size=1"/>
+                    <ConfigItem
+                        Id="AptX Low Latency Enable"
+                        ShortId="a2dpCodecsAptXLLEnable"
+                        Desc="Adds support for AptX Low Latency Codec."
+                        Type="bool"
+                        PSKey="Text=PSKEY_USR6,Address=0x290,Word=1,Bit=12,Size=1"/>
+                    <ConfigItem
+                        Id="SBC Connection Preference"
+                        ShortId="a2dpCodecsSBCPref"
+                        Desc="The connection preference to associate with the SBC codec when initiating a media connection (a unique preference order should be used for each codec)."
+                        Type="enum"
+                        PSKey="Text=PSKEY_USR6,Address=0x290,Word=1,Bit=1,Size=3">
+                        <enum key="Use as first choice"
+                              value="1"/>
+                        <enum key="Use as second choice"
+                              value="2"/>
+                        <enum key="Use as third choice"
+                              value="3"/>
+                        <enum key="Use as fourth choice"
+                              value="4"/>
+                    </ConfigItem>
+                    <ConfigItem
+                        Id="FastStream Connection Preference"
+                        ShortId="a2dpFastStreamPref"
+                        Desc="The connection preference to associate with the FastStream codec when initiating a media connection (a unique preference order should be used for each codec)."
+                        Type="enum"
+                        PSKey="Text=PSKEY_USR6,Address=0x290,Word=1,Bit=5,Size=3">
+                        <enum key="Use as first choice"
+                              value="1"/>
+                        <enum key="Use as second choice"
+                              value="2"/>
+                        <enum key="Use as third choice"
+                              value="3"/>
+                        <enum key="Use as fourth choice"
+                              value="4"/>
+                    </ConfigItem>
+                    <ConfigItem
+                        Id="AptX Connection Preference"
+                        ShortId="a2dpCodecsAptXPref"
+                        Desc="The connection preference to associate with the AptX codec when initiating a media connection (a unique preference order should be used for each codec)."
+                        Type="enum"
+                        PSKey="Text=PSKEY_USR6,Address=0x290,Word=1,Bit=9,Size=3">
+                        <enum key="Use as first choice"
+                              value="1"/>
+                        <enum key="Use as second choice"
+                              value="2"/>
+                        <enum key="Use as third choice"
+                              value="3"/>
+                        <enum key="Use as fourth choice"
+                              value="4"/>
+                    </ConfigItem>
+                    <ConfigItem
+                        Id="AptX Low Latency Connection Preference"
+                        ShortId="a2dpCodecsAptXLLPref"
+                        Desc="The connection preference to associate with the AptX Low Latency codec when initiating a media connection (a unique preference order should be used for each codec)."
+                        Type="enum"
+                        PSKey="Text=PSKEY_USR6,Address=0x290,Word=1,Bit=13,Size=3">
+                        <enum key="Use as first choice"
+                              value="1"/>
+                        <enum key="Use as second choice"
+                              value="2"/>
+                        <enum key="Use as third choice"
+                              value="3"/>
+                        <enum key="Use as fourth choice"
+                              value="4"/>
+                    </ConfigItem>
+                </ConfigGroup>
+                <ConfigItem
+                    Id="A2DP Profile"
+                    ShortId="a2dpProfile"
+                    Desc="Enable the A2DP profile."
+                    Type="enum"
+                    PSKey="Text=PSKEY_USR1,Address=0x28b,Word=1,Bit=0,Size=16">
+                    <enum key="Disabled"
+                          value="0"/>
+                    <enum key="A2DP 1.2 Enabled"
+                          value="1"/>
+                </ConfigItem>
+            </ConfigGroup>
+            <ConfigGroup Id="AVRCP"
+                         Node="Basic">
+                <ConfigItem
+                    Id="AVRCP Profile"
+                    ShortId="avrcpProfile"
+                    Desc="Enable the AVRCP profile."
+                    Type="enum"
+                    PSKey="Text=PSKEY_USR1,Address=0x28b,Word=2,Bit=0,Size=16">
+                    <enum key="Disabled"
+                          value="0"/>
+                    <enum key="AVRCP 1.0 Enabled"
+                          value="1"/>
+                </ConfigItem>
+                <ConfigItem
+                    Id="AVRCP Vendor Enable"
+                    ShortId="featuresAvrcpVendorEnable"
+                    Desc="Enable AVRCP vendor features."
+                    Type="bool"
+                    PSKey="Text=PSKEY_USR3,Address=0x28d,Word=1,Bit=9,Size=1"/>
+                <ConfigItem
+                    Id="AVRCP Vendor Command Company Identifier"
+                    ShortId="company_id"
+                    Desc="Company Identifier"
+                    Type="ulong"
+                    PresentHex="true"
+                    PSKey="Text=PSKEY_USR0,Address=0x28a,MsWord=1,MsBit=0,MsSize=16,LsWord=2,LsBit=0,LsSize=16"/>
+            </ConfigGroup>
+            <ConfigGroup Id="HFP"
+                         Node="Basic">
+                <ConfigGroup Id="EDR Packet Types"
+                             Node="Basic">
+                    <ConfigItem
+                        Id="2EV3 Disable"
+                        ShortId="hfpAudio2EV3"
+                        Desc="edr 2ev3 packet type."
+                        Type="bool"
+                        PSKey="Text=PSKEY_USR12,Address=0x296,Word=1,Bit=6,Size=1"/>
+                    <ConfigItem
+                        Id="3EV3 Disable"
+                        ShortId="hfpAudio3EV3"
+                        Desc="edr 3ev3 packet type."
+                        Type="bool"
+                        PSKey="Text=PSKEY_USR12,Address=0x296,Word=1,Bit=7,Size=1"/>
+                    <ConfigItem
+                        Id="2EV5 Disable"
+                        ShortId="hfpAudio2EV5"
+                        Desc="edr 2ev5 packet type."
+                        Type="bool"
+                        PSKey="Text=PSKEY_USR12,Address=0x296,Word=1,Bit=8,Size=1"/>
+                    <ConfigItem
+                        Id="3EV5 Disable"
+                        ShortId="hfpAudio3EV5"
+                        Desc="edr 3ev5 packet type."
+                        Type="bool"
+                        PSKey="Text=PSKEY_USR12,Address=0x296,Word=1,Bit=9,Size=1"/>
+                </ConfigGroup>
+                <ConfigGroup Id="eSCO Packet Types"
+                             Node="Basic">
+                    <ConfigItem
+                        Id="EV3 Enable"
+                        ShortId="hfpAudioEV3"
+                        Desc="esco ev3 packet type."
+                        Type="bool"
+                        PSKey="Text=PSKEY_USR12,Address=0x296,Word=1,Bit=3,Size=1"/>
+                    <ConfigItem
+                        Id="EV4 Enable"
+                        ShortId="hfpAudioEV4"
+                        Desc="esco ev4 packet type."
+                        Type="bool"
+                        PSKey="Text=PSKEY_USR12,Address=0x296,Word=1,Bit=4,Size=1"/>
+                    <ConfigItem
+                        Id="EV5 Enable"
+                        ShortId="hfpAudioEV5"
+                        Desc="esco ev5 packet type."
+                        Type="bool"
+                        PSKey="Text=PSKEY_USR12,Address=0x296,Word=1,Bit=5,Size=1"/>
+                </ConfigGroup>
+                <ConfigGroup Id="SCO Packet Types"
+                             Node="Basic">
+                    <ConfigItem
+                        Id="HV1 Enable"
+                        ShortId="hfpAudioHV1"
+                        Desc="sco hv1 packet type."
+                        Type="bool"
+                        PSKey="Text=PSKEY_USR12,Address=0x296,Word=1,Bit=0,Size=1"/>
+                    <ConfigItem
+                        Id="HV2 Enable"
+                        ShortId="hfpAudioHV2"
+                        Desc="sco hv2 packet type."
+                        Type="bool"
+                        PSKey="Text=PSKEY_USR12,Address=0x296,Word=1,Bit=1,Size=1"/>
+                    <ConfigItem
+                        Id="HV3 Enable"
+                        ShortId="hfpAudioHV3"
+                        Desc="sco hv3 packet type."
+                        Type="bool"
+                        PSKey="Text=PSKEY_USR12,Address=0x296,Word=1,Bit=2,Size=1"/>
+                </ConfigGroup>
+                <ConfigItem
+                    Id="HFP Profile"
+                    ShortId="hfpProfile"
+                    Desc="Enable the HFP profile."
+                    Type="enum"
+                    PSKey="Text=PSKEY_USR1,Address=0x28b,Word=3,Bit=0,Size=16">
+                    <enum key="Disabled"
+                          value="0"/>
+                    <enum key="HFP 1.6 Enabled"
+                          value="1"/>
+                </ConfigItem>
+                <ConfigItem
+                    Id="Bandwidth"
+                    ShortId="hfpAudioBandwidth"
+                    Desc="HFP 1.5 bandwidth."
+                    Type="ulong"
+                    PSKey="Text=PSKEY_USR12,Address=0x296,MsWord=2,MsBit=0,MsSize=16,LsWord=3,LsBit=0,LsSize=16"/>
+                <ConfigItem
+                    Id="Max Latency"
+                    ShortId="hfpAudioMaxLatency"
+                    Desc="HFP 1.5 maximum latency."
+                    Type="uint"
+                    PSKey="Text=PSKEY_USR12,Address=0x296,Word=4,Bit=0,Size=16"/>
+                <ConfigItem
+                    Id="Voice Settings"
+                    ShortId="hfpAudioVoiceSettings"
+                    Desc="HFP 1.5 voice settings."
+                    Type="enum"
+                    PSKey="Text=PSKEY_USR12,Address=0x296,Word=5,Bit=0,Size=16">
+                    <enum key="CVSD"
+                          value="0"/>
+                    <enum key="u-Law"
+                          value="1"/>
+                    <enum key="a-Law"
+                          value="2"/>
+                    <enum key="Transparent"
+                          value="3"/>
+                </ConfigItem>
+                <ConfigItem
+                    Id="Retransmission Effort"
+                    ShortId="hfpAudioRetransmissionEffort"
+                    Desc="The HFP Audio Retransmission Effort."
+                    Type="enum"
+                    PSKey="Text=PSKEY_USR12,Address=0x296,Word=6,Bit=0,Size=16">
+                    <enum key="Disabled"
+                          value="0"/>
+                    <enum key="Enabled Optimise Power"
+                          value="1"/>
+                    <enum key="Enabled Optimise Link Quality"
+                          value="2"/>
+                    <enum key="Don't Care"
+                          value="3"/>
+                </ConfigItem>
+                <ConfigItem
+                    Id="Override Wide Band Speech"
+                    ShortId="hfpAudioOverrideWideBandSpeech"
+                    Desc="HFP Audio Override Wide Band Speech"
+                    Type="enum"
+                    PSKey="Text=PSKEY_USR12,Address=0x296,Word=7,Bit=0,Size=16">
+                    <enum key="Use WB-Speech if available"
+                          value="0"/>
+                    <enum key="Don't use WB-Speech even if available"
+                          value="1"/>
+                </ConfigItem>
+            </ConfigGroup>
+        </ConfigGroup>
+        <ConfigGroup Id="Remote Device Bluetooth Address"
+                     Node="Basic">
+            <ConfigItem
+                Id="NAP"
+                ShortId="RdbNap"
+                Desc="Specifies the NAP of the remote device to connect to when the Reconnect Policy (in 'Connection Policy > Reconnection Policy') is set to 'Connect to Last Device'."
+                Type="uint"
+                PresentHex="true"
+                PSKey="Text=PSKEY_USR7,Address=0x291,Word=4,Bit=0,Size=16"/>
+            <ConfigItem
+                Id="UAP"
+                ShortId="RdbUap"
+                Desc="Specifies the UAP of the remote device to connect to when the Reconnect Policy (in 'Connection Policy > Reconnection Policy') is set to 'Connect to Last Device'."
+                Type="uint"
+                PresentHex="true"
+                PSKey="Text=PSKEY_USR7,Address=0x291,Word=3,Bit=0,Size=8"/>
+            <ConfigItem
+                Id="LAP"
+                ShortId="RdbLap"
+                Desc="Specifies the LAP of the remote device to connect to when the Reconnect Policy (in 'Connection Policy > Reconnection Policy') is set to 'Connect to Last Device'."
+                Type="ulong"
+                PresentHex="true"
+                PSKey="Text=PSKEY_USR7,Address=0x291,MsWord=1,MsBit=0,MsSize=8,LsWord=2,LsBit=0,LsSize=16"/>
+        </ConfigGroup>
+    </ConfigGroup>
+
+    <ConfigGroup Id="System"
+                 Node="Basic">
+        <ConfigGroup Id="Timers"
+                     Node="Basic">
+            <ConfigItem
+                Id="Inquiry State [s]"
+                ShortId="timers"
+                Desc="Time to remain in inquiry state, in seconds. The maximum value, 65535, indicates to remain forever."
+                Type="uint"
+                PSKey="Text=PSKEY_USR8,Address=0x292,Word=1,Bit=0,Size=16"/>
+            <ConfigItem
+                Id="Inquiry Idle [s]"
+                ShortId="timers"
+                Desc="Time to remain connectable/discoverable after inquiry state, in seconds. The maximum value, 65535, indicates to remain forever."
+                Type="uint"
+                PSKey="Text=PSKEY_USR8,Address=0x292,Word=2,Bit=0,Size=16"/>
+            <ConfigItem
+                Id="Connection Idle [s]"
+                ShortId="timers"
+                Desc="Time to remain connectable after a failed connection attempt state, in seconds. The maximum value, 65535, indicates to remain forever."
+                Type="uint"
+                PSKey="Text=PSKEY_USR8,Address=0x292,Word=3,Bit=0,Size=16"/>
+            <ConfigItem
+                Id="Disconnect Idle [s]"
+                ShortId="timers"
+                Desc="Time to remain connectable after disconnection, before restarting the connection sequence, in seconds. The maximum value, 65535, indicates to remain forever."
+                Type="uint"
+                PSKey="Text=PSKEY_USR8,Address=0x292,Word=4,Bit=0,Size=16"/>
+            <ConfigItem
+                Id="AGHFP Connection Failed [ms]"
+                ShortId="timers"
+                Desc="Time to wait before retrying to connect AGHFP, after a failed AGHFP connection attempt, in seconds."
+                Type="uint"
+                PSKey="Text=PSKEY_USR8,Address=0x292,Word=5,Bit=0,Size=16"/>
+            <ConfigItem
+                Id="A2DP Connection Failed [ms]"
+                ShortId="timers"
+                Desc="Time to wait before retrying to connect A2DP, after a failed A2DP connection attempt, in seconds."
+                Type="uint"
+                PSKey="Text=PSKEY_USR8,Address=0x292,Word=6,Bit=0,Size=16"/>
+            <ConfigItem
+                Id="AVRCP Connection Failed [ms]"
+                ShortId="timers"
+                Desc="Time to wait before retrying to connect AVRCP, after a failed AVRCP connection attempt, in seconds."
+                Type="uint"
+                PSKey="Text=PSKEY_USR8,Address=0x292,Word=7,Bit=0,Size=16"/>
+            <ConfigItem
+                Id="AVRCP Connection Delay [ms]"
+                ShortId="timers"
+                Desc="Time to wait before connecting AVRCP, after a successful  A2DP connection, in seconds."
+                Type="uint"
+                PSKey="Text=PSKEY_USR8,Address=0x292,Word=8,Bit=0,Size=16"/>
+            <ConfigItem
+                Id="Profile Connection Delay [ms]"
+                ShortId="timers"
+                Desc="Time to wait before connecting the next profile when the remote device has initiated the connection, in milliseconds."
+                Type="uint"
+                PSKey="Text=PSKEY_USR8,Address=0x292,Word=9,Bit=0,Size=16"/>
+            <ConfigItem
+                Id="Link Loss Reconnect Delay [s]"
+                ShortId="timers"
+                Desc="Time to wait before reconnecting after a link loss. This can be set to be less than the Disconnect Idle Time if a quicker reconnection is required. In seconds. The maximum value, 65535, indicates to wait forever."
+                Type="uint"
+                PSKey="Text=PSKEY_USR8,Address=0x292,Word=10,Bit=0,Size=16"/>
+            <ConfigItem
+                Id="Media Repeat [ms]"
+                ShortId="timers"
+                Desc="Time to wait for a repeat of the AVRCP media button pressed event, before treating the media button as released (i.e. for fast forward and rewind events)."
+                Type="uint"
+                PSKey="Text=PSKEY_USR8,Address=0x292,Word=11,Bit=0,Size=16"/>
+            <ConfigItem
+                Id="Audio Delay [ms]"
+                ShortId="timers"
+                Desc="Time to wait before connecting audio (which is applied in several cases)."
+                Type="uint"
+                PSKey="Text=PSKEY_USR8,Address=0x292,Word=12,Bit=0,Size=16"/>
+            <ConfigItem
+                Id="USB Audio Active [s]"
+                ShortId="timers"
+                Desc="Time to keep audio active after USB interfaces report that no audio is present. The maximum value, 65535, indicates that audio is always active."
+                Type="uint"
+                PSKey="Text=PSKEY_USR8,Address=0x292,Word=13,Bit=0,Size=16"/>
+            <ConfigItem
+                Id="Power On Connect Idle [s]"
+                ShortId="timers"
+                Desc="Time to wait after power on, before initiating the first connection. The maximum value, 65535, can be used to never initiate a connection."
+                Type="uint"
+                PSKey="Text=PSKEY_USR8,Address=0x292,Word=14,Bit=0,Size=16"/>
+            <ConfigItem
+                Id="Power On Discover Idle [s]"
+                ShortId="timers"
+                Desc="Time to wait on power on, before initiating the first discovery. The maximum value, 65535, can be used to never initiate discovery from power on."
+                Type="uint"
+                PSKey="Text=PSKEY_USR8,Address=0x292,Word=15,Bit=0,Size=16"/>
+        </ConfigGroup>
+        <ConfigGroup Id="USB Class of Device"
+                     Node="Basic">
+            <ConfigItem
+                Id="HID Keyboard Interface"
+                ShortId="usbHidKeybInterface"
+                Desc="Support USB HID Keyboard."
+                Type="bool"
+                PSKey="Text=PSKEY_USR9,Address=0x293,Word=1,Bit=3,Size=1"/>
+            <ConfigItem
+                Id="HID Consumer Interface"
+                ShortId="usbHidConsumerInterface"
+                Desc="Support USB HID Consumer."
+                Type="bool"
+                PSKey="Text=PSKEY_USR9,Address=0x293,Word=1,Bit=2,Size=1"/>
+            <ConfigItem
+                Id="Mic Interface"
+                ShortId="usbMicInterface"
+                Desc="Support USB Microphone."
+                Type="bool"
+                PSKey="Text=PSKEY_USR9,Address=0x293,Word=1,Bit=1,Size=1"/>
+            <ConfigItem
+                Id="Speaker Interface"
+                ShortId="usbSpeakerInterface"
+                Desc="Support USB Speaker. "
+                Type="bool"
+                PSKey="Text=PSKEY_USR9,Address=0x293,Word=1,Bit=0,Size=1"/>
+        </ConfigGroup>
+    </ConfigGroup>
+    
+    <ConfigGroup Id="Input/Output"
+                 Node="Basic">
+        <ConfigGroup Id="Input PIOs"
+                     Node="Basic">
+            <ConfigItem
+                Id="SPDIF Input PIO"
+                ShortId="spdif_input"
+                Desc="This configures a PIO to be used for SPDIF input, this is required for CSR8675 and must be an odd number. This should be disabled for CSR8670 (SPDIF will still function)"
+                Type="enum"
+                PSKey="Text=PSKEY_USR16,Address=0x29B,Word=1,Bit=8,Size=8">
+            <enum key="PIO 0"
+                  value="0"/>
+            <enum key="PIO 1"
+                  value="1"/>
+            <enum key="PIO 2"
+                  value="2"/>
+            <enum key="PIO 3"
+                  value="3"/>
+            <enum key="PIO 4"
+                  value="4"/>
+            <enum key="PIO 5"
+                  value="5"/>
+            <enum key="PIO 6"
+                  value="6"/>
+            <enum key="PIO 7"
+                  value="7"/>
+            <enum key="PIO 8"
+                  value="8"/>
+            <enum key="PIO 9"
+                  value="9"/>
+            <enum key="PIO 10"
+                  value="10"/>
+            <enum key="PIO 11"
+                  value="11"/>
+            <enum key="PIO 12"
+                  value="12"/>
+            <enum key="PIO 13"
+                  value="13"/>
+            <enum key="PIO 14"
+                  value="14"/>
+            <enum key="PIO 15"
+                  value="15"/>
+            <enum key="PIO 16"
+                  value="16"/>
+            <enum key="PIO 17"
+                  value="17"/>
+            <enum key="PIO 18"
+                  value="18"/>
+            <enum key="PIO 19"
+                  value="19"/>
+            <enum key="PIO 20"
+                  value="20"/>
+            <enum key="PIO 21"
+                  value="21"/>
+            <enum key="PIO 22"
+                  value="22"/>
+            <enum key="PIO 23"
+                  value="23"/>
+            <enum key="PIO 24"
+                  value="24"/>
+            <enum key="PIO 25"
+                  value="25"/>
+            <enum key="PIO 26"
+                  value="26"/>
+            <enum key="PIO 27"
+                  value="27"/>
+            <enum key="PIO 28"
+                  value="28"/>
+            <enum key="PIO 29"
+                  value="29"/>
+            <enum key="PIO 30"
+                  value="30"/>
+            <enum key="PIO 31"
+                  value="31"/>
+            <enum key="Disable"
+                  value="254"/>
+            <enum key="Always detect"
+                  value="255"/>
+          </ConfigItem>      
+        </ConfigGroup>
+    </ConfigGroup>            
+    
+    <!--ConfigGroup Id="Lower Power Settings"
+                 Node="Basic">
+    </ConfigGroup-->
+</ConfigSet>

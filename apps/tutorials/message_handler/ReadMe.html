@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>ReadMe for Message Handlers and Scheduler Tutorial</title>
+
+    <style type="text/css">
+    	h1,h2,h3,h4{font-family: arial;color: #0060a9}
+	    body,a{font-family: arial}
+    </style>
+  </head>
+
+  <body>
+    <h1>ReadMe for Message Handlers and Scheduler Tutorial</h1>
+    <hr size="1" />
+    <h2>Description</h2>
+    <p>
+        This tutorial introduces the concepts of Message Handlers and the Scheduler. The BlueCore firmware provides a number of subsystems for 
+        on-chip applications but the most fundamental subsystem is the Messaging Subsystem.
+    </p>
+    <p>
+        All on-chip applications must use a message passing architecture for implementation, which allows them to react to events such as IO and messages from the Firmware.
+    </p>
+    
+    <h2>The Code</h2>
+    <p>
+        This application implements a simple incremental counter, counting between 0 and 10. 
+        The count and display of count value is implemented by a message handler function <code>count_handler()</code>. 
+        The message handler uses a count variable to store the current <code>count</code> value.
+    </p>
+    <p>
+        In order to use the messaging API, the <i>message.h</i> header file must be included. 
+    </p>
+    
+    <table border="1" width="100%"><tr><td><pre>
+
+    5: #include &lt;message.h&gt;
+    </pre></td></tr></table>
+    
+    <p>
+        Message handlers often have variables and data associated with them. 
+        These can be implemented as globals but it the preferred approach is to encapsulate these variables with the message handler that uses them.
+    </p>
+    <p>
+        In this application, the <code>count</code> variable is encapsulated in with the message handler function pointer in a structure.
+    </p>
+    
+    <table border="1" width="100%"><tr><td><pre>
+
+    11:    typedef struct _count_task_data 
+    12:    {
+    13:        TaskData    count_task;
+    14:        uint8       count;
+    15:    } CountTaskData;
+    </pre></td></tr></table><br />
+    
+    <p>
+        To create a message handler, a static void function with exact parameters must be defined. 
+        For example, this is the definition of the <code>count_handler()</code> message handler function in this application.
+    </p>
+
+    <table border="1" width="100%"><tr><td><pre>
+
+    17:    static void count_handler(Task t, MessageId id, Message payload)
+    18:    {  
+    </pre></td></tr></table>
+    
+    <p>
+        The struct that has the message handler function pointer and associated variables for that message handler must be initialised before use. 
+        Here, it is intialised with the <code>count_handler()</code> function pointer and the initial value for the <code>count</code> variable.
+    </p>
+    <table border="1" width="100%"><tr><td><pre>
+
+    47:    static CountTaskData count_task = 
+    48:    {
+    49:        { count_handler },
+    50:        0
+    51:    };
+    </pre></td></tr></table>
+    
+    <p>
+        The <code>main()</code> function for an on-chip application must perform any intialisation and start any initial messaging. 
+        In this example it sends an initial message using <code>MessageSend()</code> to the <code>count_handler()</code> function with the message id UP (0), 
+        which indicates that the handler should increment the count.
+    </p>
+    
+    <table border="1" width="100%"><tr><td><pre>
+
+    53:    int main(void)
+    54:    {
+    55:        MessageSend(
+    56:            &amp;count_task.count_task,     /* Task the message is sent to */ 
+    57:            UP,                         /* Message Id */
+    58:            0 );                        /* Message Payload */
+    59:
+    60:        MessageLoop();
+    61:
+    62:        return 0;
+    63:    }
+    </pre></td></tr></table>
+    
+    <p>
+        The <code>MessageLoop()</code> function is the scheduler that deals with the message passing between on-chip VM applications and the firmware. 
+        This function never returns so any code after this function are redundent. 
+        However, the <code>return 0;</code> statement is still required for the <code>main()</code> function as omitting it will cause a compiler warning.
+    </p>
+    <p>
+        The intial message is received by the <code>count_handler()</code>. First the task pointer is cast to the message handlers own struct.
+    </p>
+    
+    <table border="1" width="100%"><tr><td><pre>
+
+      19:  CountTaskData *ctd = (CountTaskData *) t;
+    </pre></td></tr></table>
+    <p>
+        This allows the message handler to access its associated variables via the <code>ctd</code>; pointer.
+    </p>        
+    <p>
+        The current count value is output using <code>printf</code> and then the count is incremented or decremented depending on whether the message 
+        id value is DOWN (0) or UP (1). If the limits of the count are reached then the direction of the count is changed.
+    </p>
+    
+    <table border="1" width="100%"><tr><td><pre>
+ 
+    21:   printf("Count %d\n", ctd-&gt;count);  
+    22:
+    23:   if (DOWN == id)
+    24:   {
+    25:       ctd-&gt;count--;
+    26:   }
+    27:   else
+    28:   {
+    29:       ctd-&gt;count++;
+    30:   }
+    31:
+    32:   if (ctd-&gt;count == 10)
+    33:   {
+    34:       id = DOWN;
+    35:   }
+    36:   else if (ctd-&gt;count == 0)
+    37:   {
+    38:       id = UP;
+    39:   }
+    </pre></td></tr></table>
+    <p>
+        The final action of the count_handler is to send a message to itself, to make the next increment or decrement and perpetuate the count.
+    </p>
+
+    <table border="1" width="100%"><tr><td><pre>
+
+    41:   MessageSend(
+    42:           t,           /* Task the message is sent to */
+    43:           id,          /* Message id */
+    44:           0);          /* Message Payload */
+    45:   }
+
+    </pre></td></tr></table>
+    <h2>Summary</h2>
+    This applications demonstrates how to implement a message handler function and associate variables with that handler. 
+    It also introduces the <code>MessageLoop()</code> scheduler function that starts the message handling for the application and never returns.
+    
+    <br><br><hr>
+    Copyright Cambridge Silicon Radio Limited 2005-2014.<br>
+    Part of BlueLab-6.5.2-Release
+  </body>
+</html>

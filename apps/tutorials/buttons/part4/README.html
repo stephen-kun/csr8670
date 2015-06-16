@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>Buttons Tutorial: Part 4</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <style type="text/css">
+
+	h1,h2,h3,h4{font-family: arial;color: #0060a9}
+	body,a{font-family: arial}
+
+    </style>
+  </head>
+
+  <body>
+    <h1>Buttons Tutorial: Part 4 - Button handlers 3</h1>
+    <h4>Advanced button handling and further tasks</h4>
+    <hr>
+    
+    <h2><a name="about">About Part 4</a></h2>
+    <p>
+      Part 4 of this tutorial introduces the way of having simple buttons and
+      complex PIO handling at the same time, and gives ideas for further tasks
+      that can be done using PIO lines in BlueCore.
+    </p>
+
+    <h2><a name="code">The Code</a></h2>
+    <h3><a name="button"><code>part4_buttons.button</code></a></h3>
+    <p>
+      The button functionality is defined in the <code>part4_buttons.button</code>
+      file.
+    </p>
+    <p>
+      The structure of the button file is similar to that in part 3, but now raw PIO
+      handling is added. The basic messages are still there to demonstrate the
+      ability of having both raw PIO messages and automatically generated
+      button messages.
+    </p>
+    <p>
+      Similar to PIO lines be named, lines must also be named but now as a raw input. 
+Raw input lines are reported to the button task
+      as if there was no button handler present. Raw PIOs are defined
+      using
+    </p>
+    <p style="margin-left:20px"><code><b>pio_raw</b> pin</code></p>
+    <p>
+      where <code>pin</code> is the PIO pin number between 0 and 31.
+    </p>
+    <table border="1" width="100%"><tr><td><pre> 40: 
+ 43 // Select PIOs 2 and 3 to generate raw messages on every change
+ 44 pio_raw 2
+ 45 pio_raw 3
+ 46 </pre></td></tr></table>
+
+    <h3><a name="main"><code>main.c</code></a></h3>
+    <p>
+      The raw PIO handling must be done manually in the main application, just
+      as in part 1. The buttons are defined first and then handled by a separate function 
+<code>handle_pio_raw()</code>. The PIO
+      example PIO handler here looks for the magic key pattern, but is not
+      covered in the tutorial.
+    </p>
+    <table border="1" width="100%"><tr><td><pre> 
+ 21: /* Function prototypes */
+ 22: static void app_handler(Task task, MessageId id, Message message);
+ 23:+static void handle_pio_raw(Task task, PIO_RAW_T *raw);
+ 24: </pre></td></tr></table>
+    <p>
+      When a raw PIO event is detected, a <code>PIO_RAW</code> message is sent to
+      the application task. The current state of the raw PIO pins are reported as
+      a payload of the <code>PIO_RAW</code> message. The payload data is defined in
+      the automatically generated header file <code>part4_buttons.h</code>.
+    </p>
+    <table border="1" width="100%"><tr><td><pre> 26: 
+ 43: typedef struct
+ 44: {
+ 45: 	uint16 pio;
+ 46: } PIO_RAW_T;
+ 47: </pre></td></tr></table>
+
+    <h2><a name="test">Testing the Application</a></h2>
+    <p>
+      This application is similar to that in part 3 except for the addition of 
+      raw PIO handling. PIOs 0 and 1 (Buttons A and B respectively) are handled 
+as buttons and PIOs 2 and 3 are handled as raw PIOs. Messages are sent when either
+    </p>
+    <ul>
+      <li>Both buttons A and B have been pressed down for a second,</li>
+      <li>Button A has been pressed at least 3 seconds and is then released,
+      </li>
+      <li>Button B has been pressed down for a second, or kept pressed down
+        for a second since the last message, or</li>
+      <li>raw PIO state changes
+    </ul>
+
+    <p>
+      To trigger the extra PIO handling code activate PIOs 2 and 3. The magic
+      key sequence mentioned earlier is
+    </p>
+    <ol>
+      <li>Release both PIOs 2 and 3</li>
+      <li>Press (and keep pressed) PIO 2</li>
+      <li>Press (and keep pressed) PIO 3</li>
+      <li>Release PIO 2, and finally</li>
+      <li>Press PIO 2 again</li>
+    </ol>
+
+    <h2><a name="go_on">Further Tasks</a></h2>
+    <p>
+      This tutorial has presented basic simple tasks to do with BlueCore PIO
+      lines, either directly, using generated button messages or both
+      simultaneously. However, this is just an insight into PIO handling - the VM and Native Reference Guide
+      contains a whole section on dealing with PIO lines.
+    </p>
+    <p>
+      <code>.button</code> files are parsed by <code>buttonparsepro.exe</code>
+      which is located in the <code>[SDK installation]/tools/bin</code> directory. If run
+      without parameters <code>buttonparsepro.exe</code> prints out usage
+      information and outputs a sample <code>.button</code> file describing all
+      supported features.
+    </p>
+    <p>
+      <b>Now you're ready to write your own applications using the given the various methods learnt using this Buttons Tutorial!</b>
+    </p>
+
+    <br><br><hr>
+    Copyright Cambridge Silicon Radio Limited 2005-2014.<br>
+    Part of BlueLab-6.5.2-Release
+  </body>
+</html>

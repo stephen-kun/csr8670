@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>Troubleshooting the VM and DSP</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <style type="text/css">
+
+	h1,h2,h3,h4{font-family: arial;color: #0060a9}
+	body,a{font-family: arial}
+
+    </style>
+  </head>
+
+  <body>
+    <h1>Troubleshooting the VM and DSP</h1>
+    <hr>
+      <p>
+    <table border="1">
+      <tr><th width=300>Symptom</th><th width=450>Suggested actions</th></tr>
+      <tr><td>Unable to run app - xIDE reports "Unable to query BlueCore over SPI"</td><td>
+      <ol>
+        <li>Check SPI cable and power to development board.</li>
+        <li>Development boards with Lithium Ion batteries often have difficulty charging from completely
+flat. If this has happened try charging the battery overnight, or remove the
+battery and recharge with an external charger.</li>
+	    <li>The Debug Transport used by project may require updating. Select <b>Debug</b> and <b>Transport...</b> from the xIDE menu. 
+        Ensure that the setting is correct, press <b>Next ></b> and then <b>Finish</b>.</li>
+        <li>If the main board connects to the host via a DEV-PC-1309
+interface board, then check the following switches and jumpers; <b>On/off</b> should
+be on (This is power for the interface board), <b>Hold</b> should be on, <b>VIF</b> jumper
+should be <b>1V8</b>, <b>RST/RSTB</b> jumper should be <b>RST</b>.</li>
+      </ol></td></tr>
+
+      <tr><td>xIDE reports "Cannot start debugger" every time the Run is attempted
+</td><td>
+      <ol>
+        <li>Add a one second sleep to the makefile immediately before
+the invocation of <code>blueflashcmd.exe</code>.</li>
+      </ol></td></tr>
+
+      <tr><td>Application works when run on xIDE but not as a stand-alone application
+</td><td>
+      <ol>
+        <li>Check that application does not use <code>printf</code>.</li>
+        <li>Check that <code>PSKEY_VM_DISABLE</code> is set to false.</li>
+      </ol></td></tr>
+
+      <tr><td>Application is running but the Bluetooth is not working
+</td><td>
+      <ol>
+        <li>Check that <code>PSKEY_ONCHIP_HCI_CLIENT</code> is set to 0001</li>
+      </ol></td></tr>
+
+      <tr><td>xIDE reports "Out of memory initialising stack" (or globals)
+</td><td>
+      <ol>
+        <li>The application is using too many local variables. Reduce the stack usage, for example using dynamically allocated memory instead of large arrays.</li>
+      </ol></td></tr>
+
+      <tr><td>Bluetooth connection fails</td><td>
+      <ol>
+        <li>Check that power is on and application is running.</li>
+        <li>Make sure that the Bluetooth addresses of the Master/Slave devices are correct and in accordance with the PS Key and application code.</li>
+      </ol></td></tr>
+      <tr><td>No audio output (if applicable)</td><td>
+      <ol>
+        <li>Check the physical connections on the headset.</li>
+        <li>Ensure the jumper settings are correctly configured in accordance with the documentation supplied with your development board.</li>
+      </ol></td></tr>
+    </table>
+    </p>
+    <br><br><hr>
+    Copyright Cambridge Silicon Radio Limited 2008-2014.<br>
+    Part of BlueLab-6.5.2-Release
+  </body>
+</html>

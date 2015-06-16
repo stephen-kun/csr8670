@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>ReadMe for the Blinking Lights Tutorial Part 3</title>
+        <style type="text/css">
+            h1,h2,h3,h4{font-family: arial;color: #0060a9}
+            body,a{font-family: arial}
+        </style>
+    </head><body>
+
+    <h1>ReadMe for the Blinking Lights Tutorial Part 3</h1>
+    <hr size="1">
+    <h2>Description</h2>
+    <p>
+        This tutorial introduces the LED configuration file that can be used processed by the <code>led_parse</code> tool to generate code for specific LED display patterns.
+    </p>
+    <p>
+        The recommended hardware for this tutorial is a CaSiRA endpoint device with BlueCore5 MultiMedia module which has two dedicated LEDs (Red and Green).
+        This will also work on the DEV-PC-1645B BlueCore BlueTunes2 development board which incorporates a BlueCore5 Multimedia with dedicated Red and Blue LEDs.
+    </p>
+
+    <h2>Code</h2>
+    <p>
+        An LED (<code>.led</code>) configuration file identified, is parsed by the <code>led_parse</code>
+        tool to generate code for controlling LED display patterns. This
+        tutorial has the led configuration file <code>led_parse_example.led</code>.
+    </p>
+    <table border="1" width="100%"><tbody><tr><td><pre>
+
+     11:   #ifdef BC5_MODULE
+     12:   led 0 LED2
+     13:   led 1 LED1
+     14:
+     15:   pio 0 LED3
+     16:   pio 1 LED4
+     17:   #else
+     18:   pio 0 LED1
+     19:   pio 1 LED2
+     20:   pio 2 LED3
+     21:   pio 3 LED4
+     22:   #endif
+    </pre></td></tr></tbody></table>
+    <p>
+        The first section of the file defines logical names for <code>LED1</code> to <code>LED4</code>.
+    </p>
+    <p>
+        <code>led</code> can be used for BlueCore variants with dedicated LED outputs such as the BlueCore5 module for CaSiRA. 
+        <code>pio</code> can be used for standard Peripheral Input/Output lines.
+    </p>
+    <p>
+        In this tutorial, four LEDs will be used to make display patterns. Whether
+        BlueCore5 module LEDs are used is controlled by the compiler define switch <code>BC5_MODULE</code>.
+    </p>
+    <table border="1" width="100%"><tbody><tr><td><pre>
+
+     24:   // Flash each LED, one after the other.
+     25:   pattern PATTERN1 RPT
+     26:       LED1 ON  200
+     27:       LED1 OFF 0
+     28:       LED2 ON  200
+     29:       LED2 OFF 0
+     30:       LED3 ON  200
+     31:       LED3 OFF 0
+     32:       LED4 ON  200
+     33:       LED4 OFF 0
+    </pre></td></tr></tbody></table>
+    <p>
+        The above section of the 'led_parse_example.led' file shows how a display pattern is defined. The format is as follows:
+    </p>
+    <table border="1" width="100%"><tbody><tr><td><pre>
+
+        pattern &lt;pattern name&gt; [RPT]
+            &lt;[pio | led] define ...&gt; &lt;ON | OFF&gt; &lt;time in MS&gt;
+            ...
+
+    </pre></td></tr></tbody></table>
+    <p> 
+        Whether a pattern is repeated or not is indicated by the <code>RPT</code> command on the <code>pattern</code>
+        line. Following the first line, each following indented line can
+        specify one or more LED or PIO defines and the command to set it ON or
+        OFF. That is followed by the time before performing the next command
+        line in the pattern. The pattern definition is terminated by a blank
+        line.
+    </p>
+    <table border="1" width="100%"><tbody><tr><td><pre>
+
+     42:   // Flash LED 1 and 4 twice as slowly as 2 and 3
+     43:   pattern PATTERN3 RPT
+     44:       LED1 LED2 LED3 LED4 ON 200
+     45:       LED1 LED4 OFF 200
+     46:       LED2 LED3 OFF 0
+     47:       LED1 LED4 ON  200
+     48:       LED1 LED4 OFF 200
+    </pre></td></tr></tbody></table>
+    <p>
+        The above pattern definition demonstrates that more than one PIO or LED define can be included on the pattern command line.
+    </p>
+    <p>
+        The <code>.led</code> file will be processed by the <code>led_parse</code> tool to
+        generate a '.h' and '.c' file for the project. The filename before the
+        extention will be the same as for the <code>.led</code> file. To use the LED
+        display patterns in the application, the generated '.h' file must be
+        included and then the function <code>ledsPlay( &lt;pattern_name&gt; )</code> can be called to display a specific pattern.<br>
+    </p>
+    <p>
+        Here is the application code for the tutorial...
+    </p>
+    <table border="1" width="100%"><tbody><tr><td><pre>
+
+     7:   #include &lt;message.h&gt;
+     8:   #include &lt;charger.h&gt;
+     9:   #include &lt;pio.h&gt;                /* Peripheral Input/Output */
+     10:  #include &lt;print.h&gt;              /* debug PRINT */
+     11:
+     12:  #include "led_parse_example.h"
+    </pre></td></tr></tbody></table>
+    <p>
+        The <code>led_parse_example.h</code> file, generated by <code>led_parse</code> is included.
+    </p>
+        Also note the <code>print.h</code> include, this provides debug print functionality that can be optionally compiled in.
+    </p>
+    <p>
+        The message handler function for the application is called at 5-second
+        intervals and steps through the five patterns defined in the
+        <code>led_parse_example.led</code> file, before repeating from the beginning.
+    </p>
+    <table border="1" width="100%"><tbody><tr><td><pre>
+
+     14:   #define DELAY 5000
+     15:   #define NO_OF_PATTERNS  (5)
+     16:
+     17:   uint8 patterns[] = { PATTERN1, PATTERN2, PATTERN3, PATTERN4, PATTERN5 };
+     18:   uint8 count;
+     19:
+     20:   static void led_controller1( Task t, MessageId id, Message payload )
+     21:   {
+     22:       PRINT(("Pattern No. %d\n", count ));
+     23:   
+     24:       ledsPlay( patterns[count] );
+     25:
+     26:       count++;
+     27:       count %= NO_OF_PATTERNS;
+     28:   
+     29:       MessageSendLater( t, 0, 0, DELAY );
+     30:   }
+     31:
+     32:   static TaskData led_controller1_task = { led_controller1 };
+    </pre></td></tr></tbody></table>
+    <p>
+        The <code>PRINT(( ... ))</code> function allows debug print
+        commands to be included. By using the double brackets '((' and '))',
+        standard printf variable argument parameters can be used. 
+    </p>
+    <table border="1" width="100%"><tbody><tr><td><pre>
+
+     34:   int main(void)
+     35:   {
+     36:
+     37:   #if BC5_MODULE
+     38:       /* Prevent the LED0 flashing during charging */
+     39:       ChargerConfigure(CHARGER_SUPPRESS_LED0, 1);
+     40:   #endif
+     41:
+     42:       MessageSend( &amp;led_controller1_task, 0 , 0 );
+     43:       MessageLoop();
+     44:   
+     45:       return 0;
+     46:   }
+    </pre></td></tr></tbody></table>
+    <p>
+        The Main function simply sends an intial message to the <code>led_controller1_task()</code> to start it and then enters the <code>MessageLoop()</code> scheduler function.
+    </p>
+
+    <h2>Building The Application</h2>
+    <p>
+        To enable the debug print output the define <code>DEBUG_PRINT_ENABLED</code> must be set. 
+        The debug print output will be displayed in the 'print tab 0' output tab in xIDE, when it is enabled.
+    </p>
+    <p>
+        To compile the application to use the dedicated Red and Green LEDs of a BlueCore5 module for the CaSiRa endpoint device, the define <code>BC5_MODULE</code> must be set.
+    </p>
+    <p>
+        The preferred method of setting such defines is to add them to the project build properties.
+        <ol>
+            <li>Open the project properties: 'Project' menu -&gt; select the 'properties' option.</li><li>From the 'configuration properties' tree select 'Build System'</li>
+            <li>Enter the defines <code>BC5_MODULE</code> and/or <code>DEBUG_PRINT_ENABLED</code> for the 'define symbols' property.</li>
+        </ol>
+    </p>
+    
+    <h2>Running The Application</h2>
+    <p>
+        Note that the fifth pattern in the <code>led_parse_example.led</code> file is not a repeating pattern (the <code>RPT</code> has not been added to the pattern name definition line).
+    </p>
+    <table border="1" width="100%"><tbody><tr><td><pre>
+
+     58:   // Turn on all the LED, then turn them off in order from 1 to 4.
+     59:   pattern PATTERN5 
+     60:       LED1 LED2 LED3 LED4 ON 400
+     61:       LED1 OFF 400
+     62:       LED2 OFF 400
+     63:       LED3 OFF 400
+     64:       LED4 OFF 400
+    </pre></td></tr></tbody></table>
+    <p>
+        If a non-repeating pattern is used, then the previous repeating pattern will resume once it is completed.
+    </p>
+    <p>
+        This can be observed when running the application. The fourth pattern
+        (LED 1 and 2 on then LED 3 and 4, alternating) will be displayed for
+        5 seconds. Then the fifth pattern will display once, which takes 2
+        seconds. The fourth pattern will then repeat again for a further 3 seconds
+        before the application starts repeating the pattern sequence from the
+        beginning again.
+    </p>
+    
+    <p>
+        For more infomation on the <code>led_parse</code> file format, run the <code>led_parse.exe</code> application from 
+        the command line with no parameters and it will output user help information.
+    </p>
+    
+    <h2>Summary</h2>
+    <p>
+        This tutorial demonstrates how the </code>led_parse</code>
+        tool can be used to process a <code>.led</code> configuration file to easily
+        produce the code for LED display patterns. The tool is capable of
+        supporting both standard PIO for LED as well as dedicated LED
+        available on some BlueCore variants.
+    </p>
+    <p>
+        Additionally, this tutorial has shown how to use and compile in Debug print statements. 
+    </p>
+    <hr size="1">
+    Copyright Cambridge Silicon Radio Limited 2008-2014.<br>
+    Part of BlueLab-6.5.2-Release
+</body></html>

@@ -1,0 +1,74 @@
+// Copyright Cambridge Silicon Radio Limited 2008-2014
+// Part of BlueLab-6.5.2-Release
+//
+// Buttons Tutorial, part 4: raw events
+//
+
+//
+// Setup debouncing
+//
+// The format for PIO debouncing is
+//      "debounce" count period
+// where
+//      "debounce"      is text debounce as is
+//      count           is the number of times to read from the pins
+//      period          is the delay between reads
+
+// Do two reads 20 ms between them 
+debounce 2 20
+
+//
+// Define PIO pins that are used
+//
+// The format for defining PIO pins is
+//      "pio" pin name
+// where
+//      "pio"           is text pio as is
+//      pin             is pin number, for example 7 for PIO7
+//      name            is pin name, for example BUTTON1
+
+// Use name BUTTON_A for PIO0
+pio 0 BUTTON_A
+// Use name BUTTON_B for PIO1
+pio 1 BUTTON_B
+
+// Define PIO pins that are used for raw PIO handling
+//
+// The format for defining raw PIO pins is
+//      "pio_raw" pin
+// where
+//      "pio_raw        is text pio_raw as is
+//      pin             is pin number, for example 7 for PIO7
+
+// Select PIOs 2 and 3 to generate raw messages on every change
+pio_raw 2
+pio_raw 3
+
+//
+// Define messages for PIO events
+//
+// The format for defining PIO events is
+//      "message" name
+//          message_parameters*
+// where
+//      "message"       is text message as is
+//      name            is name of the message, for example BUTTON_PRESSED
+//      message_parameters
+//                      are parameters defining when message is send
+
+// Send message AB_HELD when BUTTON_A and BUTTON_B are pressed for a second
+message AB_HELD
+    BUTTON_A BUTTON_B   held 1000
+
+// Send message A_HELD_RELEASE when BUTTON_A is released after being pressed
+// for at least 3 seconds.
+// Note: a sent 'held' message cancels any further 'held_release' messages.
+message A_HELD_RELEASE
+    BUTTON_A    held_release 3000
+
+// Send message B_HELD when BUTTON_B has been pressed for a second
+// Repeat the message every second button is still held
+message B_HELD
+    BUTTON_B    held 1000
+    BUTTON_B    repeat 1000
+

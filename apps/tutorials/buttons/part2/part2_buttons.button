@@ -1,0 +1,57 @@
+// Copyright Cambridge Silicon Radio Limited 2008-2014
+// Part of BlueLab-6.5.2-Release
+//
+// Buttons Tutorial, part 2: button press, release and double-press
+//
+
+//
+// Setup debouncing
+//
+// The format for PIO debouncing is
+//      "debounce" count period
+// where
+//      "debounce"      is text debounce as is
+//      count           is the number of times to read from the pins
+//      period          is the delay between reads
+
+// Do two reads 20 ms between them 
+debounce 2 20
+
+//
+// Define PIO pins that are used
+//
+// The format for defining PIO pins is
+//      "pio" pin name
+// where
+//      "pio"           is text pio as is
+//      pin             is pin number, for example 7 for PIO7
+//      name            is pin name, for example BUTTON1
+
+// Use name BUTTON_A for PIO0
+pio 0 BUTTON_A
+// Use name BUTTON_B for PIO1
+pio 1 BUTTON_B
+
+//
+// Define messages for PIO events
+//
+// The format for defining PIO events is
+//      "message" name
+//          message_parameters*
+// where
+//      "message"       is text message as is
+//      name            is name of the message, for example BUTTON_PRESSED
+//      message_parameters
+//                      are parameters defining when message is send
+
+// Send message A_PRESS when BUTTON_A is pressed
+message A_PRESS
+    BUTTON_A    enter
+
+// Send message B_RELEASE when BUTTON_B is released
+message B_RELEASE
+    BUTTON_B    release
+
+// Send message A_DOUBLE when BUTTON_A is double-pressed within half a sec
+message A_DOUBLE
+    BUTTON_A    double 500

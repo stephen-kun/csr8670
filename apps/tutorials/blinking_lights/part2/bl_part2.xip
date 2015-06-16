@@ -1,0 +1,22 @@
+<project buildenvironment="{84faf732-1340-4049-9094-244167adf571}" buildenvironmentname="vm" executionenvironmentoption="" buildenvironmentoption="" executionenvironmentname="vm" executionenvironment="{2b2c6868-a56e-4266-962a-cddf1c979343}" >
+ <folder name="C Files" >
+  <extension name="c" />
+  <file path="bl_part2.c" />
+ </folder>
+ <folder name="Header Files" >
+  <extension name="h" />
+ </folder>
+ <file path="ReadMe.html" />
+ <properties currentconfiguration="Release" >
+  <configuration name="Release" >
+   <property key="buildMatch" >(file):(line):</property>
+   <property key="buildtransport" >0</property>
+   <property key="debugtransport" >[SPI|LPT1|No]</property>
+   <property key="defines" ></property>
+   <property key="firmware" >0</property>
+   <property key="libs" ></property>
+   <property key="output" ></property>
+   <property key="stacksize" ></property>
+  </configuration>
+ </properties>
+</project>

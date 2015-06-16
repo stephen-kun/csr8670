@@ -1,0 +1,2 @@
+sink_utils.o: sink_utils.c sink_utils.h \
+  C:/ADK3.5/tools/include/standard/csrtypes.h

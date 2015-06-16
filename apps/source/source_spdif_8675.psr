@@ -1,0 +1,87 @@
+// Configuration Set XML Version: Source,2
+
+//PSKEY_THERMAL_SHUTDOWN_PERIOD
+&25e8 = 0000
+
+// PSKEY_USB_VM_CONTROL - No VM USB
+&03c0 = 0000
+
+// Default values for the source application.
+// USR 0
+&028A = 00ff ffff
+
+// USR 1
+&028B = 0001 0001 0001
+
+// USR 2
+&028C = 0003
+
+// USR 3
+&028D = 2302 0203 ffff
+
+// USR 4
+&028E = 001f 0035 0002
+
+// USR 5
+&028F = 0321
+
+// USR 6
+&0290 = 8635
+
+// USR 7
+&0291 = 0000 0000 0000 0000
+
+// USR 8
+&0292 = 001e 000a 000a 000a 07d0 07d0 07d0 0bb8 03e8 0005 01f4 0bb8 ffff 0000 0000
+
+// PSKEY_USER9 (PS_KEY_USER_USB_CONFIG) - No USB Configured in Application
+&0293 = 0000
+
+// USR 10
+&0294 = 0010
+
+// USR 12
+&0296 = 038f 0000 1f40 000c 0003 0002 0000
+
+// USR 13
+&0297 = 0000 0000 0000 0000
+
+// USR 14
+&0298 = 0110
+
+// USR 15 - Default Pin Codes
+&0299 = 0004 0030 0030 0030 0030 0031 0031 0031 0031 0031 0032 0033 0034 0038 0038 0038 0038
+
+// USR 16
+&029A = 0014 0014 0514 0014 0187 0591 00ff 0000 0000 0000 0014 0014 0063 013d 02d9 ffff 0000 0000 0000 0000 0614 0014 109a
+
+// USR 17 - PIO Config
+&029B = 1100
+
+// --------MODE0-------------------------------------------------------- 
+// BOOTMODE_KEY_LIST_0: Overwrite :                               
+//                                HOST_INTERFACE (01f9)  
+//                                ONCHIP_HCI_CLIENT (03cc)
+//                                VM_DISABLE (025d)
+&04b0 = 01f9 03cc 025d
+// 
+//  BOOTMODE_KEY_TABLE_0+0: HOST_INTERFACE = UART with BCSP
+&04b8 = 0001
+//  BOOTMODE_KEY_TABLE_0+1: ONCHIP_HCI_CLIENT = 0
+&04b9 = 0000
+//  BOOTMODE_KEY_TABLE_0+2: VM_DISABLE = 1
+&04ba = 0001
+
+// --------MODE1-------------------------------------------------------- 
+// BOOTMODE_KEY_LIST_1: 
+//                                HOST_INTERFACE (01f9)
+//                                ONCHIP_HCI_CLIENT (03cc)
+//                                VM_DISABLE (025d)
+&04b1 = 01f9 03cc 025d
+// 
+// BOOTMODE_KEY_TABLE_1+0: HOST_INTERFACE = NONE
+&04f8 = 0000
+//  BOOTMODE_KEY_TABLE_1+1: ONCHIP_HCI_CLIENT = 1
+&04f9 = 0001
+//  BOOTMODE_KEY_TABLE_1+2: VM_DISABLE = 0
+&04fa = 0000

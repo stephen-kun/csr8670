@@ -1,0 +1,137 @@
+#######################################
+## Stereo Config                     ##
+## Basic init when a filesystem      ##
+## Config is in use                  ##
+## Version = STEREO ADK3.0           ##
+#######################################
+
+//USR  - SESSION CONFIG   
+&028a =  4018 0000 0000
+
+//USR  1          
+//&028b - 
+
+//USR  2      
+//&028c - 
+
+//USR  3      
+//&028d - 
+
+//USR  4 
+//&028e -
+
+//USR  5 - 
+//&028f - 
+
+//USR  6 -               
+&0290 - 
+
+//USR  7 -         
+&0291 - 
+
+//USR  8 -         
+&0292 - 
+
+//USR  9 -                    
+&0293 -
+
+//USR 10 - 
+&0294 -
+
+//USR 11 -            
+&0295 - 
+
+//USR 12 -            
+&0296 - 
+
+//USR 13 -              
+&0297 - 
+
+//USR 14 -              
+&0298 - 
+
+//USR 15 -              
+&0299 -
+
+//USR 16 -     
+&029a - 
+
+//USR 17 -       
+&029b - 
+
+//USR 18 -              
+&029c - 
+
+//USR 19 -              
+&029d - 
+
+//USR 20 -             
+&029e - 
+
+//USR 21 -             
+&029f - 
+
+//USR 22 -                
+&02a0 - 
+
+//USR 23 -                 
+&02a1 -
+
+//USR 24 -                  
+&02a2 -
+
+//USR 25 -                  
+&02a3 -
+
+//USR 26 -                   
+&02a4 -
+
+//USR 27 -                   
+&02a5 -
+
+//USR 28 -                   
+&02a6 -
+
+//USR 29 -             
+&02a7 - 
+
+//USR 30 -           
+&02a8 -
+
+//USR 31 -         
+&02a9 -
+
+//USR 32 -         
+&02aa -
+
+//USR 33 -         
+&02ab -
+
+//USR 34 -         
+&02ac -
+
+//USR 35 -         
+&02ad -
+
+//USR 36 -         
+&02ae -
+
+//USR 37 -         
+&02af -
+
+//USR 38 -         
+&02b0 -
+
+
+//PSKEY_CODEC_PIO - MIC BIAS                
+&01b9 =  00FE
+
+//PSKEY_LOCAL_DEVICE_NAME                   
+&0108 =  5343 3852 3736 2D30 4E43 2053 3031 3030 7631 2D34 5453 5245 4F45
+
+//VP:voiceprompt data start
+//VP:1
+//VP:2
+//VP:1
+//VP:1
+//VP:voiceprompt data end

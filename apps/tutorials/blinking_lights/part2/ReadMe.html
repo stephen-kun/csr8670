@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>ReadMe for the Blinking Lights Tutorial Part 2</title>
+        <style type="text/css">
+            h1,h2,h3,h4{font-family: arial;color: #0060a9}
+            body,a{font-family: arial}
+        </style>
+    </head><body>
+    <h1>ReadMe for the Blinking Lights Tutorial Part 2</h1>
+    <hr size="1">
+    <h2>Description</h2>
+    <p>
+        This tutorial briefly covers LED specific PIO functionality that is only available on certain BlueCore variants.
+    </p>
+    <p>
+        The recommended hardware for this tutorial is a CaSiRA endpoint device with BlueCore5 MultiMedia module which has two dedicated LEDs (Red and Green).
+        This will also work on the DEV-PC-1645B BlueCore BlueTunes2 development board which incorporates a BlueCore5 Multimedia with dedicated Red and Blue LEDs.
+    </p>
+    
+    <h2>Code</h2>
+    <p>
+        BlueCore solutions that have dedicated LED output have specific functionality for controlling these in the PIO API.
+    </p>
+    <table border="1" width="100%"><tbody><tr><td><pre>
+
+    15:  int main(void)
+    16:  {
+    17:      /* Prevent the LED0 flashing during charging */
+    18:      ChargerConfigure(CHARGER_SUPPRESS_LED0, 1);
+    19:
+    20:      /* Enable LEDs */
+    21:      LedConfigure(LED_0, LED_ENABLE, 1);
+    22:      LedConfigure(LED_1, LED_ENABLE, 1);
+    23:      
+    24:      /* Set the intensity */
+    25:      LedConfigure(LED_0, LED_DUTY_CYCLE, 0x7FF);
+    26:      LedConfigure(LED_1, LED_DUTY_CYCLE, 0x7FF);
+    27:      
+    28:      /* Set the PWM period */
+    29:      LedConfigure(LED_0, LED_PERIOD, 0x1);
+    30:      LedConfigure(LED_1, LED_PERIOD, 0x1);
+    31:      
+    32:      /* Pulse the LEDs */
+    33:      LedConfigure(LED_0, LED_FLASH_ENABLE, 1);
+    34:      LedConfigure(LED_0, LED_FLASH_RATE, 0x7);   /* Pulse the LED_0 slowly */
+    35:      
+    36:      LedConfigure(LED_1, LED_FLASH_ENABLE, 1);
+    37:      LedConfigure(LED_1, LED_FLASH_RATE, 0x4);   /* Pulse the LED_1 quickly */
+    38:      
+    39:      return 0;
+    40:   }
+    </pre></td></tr></tbody></table>
+    <p>
+        The <code>LED_ENABLE</code> key with value <code>1</code> enables the LED.
+    </p>
+    <p>
+        The <code>LED_DUTY_CYCLE()</code> key with value <code>0x7FF</code> selects a 50% duty cycle over the PWM period.
+    </p>
+    <p>
+        The <code>LED_PERIOD()</code> key with value <code>0x1</code> selects the shortest PWM period to minimise noticeable flickering.
+    </p>
+    <p>
+        The <code>LED_FLASH_ENABLE()</code> key with value <code>1</code> flashes or pulses the LED.
+    </p>
+    <p>        
+        The <code>LED_FLASH_RATE()</code> key specifies the frequency at which to flash the LED.
+    </p>
+    <p>
+        The application in this tutorial cause LED 0 and 1 to 'pulse' rather than flash. Both will fade up and down in intensity rather than just switch on and off. 
+        LED 1 will pulse with more frequency than LED 0. Choosing a short PWM period relative to a flash frequency will reduce aliasing effects.
+    </p>
+    <h2>Summary</h2>
+    This tutorial demonstrates the dedicated LED PIO control API available on certain BlueCore Variants allowing more effects then just toggling
+    the LED on and off.
+
+    <hr size="1">
+    Copyright Cambridge Silicon Radio Limited 2008-2014.<br>
+    Part of BlueLab-6.5.2-Release
+</body></html>

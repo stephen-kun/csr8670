@@ -1,0 +1,100 @@
+<custom>
+   <property type="list" key="board" format="define" name="Hardware Type" defaultvalue="0">
+       <option internalval="CSR8670">CSR8670</option>
+       <option internalval="BC5_MULTIMEDIA">BlueCore5-MultiMedia</option>
+       <description>
+           <![CDATA[
+           This option selects which hardware to compile for. 
+           ]]>
+       </description>
+   </property>
+   <property type="list" key="debug_print_enabled" format="define" name="Debug Print" defaultvalue="1">
+       <option internalval="DEBUG_PRINT_ENABLED">Enabled</option>
+       <option fake="">Disabled</option>
+       <description>
+           <![CDATA[
+           When this define symbol is included the debug output for the application is displayed.
+           ]]>
+       </description>
+   </property>   
+   <property type="list" key="ANALOGUE_INPUT_DEVICE" format="define" name="Wired Input" defaultvalue="1">
+       <option internalval="ANALOGUE_INPUT_DEVICE">Enabled</option>
+       <option fake="">Disabled</option>
+       <description>
+           <![CDATA[
+           This define symbol sets up the application for Analogue or SPDIF Input Mode instead of USB Input Mode.
+           ]]>
+       </description>
+   </property>   
+   <property type="list" key="include_dualstream" format="define" name="Dualstream" defaultvalue="0">
+       <option internalval="INCLUDE_DUALSTREAM">Enabled</option>
+       <option fake="">Disabled</option>
+       <description>
+           <![CDATA[
+           This define symbol adds DualStream operation to the Audio Adaptor.
+	       Note: The user PS Key for DualStream must also be configured to enable this feature.
+           ]]>
+       </description>
+   </property>
+   <property type="list" key="include_buttons" format="define" name="Buttons" defaultvalue="0">
+       <option internalval="INCLUDE_BUTTONS">Enabled</option>
+       <option fake="">Disabled</option>
+       <description>
+           <![CDATA[
+           This define symbol adds button support to the application. The buttons used in the 
+		   application are defined in the source_buttons.button file.
+           ]]>
+       </description>
+   </property>
+   <property type="list" key="include_leds" format="define" name="Leds" defaultvalue="0">
+       <option internalval="INCLUDE_LEDS">Enabled</option>
+       <option fake="">Disabled</option>
+       <description>
+           <![CDATA[
+           This define symbol will add LED support to the application. The LEDs used in 
+		   the application are defined in the source_leds.led file.
+           ]]>
+       </description>
+   </property>
+   <property type="list" key="ms_lync_only_buld" format="define" name="MS LYNC Only" defaultvalue="1">
+       <option internalval="MS_LYNC_ONLY_BUILD">Enabled</option>
+       <option fake="">Disabled</option>
+       <description>
+           <![CDATA[
+           This define symbol only includes HFP support and configures the USB rate to be 16 kHz.
+           ]]>
+       </description>
+   </property>
+   <property type="list" key="usb_mic_16k" format="define" name="Use MIC 16K" defaultvalue="1">
+       <option internalval="USB_MIC_16K">Enabled</option>
+       <option fake="">Disabled</option>
+       <description>
+           <![CDATA[
+           This define symbol sets the USB rate to 16 kHz for the audio sent to the USB interface 
+		   (mic interface). Normally this USB rate is 48 kHz. The USB rate for the audio received 
+		   from USB (speaker interface) remains at 48 kHz.
+           ]]>
+       </description>
+   </property>   
+   <property type="list" key="include_power_readings" format="define" name="Power Readings" defaultvalue="1">
+       <option internalval="INCLUDE_POWER_READINGS">Enabled</option>
+       <option fake="">Disabled</option>
+       <description>
+           <![CDATA[
+           The define symbol initialises the power library for receiving power readings from the hardware. 
+		   This is generally used for an Analogue Input device. 
+           ]]>
+       </description>
+   </property>
+   <property type="list" key="include_application_a2dp_codec_configuration" format="define" name="App Codec Config" defaultvalue="1">
+       <option internalval="INCLUDE_APPLICATION_A2DP_CODEC_CONFIGURATION">Enabled</option>
+       <option fake="">Disabled</option>
+       <description>
+           <![CDATA[
+           This define symbol is used so that the application can choose the A2DP codec configuration 
+		   to use when an A2DP codec is being negotiated. The application code can be edited to choose 
+		   the required configuration
+           ]]>
+       </description>
+   </property>
+</custom>

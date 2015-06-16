@@ -1,0 +1,2 @@
+sink_gatt_client.o: sink_gatt_client.c \
+  C:/ADK3.5/tools/include/standard/csrtypes.h

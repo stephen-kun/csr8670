@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>Buttons Tutorial: Part 2</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <style type="text/css">
+
+	h1,h2,h3,h4{font-family: arial;color: #0060a9}
+	body,a{font-family: arial}
+
+    </style>
+  </head>
+
+  <body>
+    <h1>Buttons Tutorial: Part 2 - Button Handlers 1</h1>
+    <h4>Pressing a button, releasing a button, and double-clicking a button</h4>
+    <hr>
+    <h2><a name="about">About Part 2</a></h2>
+    <p>
+      Part 2 of this tutorial describes how to use the SDK button
+      interface. CSR's Bluetooth SDK can generate code automatically for certain usually
+      used button use cases.  This avoids the needs to deal
+      directly with PIO lines, which can be overly complicated as seen in part
+      1. 
+    </p>
+    <p>
+      The simple button use cases described here are pressing a button, releasing a button
+      and also double-clicking a button.
+    </p>
+
+    <h2><a name="code">The Code</a></h2>
+    <p>
+      Button handling is achieved using simple commands entered into a
+      <code>.button</code> file which BlueLab uses to automatically generate
+      C code. This removes and simplifies the code in the original application file <code>main.c</code> 
+as the auto-generated code provides the button management functionality.
+    </p>
+
+    <h3><a name="button"><code>part2_buttons.button</code></a></h3>
+    <p>
+      The button functionality is defined in the <code>part2_buttons.button</code>
+      file.
+    </p>
+    <p>
+      As in part 1 of the tutorial, debounced buttons press readings are used as the physical 
+buttons cannot be handled directly. In a <code>.button</code>
+      file this is achieved using the keyword <code>debounce</code> with the parameters being the
+      same as for the <code>PioDebounce()</code> function, which can now be removed
+      from the application code.
+    </p>
+    <table border="1" width="100%"><tr><td><pre> 14: 
+ 15: // Do two reads 20 ms between them 
+ 16: debounce 2 20
+ 17: </pre></td></tr></table>
+
+    <p>
+      In BlueLab, every button has a logical name, in a similar way to them <code>#defined</code> in part
+      1. The name is given using the <code>pio</code> keyword with the following
+      parameters: 
+    </p>
+    <p style="margin-left:20px"><code><b>pio</b> pin name</code></p>
+    <p>
+      where <code>pin</code> is the PIO pin number between 0 and 31.
+    </p>
+    <p>
+      The following example defines <code>BUTTON_A</code> to be PIO0 and
+      <code>BUTTON_B</code> to be PIO1.
+    </p>
+    <table border="1" width="100%"><tr><td><pre> 27: 
+ 30: // Use name BUTTON_A for PIO0
+ 31: pio 0 BUTTON_A
+ 32: // Use name BUTTON_B for PIO1
+ 33: pio 1 BUTTON_B
+ 34: </pre></td></tr></table>
+
+    <p>
+      Now that the buttons and debounce requirements are defined, we can now assign some button handling 
+functionality. In BlueLab, the button interface button operations are
+      events that are sent as messages to a named task.
+    </p>
+    <p>
+      Messages are defined using the <code>message</code> keyword followed by
+      the message name and one or more conditions describing when this message should be 
+      sent.
+    </p>
+    <p style="margin-left:20px"><code><b>message</b> name</code></p>
+    <p style="margin-left:40px"><code>message_parameters</code></p>
+    <p>
+      where <code>name</code> is the name of the message to be delivered when the conditions
+      described in <code>message_parameters</code> are met. The rest of this tutorial
+      concentrates on <code>message_parameters</code>.
+    </p>
+    <p>
+      The basic format for <code>message_parameters</code> is
+    </p>
+    <p style="margin-left:20px"><code>pio [pio [pio...]] <b>type</b>
+        [parameters]</code></p>
+    <p>
+      where <code>pio</code> is one or more PIO names defined using
+      the <code>pio</code> keyword, the keyword <code>type</code> describes the message sent 
+and <code>parameters</code> depends on the <code>type</code>.
+    </p>
+    <p>
+      <code>enter</code> message is sent when the button is pressed.
+    </p>
+    <table border="1" width="100%"><tr><td><pre> 44: 
+ 47: // Send message A_PRESS when BUTTON_A is pressed
+ 48: message A_PRESS
+ 49:     BUTTON_A    enter
+ 50: </pre></td></tr></table>
+
+    <p>
+      <code>release</code> message is sent when the button is released.
+    </p>
+    <table border="1" width="100%"><tr><td><pre> 48: 
+ 51: // Send message B_RELEASE when BUTTON_B is released
+ 52: message B_RELEASE
+ 53:     BUTTON_B    release
+ 54: </pre></td></tr></table>
+
+    <p>
+      <code>double</code> message is sent when the button is &quot;double-clicked&quot; 
+within the timeout given as a parameter. All timeout values are in milliseconds, 
+i.e. 2000 means 2 seconds and 500 means half a second.
+    </p>
+    <table border="1" width="100%"><tr><td><pre> 52: 
+ 55: // Send message A_DOUBLE when BUTTON_A is double-pressed within half a sec
+ 56: message A_DOUBLE
+ 57:     BUTTON_A    double 500
+</pre></td></tr></table>
+
+    <h3><a name="main"><code>main.c</code></a></h3>
+    <p>
+      Messages defined in the <code>.button</code> file must be handled in some task
+      handler, and the button interface must know which task should handle the message.
+ That means that some changes must be made to the application
+      presented in part 1 of the tutorial.
+    </p>
+    <p>
+      The automatically generated
+      <code>part2_buttons.h</code> file must be included (line 11) and the button
+      interface requires a <code>PioState</code> structure in which to store the state 
+information (line 16).
+    </p>
+    <table border="1" width="100%"><tr><td><pre>  7: 
+  8: #include &lt;pio.h&gt;
+  9: #include &lt;stdio.h&gt;
+ 10: #include &lt;message.h&gt;
+ 11:+#include "part2_buttons.h"
+ 12: 
+    -#define BUTTON_A        (1 &lt;&lt; 0)        /* PIO0 is BUTTON_A */
+    -#define BUTTON_B        (1 &lt;&lt; 1)        /* PIO1 is BUTTON_B */
+    -#define BUTTON_C        (1 &lt;&lt; 2)        /* PIO2 is BUTTON_C */
+    -#define BUTTON_D        (1 &lt;&lt; 3)        /* PIO3 is BUTTON_D */
+    -
+ 13: typedef struct
+ 14: {
+ 15:     TaskData    task;   /* task is required for messages to be delivered */
+ 16:+    PioState    pio;    /* PIO state used by buttonparse */
+ 17: } appState;
+ 18: </pre></td></tr></table>
+
+    <p>
+      To keep the application as simple as possible, the redundant PIO handling code fragments
+      which were necessary in part 1 of the tutorial can be removed. That is, the <code>handle_pio()</code>
+      function, <code>MESSAGE_PIO_CHANGED</code> handling in
+      <code>app_handler()</code> and the PIO initialisation from
+      <code>main()</code> .
+    </p>
+    <p>
+      <code>pioInit()</code> (line 30) must be added to inform the button
+      interface where it can store state (first parameter,
+      <code>&app.pio</code>) and which task messages are sent (second
+      parameter, <code>&app.task</code>).
+    </p>
+    <table border="1" width="100%"><tr><td><pre> 21: /* Function prototypes */
+ 22: static void app_handler(Task task, MessageId id, Message message);
+    -static void handle_pio(Task task, MessagePioChanged *pio);
+ 23: 
+ 24: int main(void)
+ 25: {
+ 26:     /* Set app_handler() function to handle app's messages */
+ 27:     app.task.handler = app_handler;
+ 28: 
+    -    /* Set app task to receive PIO messages */
+    -    MessagePioTask(&app.task);
+    -
+    -    /* Setup PIO interrupt messages */
+    -    PioDebounce32(BUTTON_A | BUTTON_B,    /* PIO pins we are interested in */
+    -                2, 20);                 /* 2 reads and 20ms between them */
+ 29:+    /* Set app task to receive button messages */
+ 30:+    pioInit(&app.pio, &app.task);
+ 31:</pre></td></tr></table>
+    <p>
+      <code>MESSAGE_PIO_CHANGED</code> is replaced with new messages
+      defined in the <code>.button</code> file using the <code>message</code> keyword
+      (lines 48, 52, and 56).
+    </p>
+    <table border="1" width="100%"><tr><td><pre> 39:     switch (id)
+ 40:     {
+    -    case MESSAGE_PIO_CHANGED:
+    -        handle_pio(task, (MessagePioChanged*)message);
+    -        break;
+ 41:+    case A_PRESS:
+ 42:+        printf("Button A pressed\n");
+ 43:+        break;
+ 44:+
+ 45:+    case B_RELEASE:
+ 46:+        printf("Button B released\n");
+ 47:+        break;
+ 48:+        
+ 49:+    case A_DOUBLE:
+ 50:+        printf("Button A double-pressed\n");
+ 51:+        break;
+ 52:</pre></td></tr></table>
+
+    <h2><a name="test">Testing the Application</a></h2>
+    <p>
+      This application only reacts to changes on PIO 0 (Button A) and PIO 1
+      (Button B). When Button A is pressed or double-clicked rapidly, and
+      when Button B is released, the notification is printed.
+    </p>
+    <p>
+      However, sometimes it is more important to know the duration that a button has been
+      pressed for instead of when it is released. One such example includes powering off the device
+once a button has been pressed for two seconds. This and
+      some other use cases can be handled as easily as button press or release
+      and this is described in part 3 of the tutorial (<code>tutorials/buttons/part3.xiw</code>).
+    </p>
+
+    <br><br><hr>
+    Copyright Cambridge Silicon Radio Limited 2005-2014.<br>
+    Part of BlueLab-6.5.2-Release
+  </body>
+</html>

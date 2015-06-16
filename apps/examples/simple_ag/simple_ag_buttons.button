@@ -1,0 +1,64 @@
+// Copyright (C) Cambridge Silicon Radio Ltd. 2005-2014
+// Part of ADK 3.5
+
+
+debounce 2 20
+
+#ifdef DEV_PC_1645
+
+//button usage for DEV_PC_1645
+
+pio 11 VOL_UP
+pio 12 VOL_DWN
+pio 1 MFB
+pio 0 FCN
+
+
+message BUTTON_MFB_PRESS
+	MFB enter
+	
+
+#endif
+
+#ifdef DEV_PC_1395
+
+//button usage for DEV_PC_1395
+
+pio 0 FCN
+pio 1 VOL_UP
+pio 2 VOL_DWN
+
+vreg VREG
+
+message BUTTON_MFB_PRESS
+    VREG enter
+    
+#endif
+
+
+#ifdef DEV_PC_1854
+
+pio 2 VOL_DWN
+pio 1 VOL_UP
+pio 0 FCN
+vreg VREG
+
+
+message BUTTON_MFB_PRESS
+    VREG enter
+#endif
+
+
+
+
+
+
+message BUTTON_FCN_PRESS
+	FCN enter
+
+message BUTTON_VOL_UP
+ VOL_UP enter
+
+message BUTTON_VOL_DOWN
+ VOL_DWN enter
+

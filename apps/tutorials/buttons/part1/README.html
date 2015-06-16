@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>Buttons Tutorial: Part 1</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <style type="text/css">
+
+	h1,h2,h3,h4{font-family: arial;color: #0060a9}
+	body,a{font-family: arial}
+
+    </style>
+  </head>
+
+  <body>
+    <h1>Buttons Tutorial: Part 1 - Basic PIO messages</h1>
+    <hr>
+    
+    <h2><a name="about">About Part 1</a></h2>
+    <p>
+     
+      Part 1 of this tutorial describes a very simple application that defines
+      a state for the single task and sets this task to receive a message when
+      the PIO lines change their status i.e. a button is depressed.
+      <br>
+      The source code provided will work without any further changes.
+    </p>
+
+    <h2><a name="code">The Code</a></h2>
+    <p>
+      The tutorial has been designed to encourage you to write your own 
+application based on the fundamental mechanisms being demonstrated here.
+    </p>
+
+    <h3><a name="main"><code>main.c</code></a></h3>
+    <p>
+      File <code>main.c</code> contains an example application that
+      logs information on the button press events in xIDE's <b>Print
+ Channel 0</b> tab. The example is designed to be as simple as possible and
+ annotated where helpful.  You will find increased annotation where the source
+ code becomes more complex.
+    </p>
+    <p>
+      In BlueCore, every PIO has a corresponding bit in a bit mask; bit 0 refers to PIO0, 
+ bit 1 refers to PIO1 etc. This tutorial will end up using four PIO
+      lines which are named <b>BUTTON_A</b>, <b>BUTTON_B</b>, <b>BUTTON_C</b> and <b>BUTTON_D</b>.
+    </p>
+    <table border="1" width="100%"><tr><td><pre> 11: 
+ 12: #define BUTTON_A        (1 &lt;&lt; 0)        /* PIO0 is BUTTON_A */
+ 13: #define BUTTON_B        (1 &lt;&lt; 1)        /* PIO1 is BUTTON_B */
+ 14: #define BUTTON_C        (1 &lt;&lt; 2)        /* PIO2 is BUTTON_C */
+ 15: #define BUTTON_D        (1 &lt;&lt; 3)        /* PIO3 is BUTTON_D */
+ 16: </pre></td></tr></table>
+
+    <p>
+      To receive status change information on PIOs, the application needs to
+      register a task to receive the PIO messages. This task is registered using
+      the <code>MessagePioTask</code> command, line 34, and the PIO lines
+      which the task is interested in is declared using the <code>PioDebounce</code> command, lines 37 and 38.
+    </p>
+    <table border="1" width="100%"><tr><td><pre> 32: 
+ 33:     /* Set app task to receive PIO messages */
+ 34:     MessagePioTask(&app.task);
+ 35: 
+ 36:     /* Setup PIO interrupt messages */
+ 37:     PioDebounce32(BUTTON_A | BUTTON_B,  /* PIO pins we are interested in */
+ 38:                 2, 20);                 /* 2 reads and 20ms between them */
+ 39: </pre></td></tr></table>
+
+    <p>
+      As described in the <b>Writing BlueCore Applications User Guide</b>, every task
+      needs a message handler in order to function correctly. In this first part of the tutorial, there is
+      only one message to handle, <code>MESSAGE_PIO_CHANGED</code>, line 49,
+      and to make the code easier to understand the message is actually handled in 
+      its own function <code>handle_pio()</code>, line 58.
+    </p>
+    <table border="1" width="100%"><tr><td><pre> 45: static void app_handler(Task task, MessageId id, Message message) 
+ 46: {
+ 47:     switch (id)
+ 48:     {
+ 49:     case MESSAGE_PIO_CHANGED:
+ 50:         handle_pio(task, (MessagePioChanged*)message);
+ 51:         break;
+ 52:         
+ 53:     default:
+ 54:         printf("Unhandled message 0x%x\n", id);
+ 55:     }
+ 56: }</pre></td></tr></table>
+
+    <p>
+      Each time the underlying firmware determines a debounced PIO change, it sends a
+      message containing the information about the current PIO status. It is up to
+      application to handle this information, and Part 1 simply prints if the button has been been 
+pressed (i.e. PIO line goes high). As previously described, the PIO line status is a bit mask of lines 
+reflecting the voltage status of each of the PIOs. Hence the applications needs to systematically check which bit (or bits) is set.
+ Lines 60 and 61 compare the current PIO line status of buttons defined earlier.
+    </p>
+    <table border="1" width="100%"><tr><td><pre> 58: static void handle_pio(Task task, MessagePioChanged *pio)
+ 59: {
+ 60:     if (pio-&gt;state & BUTTON_A) printf("Button A pressed\n");
+ 61:     if (pio-&gt;state & BUTTON_B) printf("Button B pressed\n");    
+ 62: }</pre></td></tr></table>
+
+    <h2><a name="test">Testing the Application</a></h2>
+    <p>
+      This application only reacts to changes on PIO 0 (Button A) and PIO 1
+      (Button B). If either of these buttons are pressed,
+      <code>handle_pio()</code> will check the PIO state and print the button status information.
+    </p>
+    <p>
+      However, if Button A is pressed (and not released), and then button B is pressed, the
+      application output is actually <pre>Button A pressed
+Button A pressed
+Button B pressed</pre> as the printout is based on current PIO status. In most
+      cases that is not important, but the information about which button is
+      pressed or released is. 
+    </p>
+    <p>
+      This can be easily handled using the SDK button
+      interface as described in part 2 of the tutorial (<code>tutorials/buttons/part2.xiw</code>).
+    </p>
+
+    <br><br><hr>
+    Copyright Cambridge Silicon Radio Limited 2005-2014.<br>
+    Part of BlueLab-6.5.2-Release
+  </body>
+</html>

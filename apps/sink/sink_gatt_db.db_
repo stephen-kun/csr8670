@@ -1,0 +1,58 @@
+# 1 "sink_gatt_db.db"
+# 1 "<built-in>"
+# 1 "<command line>"
+# 1 "sink_gatt_db.db"
+
+
+
+
+
+
+primary_service {
+    uuid : 0x1801,
+    name : "GATT_SERVICE"
+},
+
+# 1 "sink_gatt_bas_db.h" 1
+
+
+primary_service {
+    uuid : 0x180F,
+    name : "BATTERY_SERVICE",
+    characteristic {
+        uuid : 0x2A19,
+        name : "BATTERY_LEVEL",
+        flags : [ FLAG_IRQ ],
+        properties : [ read , notify ],
+        value : 0x0,
+        client_config
+        {
+            name : "BATTERY_LEVEL_CLIENT_CONFIG",
+            flags : [ FLAG_IRQ , FLAG_DYNLEN ]
+        }
+    }
+},
+# 13 "sink_gatt_db.db" 2
+
+
+
+
+
+# 1 "sink_gatt_gap_db.h" 1
+primary_service {
+    uuid : 0x1800,
+    name : "GAP_SERVICE",
+    characteristic {
+        uuid : 0x2A00,
+        name : "DEVICE_NAME",
+        flags : [ FLAG_IRQ ],
+        properties : [ read ]
+    },
+    characteristic {
+        uuid : 0x2A01,
+        name : "DEVICE_APPEARANCE",
+        flags : [ FLAG_IRQ ],
+        properties : [ read ]
+    }
+}
+# 19 "sink_gatt_db.db" 2

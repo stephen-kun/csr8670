@@ -1,0 +1,70 @@
+sink_statemanager.o: sink_statemanager.c sink_statemanager.h \
+  sink_private.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/connection.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/connection_no_ble.h \
+  C:/ADK3.5/tools/include/firmware/bdaddr_.h \
+  C:/ADK3.5/tools/include/standard/csrtypes.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/library.h \
+  C:/ADK3.5/tools/include/firmware/message.h \
+  C:/ADK3.5/tools/include/firmware/sink_.h \
+  C:/ADK3.5/tools/include/firmware/message_.h \
+  C:/ADK3.5/tools/include/firmware/app/message/system_message.h \
+  C:/ADK3.5/tools/include/firmware/app/adc/adc_if.h \
+  C:/ADK3.5/tools/include/firmware/app/usb/usb_if.h \
+  C:/ADK3.5/tools/include/firmware/app/vm/vm_if.h \
+  C:/ADK3.5/tools/include/firmware/app/capsense/capsense_if.h \
+  C:/ADK3.5/tools/include/firmware/app/partition/partition_if.h \
+  C:/ADK3.5/tools/include/firmware/app/infrared/infrared_if.h \
+  C:/ADK3.5/tools/include/firmware/source_.h \
+  C:/ADK3.5/tools/include/firmware/app/status/status_if.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/hfp.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/usb_device_class.h \
+  C:/ADK3.5/tools/include/standard/stdio.h \
+  C:/ADK3.5/tools/lib/gcc-lib/xap-local-xap-assisted/3.3.3/include/stdarg.h \
+  C:/ADK3.5/tools/include/standard/stdlib.h \
+  C:/ADK3.5/tools/include/firmware/charger.h \
+  C:/ADK3.5/tools/include/firmware/app/charger/charger_if.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/audio.h \
+  C:/ADK3.5/tools/include/firmware/stream.h \
+  C:/ADK3.5/tools/include/firmware/transform_.h \
+  C:/ADK3.5/tools/include/firmware/app/file/file_if.h \
+  C:/ADK3.5/tools/include/firmware/app/uart/uart_if.h \
+  C:/ADK3.5/tools/include/firmware/app/stream/stream_if.h \
+  C:/ADK3.5/tools/include/firmware/app/bluestack/types.h \
+  C:/ADK3.5/tools/include/standard/limits.h \
+  C:/ADK3.5/tools/include/firmware/app/audio/audio_if.h \
+  C:/ADK3.5/tools/include/firmware/app/ringtone/ringtone_if.h \
+  C:/ADK3.5/tools/include/firmware/app/ringtone/ringtone_notes.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/audio_plugin_if.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/power.h \
+  C:/ADK3.5/tools/include/firmware/adc.h \
+  C:/ADK3.5/tools/include/firmware/panic.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/csr_cvc_common_plugin.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/codec.h \
+  C:/ADK3.5/tools/include/firmware/source.h \
+  C:/ADK3.5/tools/include/firmware/sink.h \
+  C:/ADK3.5/tools/include/firmware/codec_.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/csr_i2s_audio_plugin.h \
+  sink_buttonmanager.h sink_events.h sink_leddata.h sink_states.h \
+  sink_powermanager.h sink_debug.h sink_volume.h sink_usb.h \
+  sink_inquiry.h sink_configmanager.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/pblock.h \
+  sink_wired.h sink_a2dp.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/csr_a2dp_decoder_common_plugin.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/a2dp.h \
+  sink_peer.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/bdaddr.h \
+  C:/ADK3.5/tools/include/firmware/app/bluestack/bluetooth.h \
+  C:/ADK3.5/tools/include/standard/string.h sink_audio_routing.h \
+  sink_partymode.h sink_fm.h sink_devicemanager.h sink_avrcp.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/avrcp.h \
+  sink_gatt.h sink_gatt_server.h sink_gatt_server_gap.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/gatt.h \
+  sink_gatt_server_bas.h sink_gatt_client.h sink_led_manager.h sink_dut.h \
+  sink_pio.h C:/ADK3.5/tools/include/firmware/pio.h \
+  C:/ADK3.5/tools/include/firmware/app/pio/pio_if.h \
+  C:/ADK3.5/tools/include/profiles/BlueLab-6.5.2-Release/pio_common.h \
+  sink_audio.h sink_scan.h sink_slc.h sink_speech_recognition.h \
+  C:/ADK3.5/tools/include/firmware/psu.h \
+  C:/ADK3.5/tools/include/firmware/app/psu/psu_if.h sink_auth.h \
+  C:/ADK3.5/tools/include/firmware/boot.h

@@ -1,0 +1,8 @@
+<workspace>
+ <project path="source.xip" />
+ <project path="../../kalimba/apps/a2dp_source/sbc_encoder.xip" />
+ <project path="../../kalimba/apps/one_mic_example/usb_dongle_8k_mono.xip" />
+ <project path="../../kalimba/apps/one_mic_example/usb_dongle_16k_mono.xip" />
+ <project path="../../kalimba/apps/one_mic_example/usb_dongle_48_to_8k_stereo.xip" />
+ <project path="../../kalimba/apps/one_mic_example/usb_dongle_48_to_16k_stereo.xip" />
+</workspace>

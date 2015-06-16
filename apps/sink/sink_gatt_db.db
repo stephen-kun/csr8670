@@ -1,0 +1,21 @@
+#ifndef _SINK_GATT_DB_
+#define _SINK_GATT_DB_
+
+
+#ifdef GATT_SERVER_ENABLED
+
+primary_service {
+    uuid : 0x1801,
+    name : "GATT_SERVICE"
+},
+
+#include "sink_gatt_bas_db.h"
+/* Add other GATT DB files here */
+
+#endif /* GATT_SERVER_ENABLED */
+
+/* NOTE: The GAP DB must always be the last included DB file */
+#include "sink_gatt_gap_db.h"
+
+
+#endif /* _SINK_GATT_DB_ */

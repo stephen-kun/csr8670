@@ -1,0 +1,161 @@
+//This file contains the common system keys that are needed 
+
+// PSKEY_HCI_NOP_DISABLE - disable the hci nop event
+&00f2 = 0001
+
+// PSKEY_HOSTIO_MAP_SCO_PCM - map sco over pcm
+&01ab = 0001
+
+// PSKEY_HOSTIO_MAP_SCO_CODEC - use internal codec
+&01b0 = 0001
+
+// PSKEY_ANA_FREQ - generally either 16Mhz (3e80) or 26Mhz (6590)
+&01fe=6590
+
+// PSKEY_PIO_PROTECT_MASK - enable application to access all pios
+&0202 = 0000
+
+// PSKEY_USE_EXTERNAL_CLOCK - don't use external clock
+&023b = 0000
+
+// PSKEY_CLOCK_REQUEST_ENABLE - don't use external clock
+&0246 = 0000
+
+// PSKEY_BCSP_LM_MODE_PS_BLOCK - enable link establishment 
+&0192 = 0001 0000 00fa
+
+// PSKEY_PCM_MIN_CPU_CLOCK - 16Mhz (full rate)
+&024D = 0000
+
+// PSKEY_ONCHIP_HCI_CLIENT - true
+&03cc = 0001
+
+// PSKEY_FIXED_PIN
+&035b = 0030 0030 0030 0030
+
+// GORDON - frequency to 80Mhz
+&21b5 = 0000
+
+//PSKEY_INITIAL_BOOTMODE
+&03cd = 0001
+
+//PSKEY_INITIAL_PIO_STATE
+&03B5 -
+
+//PSKEY_THERMAL_SHUTDOWN_PERIOD
+&25e8 = 0000
+
+// PSKEY_CAP_SENSE_CALIBRATE
+&25b1 = ffff
+
+//PSKEY_VM_DISABLE
+&025d = 0000
+
+// PSKEY_LC_INQUIRY_PRIORITY
+&22c0 = 0001
+
+// --------MODE0-------------------------------------------------------- 
+// BOOTMODE_KEY_LIST_0: Overwrite :
+//                                HOST_INTRFACE  (1F9)
+//                                VM_DISABLE     (25D)
+//                                USB_VM_CONTROL (3C0)
+//                                USB PRODUCT ID (01be)  
+&04B0 = 01F9 025D 03C0 02bf 03b5
+// 
+// BOOTMODE_KEY_TABLE_0+0: PSKEY_HOST_INTERFACE = USB
+&04B8 = 0002
+// BOOTMODE_KEY_TABLE_0+1: PSKEY_VM_DISABLE = TRUE
+&04B9 = 0001
+// BOOTMODE_KEY_TABLE_0+3: PSKEY_USB_VM_CONTROL = false
+&04BA = 0000
+//  BOOTMODE_KEY_TABLE_0+4: USB PID = 0xffff (DFU)
+&04BB = ffff
+//BOOTMODE_KEY_TABLE_0+5: Initial STate of PIO pins (LEDS on)
+&04BC = 0804 0804 0804 0000
+
+// --------MODE1-------------------------------------------------------- 
+// BOOTMODE_KEY_LIST_1: 
+
+//PSKEY_UART_BITRATE
+&04B1 = 01ea
+// 
+//  BOOTMODE_KEY_TABLE_0+0: UART BIT RATE 9600 (min clock speed)
+&04f8 = 0000 9600
+
+
+
+// ********************************************************
+// ***************** USB configuration ********************
+// ********************************************************
+
+// PSKEY_USB_PRODUCT_STRING (CSR8670 USB headset)
+&02c2 = 0043 0053 0052 0038 0036 0037 0030 0020 0055 0053 0042 0020 0048 0065 0061 0064 0073 0065 0074
+
+// PSKEY_RESET_ON_CHARGER_ATTACH (Don't reset)
+&25af = 0000
+
+// PSKEY_HOST_INTERFACE - USB
+&01f9 = 0002
+
+// PSKEY_USB_VM_CONTROL - VM controls USB
+&03c0 = 0001
+
+// PSKEY_USB_ALLOW_DEEP_SLEEP - set to deep sleep when detached if always exposing USB host interface
+&02fc = 3
+
+// PSKEY_USB_CHARGER_DETECTION_ENABLE - Voltage Source
+&2180 = 2
+
+// PSKEY_USB_PRODUCT_ID
+&02bf = 1243
+
+// PSKEY_USB_DEVICE_CLASS_CODES - Composite
+&02bd = 0000 0000 0000
+
+// PSKEY_USB_MAX_POWER - 500mA
+&02c6 = FA
+
+// PSKEY_USB_ATTRIBTUES_POWER - Not self powered
+&03f2 = 0000
+
+// PSKEY_USB_VM_CONTROLLED_SUSPEND - VM controls suspend action
+&25be = 0001
+
+// PSKEY_USB_PIO_VBUS - for USB charger detection set to use VDD_CHG (battery charger)
+&2d1 = fffe
+
+// PSKEY_USB_DATA_PLUS_PULL_CONTROL - set D+ when configuration done
+&01f0 = 0001
+
+// PSKEY_USB_CONFIG - disable single byte packet counter on incoming bulk data
+&02d9 = 0030
+
+// PSKEY_USB_SERIAL_NUMBER_STRING - the mass storage spec requires this to be min 12 characters (A-F, 0-9)
+&02c3 = 0041 0042 0043 0044 0045 0046 0030 0031 0032 0033 0034 0035 0036 0037 0038 0039
+
+// --------MODE3--------------------------------------------------------
+// BOOTMODE_KEY_LIST_3
+//                                USB_MAX_POWER (02c6)
+//                                USB_ATTRIBUTES_POWER (03f2)
+//                                PSKEY_USR28 (02a6)
+&04B3 = 02c6 03f2 02a6
+
+//
+// BOOTMODE_KEY_TABLE_3+0: PSKEY_USB_MAX_POWER - 100mA
+&0578 = 32
+
+// BOOTMODE_KEY_TABLE_3+1: PSKEY_USB_ATTRIBTUES_POWER - Self powered
+&0579 = 0001
+
+// BOOTMODE_KEY_TABLE_3+2: PSKEY_USR32 - Don't draw over 100mA from standard host/hub
+&057e = 001F 8096 1400 0400 905A 805A 905A 805A 8096 8096 8096 0100
+
+// ********************************************************
+// ***************** End of USB configuration *************
+// ********************************************************
+
+//PSKEY_CODEC_PIO - MIC BIAS
+&01b9 = 00FE
+
+// PSKEY_PIO_DEEP_SLEEP_EITHER_LEVEL - ignore PIO level, only wake on edge detection
+&21bd = FFFF FFFF
